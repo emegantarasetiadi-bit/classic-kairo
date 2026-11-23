@@ -1,692 +1,670 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b1424">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101c2d">
 <title>Classic Kairo Futsal Club</title>
 <style>
-:root{color-scheme:dark;--bg:#080e19;--panel:#101c2d;--soft:#18283e;--line:#30435e;--gold:#ffd36a;--text:#f1f5fb;--muted:#aebed4;--red:#ff6977;--green:#48d993}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,sans-serif}
-h1,h2,h3,p{margin:0 0 .65rem}
-h1{font-size:clamp(1.5rem,5vw,2.1rem)}
-h2{font-size:1.12rem}
-a{color:var(--gold)}
-small,.muted{color:var(--muted)}
-.shell{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:100dvh}
-nav{background:var(--panel);border-right:1px solid var(--line);padding:16px;position:sticky;top:0;height:100dvh;overflow:auto}
-.brand{display:grid;justify-items:center;text-align:center;color:var(--gold);font-weight:800;gap:8px;margin:4px 0 20px}
-.logo{display:block;max-width:100%;height:auto;object-fit:contain}
-.nav-item{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:transparent;color:var(--muted);margin-bottom:4px}
-.nav-item[aria-current="page"]{background:var(--soft);color:var(--gold)}
-main{width:100%;max-width:1160px;padding:clamp(14px,3vw,32px);min-width:0}
-.hero,.panel,.stat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:14px}
-.hero{display:flex;align-items:center;gap:clamp(12px,4vw,28px);background:linear-gradient(140deg,#203657,#101c2d);border-color:#78623c}
-.hero .logo{width:clamp(76px,25vw,142px);flex:none}
-.hero h2{color:var(--gold);font-size:clamp(1.15rem,4vw,1.9rem);line-height:1.2}
-.hero p{margin:0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}
-.stats{grid-template-columns:repeat(auto-fit,minmax(min(100%,135px),1fr))}
-.stat{margin-top:0}
-.stat strong{display:block;color:var(--gold);font-size:1.65rem}
-.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.mt{margin-top:12px}
-button,input,select{font:inherit}
-button{border:0;border-radius:9px;padding:9px 13px;background:var(--gold);color:#1b1405;font-weight:750;cursor:pointer}
-button:hover:not(:disabled){filter:brightness(1.12)}
-button:disabled{opacity:.45;cursor:not-allowed}
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-.secondary{background:var(--soft);color:var(--text);border:1px solid var(--line)}
-.danger{background:var(--red);color:#240509}
-.share{background:var(--green);color:#062319}
-input,select{max-width:100%;min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--text)}
-label.field{display:grid;gap:6px;margin-top:10px}
-.scroll{overflow-x:auto}
-table{border-collapse:collapse;width:100%;text-align:left;white-space:nowrap}
-th,td{padding:9px;border-bottom:1px solid var(--line)}
-th{color:var(--muted);font-size:.82rem}
-.status{color:var(--gold);font-size:.8rem;font-weight:800}
-.live{color:var(--red)}
-.scoreboard{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px;align-items:start;text-align:center}
-.score{font-size:clamp(1.7rem,7vw,3.5rem);color:var(--gold);font-weight:900;font-variant-numeric:tabular-nums}
-.timer{text-align:center;font-size:clamp(2.8rem,13vw,5rem);color:var(--gold);font-weight:900;font-variant-numeric:tabular-nums}
-.goals{padding:0;list-style:none;overflow-wrap:anywhere}
-.goals li{margin:6px 0}
-.goals button{padding:2px 6px}
-.center{justify-content:center}
-dialog{width:min(680px,calc(100% - 24px));max-height:85dvh;overflow:auto;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;padding:18px}
-dialog::backdrop{background:#000a}
-.notice{border-left:3px solid var(--red);padding:8px 10px;background:var(--soft);margin:12px 0}
-#toast{position:fixed;z-index:5;left:50%;bottom:72px;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);background:var(--gold);color:#1b1405;border-radius:10px;padding:10px 14px;font-weight:700}
-[hidden]{display:none!important}
-@media(max-width:800px){
- .shell{display:block}
- nav{position:fixed;inset:auto 0 0;height:auto;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:2px;z-index:4;padding:5px 4px calc(5px + env(safe-area-inset-bottom));border:0;border-top:1px solid var(--line)}
- .brand{display:none}
- .nav-item{display:grid;justify-items:center;gap:0;padding:7px 0;margin:0;font-size:.6rem;text-align:center}
- .nav-icon{font-size:1rem}
- main{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
-}
+:root{color-scheme:dark;--bg:#080e19;--panel:#101c2d;--soft:#192b43;--line:#30435e;--gold:#ffd36a;--text:#f1f5fb;--muted:#b7c6da;--red:#ff7886;--green:#49d992}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,sans-serif}h1,h2,h3,p{margin:0 0 .65rem}h1{font-size:clamp(1.5rem,5vw,2rem)}h2{font-size:1.15rem}h3{font-size:1rem}
+small,.muted{color:var(--muted)}.gold,strong{color:var(--gold)}.warning{color:var(--red)}.shell{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:100vh}
+nav{background:var(--panel);padding:14px;position:sticky;top:0;height:100vh;overflow:auto;border-right:1px solid var(--line)}.brand{display:grid;justify-items:center;text-align:center;gap:8px;margin:4px 0 18px;font-weight:800;color:var(--gold)}
+.logo{display:block;height:auto;max-width:100%}.navbtn{width:100%;text-align:left;display:flex;gap:9px;align-items:center;margin-bottom:4px;background:transparent;color:var(--muted)}.navbtn[aria-current=page]{background:var(--soft);color:var(--gold)}.short{display:none}
+main{width:100%;max-width:1160px;min-width:0;padding:clamp(14px,3vw,32px)}.panel,.hero{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:14px}
+.hero{display:flex;align-items:center;gap:clamp(10px,4vw,26px);background:linear-gradient(145deg,#203658,#101c2d);border-color:#776343}.hero .logo{width:clamp(78px,25vw,142px);flex:none}.hero h2{color:var(--gold);font-size:clamp(1.1rem,4vw,1.9rem);line-height:1.2}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px}.stats{grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr))}.stat strong{display:block;font-size:1.6rem}.mt{margin-top:12px}
+button,input,select{font:inherit}button{border:0;border-radius:9px;padding:8px 12px;background:var(--gold);color:#221805;font-weight:750;cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.secondary{background:var(--soft);color:var(--text);border:1px solid var(--line)}.danger{background:var(--red);color:#27060c}.share{background:var(--green);color:#062319}:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+input,select{padding:8px 10px;max-width:100%;min-width:0;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text)}input[type=number]{width:6.5rem}label.field{display:grid;gap:5px;margin:8px 0}.scroll{overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left;white-space:nowrap}th,td{padding:8px;border-bottom:1px solid var(--line)}th{font-size:.84rem;color:var(--muted)}
+.timer{text-align:center;font-size:clamp(2.6rem,12vw,5rem);font-weight:900;color:var(--gold);font-variant-numeric:tabular-nums}.board{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:8px;text-align:center;overflow-wrap:anywhere}.score{font-size:clamp(1.4rem,7vw,3.5rem);font-weight:900;color:var(--gold)}.goals{padding:0;list-style:none}.goals li{margin:5px 0}.goals button{padding:2px 6px}.center{justify-content:center;text-align:center}
+dialog{width:min(680px,calc(100% - 24px));max-height:85vh;overflow:auto;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;padding:18px}dialog::backdrop{background:#000a}.notice{background:var(--soft);border-left:3px solid var(--red);padding:10px;margin:10px 0}#toast{position:fixed;bottom:78px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);z-index:5;background:var(--gold);color:#201704;border-radius:9px;padding:9px 13px;font-weight:700}[hidden]{display:none!important}
+@media(max-width:800px){.shell{display:block}nav{position:fixed;inset:auto 0 0;height:auto;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:2px;z-index:4;padding:4px 3px calc(4px + env(safe-area-inset-bottom));border:0;border-top:1px solid var(--line)}.brand,.long{display:none}.short{display:block}.navbtn{display:grid;justify-items:center;text-align:center;gap:0;font-size:.6rem;padding:7px 0;margin:0}.icon{font-size:1rem}main{padding-bottom:calc(85px + env(safe-area-inset-bottom))}}
 </style>
 </head>
 <body>
 <div class="shell"><nav id="nav" aria-label="Main navigation"></nav><main id="main"></main></div>
-<dialog id="modal"><div id="modalBody"></div></dialog>
+<dialog id="modal"><div id="modalBody"></div><p id="modalMsg" class="warning" role="status" hidden></p></dialog>
 <div id="toast" role="status" hidden></div>
-
 <script>
 'use strict';
-
-const DB_KEY = 'futsal_tournament_v1';
-const HIST_KEY = 'futsal_history_v1';
-const LOGO = './logo-kairo.png';
-const $ = id => document.getElementById(id);
-const empty = () => ({players:[], teams:[], matches:[], settings:{matchMinutes:10, teamCount:4}});
-const uid = () => globalThis.crypto?.randomUUID?.() || Math.random().toString(36).slice(2);
-const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({
-  '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
-})[c]);
-const arg = value => esc(JSON.stringify(value));
-const logo = width => `<img class="logo" src="${LOGO}" width="${width}" alt="Classic Kairo Futsal Club logo">`;
-const dateLabel = value => new Date(value).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
-
-let db = empty(), archives = [], storageReady = true;
-try {
-  const active = JSON.parse(localStorage.getItem(DB_KEY) || 'null');
-  const history = JSON.parse(localStorage.getItem(HIST_KEY) || '[]');
-  if (active && !['players','teams','matches'].every(key => Array.isArray(active[key]))) throw Error('Invalid active data');
-  if (!Array.isArray(history)) throw Error('Invalid history');
-  if (active) db = {...empty(), ...active, settings:{...empty().settings, ...active.settings}};
-  archives = history;
-} catch (error) {
-  storageReady = false;
-  console.error(error);
-}
-
-let page = 0, selectedMatch = '', archiveDraft = '', toastTimer;
-const pages = [
-  ['Dashboard','Home','📊'], ['Players','Players','👥'], ['Team Generator','Teams','🛡️'],
-  ['Match Schedule','Schedule','📅'], ['Live Scoreboard','Live','⏱️'],
-  ['League Standings','League','🏆'], ['Top Scorers','Scorers','⚽'], ['History','History','🗂️']
+const DB_KEY='futsal_tournament_v1', HIST_KEY='futsal_history_v1', LOGO='./logo-kairo.png';
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+const arg=v=>esc(JSON.stringify(v));
+const uid=()=>globalThis.crypto?.randomUUID?.()||Math.random().toString(36).slice(2);
+const defaults=()=>({matchMinutes:10,teamCount:4,rentalMinutes:120,bufferMinutes:15,gapMinutes:2});
+const empty=()=>({players:[],teams:[],matches:[],settings:defaults(),sessionStart:null});
+const copy=v=>JSON.parse(JSON.stringify(v));
+const int=(v,min,max)=>Number.isInteger(v)&&v>=min&&v<=max;
+const dateLabel=t=>new Date(t).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+const clock=t=>new Date(t).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+const defaultName=()=>`Turnamen ${dateLabel(db.sessionStart||Date.now())}`;
+let db=empty(), archives=[], rawActive=null, storageReady=true;
+try{
+  rawActive=localStorage.getItem(DB_KEY);
+  const saved=JSON.parse(rawActive||'null');
+  const past=JSON.parse(localStorage.getItem(HIST_KEY)||'[]');
+  if(saved&&!['players','teams','matches'].every(k=>Array.isArray(saved[k])))throw Error('Invalid tournament data');
+  if(!Array.isArray(past))throw Error('Invalid history');
+  if(saved)db={...empty(),...saved,settings:{...defaults(),...saved.settings}};
+  archives=past;
+}catch(e){storageReady=false;console.error(e)}
+let page=0, selectedMatch='', archiveDraft='', lateDraft=null, toastTimer;
+const pages=[
+  ['Dashboard','Home','📊'],['Players','Players','👥'],['Team Generator','Teams','🛡️'],
+  ['Match Schedule','Schedule','📅'],['Live Scoreboard','Live','⏱️'],
+  ['League Standings','League','🏆'],['Top Scorers','Scorers','⚽'],['History','History','🗂️']
 ];
-
-function toast(message) {
-  $('toast').textContent = message;
-  $('toast').hidden = false;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => $('toast').hidden = true, 3500);
+function toast(text){
+  if($('modal').open){$('modalMsg').textContent=text;$('modalMsg').hidden=false;return}
+  $('toast').textContent=text;$('toast').hidden=false;clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>$('toast').hidden=true,4000);
 }
+function openModal(html){
+  $('modalBody').innerHTML=html;$('modalMsg').hidden=true;
+  if(!$('modal').open)$('modal').showModal();
+}
+function closeModal(){$('modal').close()}
+function go(n){page=n;render();window.scrollTo(0,0)}
+function openMatch(id){selectedMatch=id;go(4)}
+function persist(next){
+  if(localStorage.getItem(DB_KEY)!==rawActive)throw Error('STALE');
+  const json=JSON.stringify(next);
+  localStorage.setItem(DB_KEY,json);rawActive=json;db=next;
+}
+function update(change){
+  if(!storageReady)return false;
+  try{const next=copy(db);change(next);persist(next);return true}
+  catch(e){console.error(e);toast(e.message==='STALE'?'Data changed in another tab. Reload before continuing.':'Could not save. Existing data was not changed.');return false}
+}
+const team=id=>db.teams.find(t=>t.id===id);
+const player=id=>db.players.find(p=>p.id===id);
+const match=id=>db.matches.find(m=>m.id===id);
+const teamName=id=>team(id)?.name||'Unknown team';
+const goals=m=>Array.isArray(m.goals)?m.goals:[];
+const score=(m,id)=>goals(m).filter(g=>g.teamId===id).length;
+const finished=()=>db.matches.filter(m=>m.status==='FINISHED');
+const isFinal=()=>db.matches.length>0&&finished().length===db.matches.length;
+const hasActive=()=>db.players.length||db.teams.length||db.matches.length||db.sessionStart;
+const seasonLocked=()=>db.matches.some(m=>m.started||goals(m).length||m.status!=='UPCOMING');
+const editable=m=>m.status==='UPCOMING'&&!m.started&&!goals(m).length;
+const defaultSeconds=()=>60*(Number(db.settings.matchMinutes)||10);
+const planned=m=>Number(m.durationSeconds)>0?Number(m.durationSeconds):defaultSeconds();
+const remaining=m=>Math.max(0,(Number(m.timerRemain??planned(m))||0)-
+  (m.status==='LIVE'&&m.timerStart?Math.max(0,Math.floor((Date.now()-m.timerStart)/1000)):0));
+const timeText=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+const durationText=s=>`${Math.floor(s/60)}m${s%60?' '+Math.floor(s%60)+'s':''}`;
+const logo=w=>`<img class="logo" src="${LOGO}" width="${w}" alt="Classic Kairo Futsal Club logo">`;
+const cancel=`<button type="button" class="secondary" onclick="closeModal()">Cancel</button>`;
 
-// Apply a change only after the browser confirms that it was saved.
-function update(change) {
-  if (!storageReady) return false;
-  try {
-    const next = JSON.parse(JSON.stringify(db));
-    change(next);
-    localStorage.setItem(DB_KEY, JSON.stringify(next));
-    db = next;
-    return true;
-  } catch (error) {
-    console.error(error);
-    toast('Could not save. Existing data was not changed.');
-    return false;
+function standings(){
+  const rows=db.teams.map(t=>({id:t.id,name:t.name,p:0,w:0,d:0,l:0,gf:0,ga:0,gd:0,pts:0}));
+  const index=new Map(rows.map(r=>[r.id,r]));
+  for(const m of finished()){
+    const a=index.get(m.teamA),b=index.get(m.teamB);if(!a||!b)continue;
+    const x=score(m,m.teamA),y=score(m,m.teamB);
+    a.p++;b.p++;a.gf+=x;a.ga+=y;b.gf+=y;b.ga+=x;
+    if(x>y){a.w++;b.l++;a.pts+=3}
+    else if(y>x){b.w++;a.l++;b.pts+=3}
+    else{a.d++;b.d++;a.pts++;b.pts++}
   }
+  rows.forEach(r=>r.gd=r.gf-r.ga);
+  return rows.sort((a,b)=>b.pts-a.pts||b.gd-a.gd||b.gf-a.gf||String(a.name).localeCompare(String(b.name)));
 }
-
-function openModal(content) {
-  $('modalBody').innerHTML = content;
-  if (!$('modal').open) $('modal').showModal();
-}
-function closeModal() { $('modal').close(); }
-function go(index) {
-  page = index;
-  render();
-  window.scrollTo(0,0);
-}
-function openMatch(id) { selectedMatch = id; go(4); }
-
-const team = id => db.teams.find(t => t.id === id);
-const player = id => db.players.find(p => p.id === id);
-const teamName = id => team(id)?.name || 'Unknown team';
-const goalsOf = match => Array.isArray(match.goals) ? match.goals : [];
-const score = (match, id) => goalsOf(match).filter(g => g.teamId === id).length;
-const finished = () => db.matches.filter(m => m.status === 'FINISHED');
-const isFinal = () => db.matches.length > 0 && finished().length === db.matches.length;
-const duration = () => Math.max(1, Number(db.settings.matchMinutes) || 10) * 60;
-const defaultName = () => 'Turnamen ' + dateLabel(Date.now());
-
-function standings() {
-  const rows = db.teams.map(t => ({id:t.id,name:t.name,p:0,w:0,d:0,l:0,gf:0,ga:0,gd:0,pts:0}));
-  const index = new Map(rows.map(r => [r.id,r]));
-  for (const m of finished()) {
-    const a = index.get(m.teamA), b = index.get(m.teamB);
-    if (!a || !b) continue;
-    const x = score(m,m.teamA), y = score(m,m.teamB);
-    a.p++; b.p++;
-    a.gf += x; a.ga += y; b.gf += y; b.ga += x;
-    if (x > y) { a.w++; b.l++; a.pts += 3; }
-    else if (y > x) { b.w++; a.l++; b.pts += 3; }
-    else { a.d++; b.d++; a.pts++; b.pts++; }
-  }
-  rows.forEach(r => r.gd = r.gf - r.ga);
-  return rows.sort((a,b) => b.pts-a.pts || b.gd-a.gd || b.gf-a.gf || a.name.localeCompare(b.name));
-}
-
-function scorers(matches = finished()) {
-  const index = new Map();
-  for (const m of matches) for (const g of goalsOf(m)) {
-    const t = team(g.teamId);
-    const name = g.playerName || player(g.playerId)?.name ||
-      t?.members?.find(p => p.id === g.playerId)?.name;
-    if (!g.playerId || !name) continue;
-    if (!index.has(g.playerId)) index.set(g.playerId,{name,team:t?.name || '',goals:0});
+function scorers(){
+  const index=new Map();
+  for(const m of finished())for(const g of goals(m)){
+    const t=team(g.teamId);
+    const name=g.playerName||player(g.playerId)?.name||t?.members?.find(p=>p.id===g.playerId)?.name;
+    if(!g.playerId||!name)continue;
+    if(!index.has(g.playerId))index.set(g.playerId,{name,team:t?.name||'',goals:0});
     index.get(g.playerId).goals++;
   }
-  return [...index.values()].sort((a,b) => b.goals-a.goals || a.name.localeCompare(b.name));
+  return [...index.values()].sort((a,b)=>b.goals-a.goals||a.name.localeCompare(b.name));
 }
-function snapshot(name = defaultName()) {
-  return {id:uid(), name, date:Date.now(),
-    standings:standings().map(({id,...r}) => r), topScorers:scorers()};
+function snapshot(name=defaultName()){
+  return {id:uid(),name,date:db.sessionStart||Date.now(),status:isFinal()?'Final':'Partial',
+    standings:standings().map(({id,...r})=>r),topScorers:scorers()};
 }
-
-function table(headers, rows, emptyText) {
-  return `<div class="scroll"><table><thead><tr>${headers.map(h => `<th scope="col">${esc(h)}</th>`).join('')}</tr></thead>
-    <tbody>${rows.length ? rows.join('') : `<tr><td colspan="${headers.length}">${esc(emptyText)}</td></tr>`}</tbody></table></div>`;
+const reportStatus=h=>h.status==='Partial'?'Partial':h.status==='Final'?'Final':'Archived';
+const headers=['#','Team','P','W','D','L','GF','GA','GD','PTS'];
+const standingValues=(r,i)=>[i+1,r.name,r.p,r.w,r.d,r.l,r.gf,r.ga,r.gd??(r.gf-r.ga),r.pts];
+const cells=values=>values.map(v=>`<td>${esc(v)}</td>`).join('');
+function table(head,rows,none){
+  return `<div class="scroll"><table><thead><tr>${head.map(v=>`<th scope="col">${esc(v)}</th>`).join('')}</tr></thead>
+  <tbody>${rows.length?rows.join(''):`<tr><td colspan="${head.length}">${esc(none)}</td></tr>`}</tbody></table></div>`;
 }
-const cells = values => values.map(v => `<td>${esc(v)}</td>`).join('');
-const standingHeaders = ['#','Team','P','W','D','L','GF','GA','GD','PTS'];
-const standingValues = (r,i) => [i+1,r.name,r.p,r.w,r.d,r.l,r.gf,r.ga,r.gd ?? (r.gf-r.ga),r.pts];
-function standingTable(rows) {
-  return table(standingHeaders, rows.map((r,i) => `<tr>${cells(standingValues(r,i))}</tr>`), 'No standings yet.');
+function standingTable(rows){return table(headers,rows.map((r,i)=>`<tr>${cells(standingValues(r,i))}</tr>`),'No standings yet.')}
+function ranked(rows){
+  let rank=0;
+  return rows.map((r,i)=>{if(!i||r.goals!==rows[i-1].goals)rank=i+1;return [rank,r.name,r.team,r.goals]});
 }
-function scorerTable(rows) {
-  let rank = 0;
-  return table(['#','Player','Team','Goals'], rows.map((r,i) => {
-    if (!i || r.goals !== rows[i-1].goals) rank = i+1;
-    return `<tr>${cells([rank,r.name,r.team,r.goals])}</tr>`;
-  }), 'No goals recorded.');
+function scorerTable(rows){
+  return table(['#','Player','Team','Goals'],ranked(rows).map(v=>`<tr>${cells(v)}</tr>`),'No goals recorded.');
 }
 
-function dashboard() {
-  const done = finished().length;
-  const stats = [
-    ['Players',db.players.length], ['Pro Players',db.players.filter(p=>p.cat==='PRO').length],
-    ['Regular Players',db.players.filter(p=>p.cat==='REGULAR').length],
-    ['Teams',db.teams.length], ['Matches',db.matches.length],
-    ['Completed',done], ['Remaining',db.matches.length-done],
-    ['Goals',db.matches.reduce((n,m)=>n+goalsOf(m).length,0)]
-  ];
-  const live = db.matches.filter(m => m.status === 'LIVE' || m.status === 'PAUSED');
-  return `<h1>Dashboard</h1><div class="hero">${logo(142)}
-    <div><h2>CLASSIC KAIRO<br>FUTSAL CLUB</h2><p class="muted">REUNITE · EST. 2010</p></div></div>
-    <div class="grid stats mt">${stats.map(([label,value])=>`<div class="stat"><strong>${value}</strong>${label}</div>`).join('')}</div>
+function dashboard(){
+  const live=db.matches.filter(m=>['LIVE','PAUSED'].includes(m.status));
+  const stats=[['Players',db.players.length],['Pro',db.players.filter(p=>p.cat==='PRO').length],
+    ['Regular',db.players.filter(p=>p.cat!=='PRO').length],['Teams',db.teams.length],
+    ['Matches',db.matches.length],['Completed',finished().length],
+    ['Remaining',db.matches.length-finished().length],['Goals',db.matches.reduce((n,m)=>n+goals(m).length,0)]];
+  return `<h1>Dashboard</h1><div class="hero">${logo(142)}<div><h2>CLASSIC KAIRO<br>FUTSAL CLUB</h2>
+    <p class="muted">REUNITE · EST. 2010</p></div></div>
+    <div class="grid stats">${stats.map(([k,v])=>`<div class="panel stat"><strong>${v}</strong>${k}</div>`).join('')}</div>
     <section class="panel"><h2>Active Matches</h2>${live.map(m=>`<p class="row">
-      <button class="secondary" onclick="openMatch(${arg(m.id)})">Open</button>
-      ${esc(teamName(m.teamA))} vs ${esc(teamName(m.teamB))}</p>`).join('') || '<p class="muted">No active matches.</p>'}</section>
-    <section class="panel"><h2>Reset Tournament</h2><p class="muted">Archive the final standings and top scorers before starting a new week.</p>
-      <button class="danger" onclick="resetStart()">Reset Tournament</button></section>`;
+    <button class="secondary" onclick="openMatch(${arg(m.id)})">Open</button>${esc(teamName(m.teamA))} vs ${esc(teamName(m.teamB))} · ${esc(m.status)}</p>`).join('')||'<p class="muted">No active matches.</p>'}</section>
+    <section class="panel"><h2>Reset Tournament</h2>
+    <p class="muted">Reset at any time. Only completed matches count toward the archive.</p>
+    <button class="danger" onclick="resetStart()" ${hasActive()?'':'disabled'}>Reset Tournament</button></section>`;
 }
 
-function playersPage() {
-  return `<h1>Players</h1><section class="panel">
-    <form class="row" onsubmit="addPlayer(event)">
-      <input id="playerName" aria-label="Player name" placeholder="Player name" maxlength="100" required>
-      <select id="playerCat" aria-label="Player category"><option value="REGULAR">Regular</option><option value="PRO">Pro</option></select>
-      <button>Add Player</button>
-    </form>
-    <div class="row mt"><button class="secondary" onclick="exportCSV()">Export CSV</button>
+const category=(value='REGULAR')=>`<option value="REGULAR" ${value!=='PRO'?'selected':''}>Regular</option><option value="PRO" ${value==='PRO'?'selected':''}>Pro</option>`;
+const lateButton=()=>`<button class="secondary" onclick="lateForm()" ${db.teams.length?'':'disabled'}>Add Late Player</button>`;
+const duplicate=(name,id)=>db.players.some(p=>p.id!==id&&p.name.toLowerCase()===name.toLowerCase());
+function playersPage(){
+  return `<h1>Players</h1><section class="panel"><form class="row" onsubmit="addPlayer(event)">
+    <input id="playerName" aria-label="Player name" placeholder="Player name" maxlength="100" required>
+    <select id="playerCat" aria-label="Category">${category()}</select><button>Add Player</button>
+    </form><div class="row mt">${lateButton()}<button class="secondary" onclick="exportCSV()">Export CSV</button>
     <button class="secondary" onclick="$('csvFile').click()">Import CSV</button>
     <input id="csvFile" type="file" accept=".csv,text/csv" hidden onchange="importCSV(event)"></div>
-    </section><section class="panel"><h2>Player List</h2>
-    <input id="search" type="search" aria-label="Search players" placeholder="Search players" oninput="renderPlayerList()">
-    <div class="mt" id="playerList"></div></section>`;
+    ${db.teams.length?'<p class="muted mt">Use Add Late Player to put a new player directly into a team.</p>':''}</section>
+    <section class="panel"><h2>Player List</h2><input id="search" type="search" aria-label="Search players" placeholder="Search players" oninput="renderPlayerList()">
+    <div id="playerList" class="mt"></div></section>`;
 }
-function renderPlayerList() {
-  const q = $('search').value.trim().toLowerCase();
-  $('playerList').innerHTML = table(['Name','Category','Actions'],
-    db.players.filter(p=>p.name.toLowerCase().includes(q)).map(p=>
-      `<tr>${cells([p.name,p.cat])}<td><div class="row">
-      <button class="secondary" onclick="editPlayer(${arg(p.id)})">Edit</button>
-      <button class="danger" onclick="deletePlayer(${arg(p.id)})">Delete</button></div></td></tr>`),
-    'No players found.');
+function renderPlayerList(){
+  const q=$('search').value.trim().toLowerCase();
+  $('playerList').innerHTML=table(['Name','Category','Team','Actions'],db.players.filter(p=>p.name.toLowerCase().includes(q)).map(p=>{
+    const t=db.teams.find(t=>t.members?.some(x=>x.id===p.id));
+    return `<tr>${cells([p.name,p.cat,t?.name||'Unassigned'])}<td><div class="row">
+    <button class="secondary" onclick="editPlayer(${arg(p.id)})">Edit</button>
+    <button class="danger" onclick="deletePlayer(${arg(p.id)})" ${t?'disabled':''}>Delete</button></div></td></tr>`;
+  }),'No players found.');
 }
-function addPlayer(event) {
-  event.preventDefault();
-  const name = $('playerName').value.trim(), cat = $('playerCat').value;
-  if (!name) return;
-  if (db.players.some(p=>p.name.toLowerCase()===name.toLowerCase())) return toast('Player already exists.');
-  if (update(d=>d.players.push({id:uid(),name,cat}))) render();
+function addPlayer(e){
+  e.preventDefault();const name=$('playerName').value.trim(),cat=$('playerCat').value;
+  if(!name)return;
+  if(duplicate(name))return toast('Player already exists.');
+  if(update(d=>d.players.push({id:uid(),name,cat})))render();
 }
-function editPlayer(id) {
-  const p = player(id);
-  if (!p) return;
+function editPlayer(id){
+  const p=player(id);if(!p)return;
   openModal(`<h2>Edit Player</h2><form onsubmit="savePlayer(event,${arg(id)})">
     <label class="field">Name<input id="editName" value="${esc(p.name)}" maxlength="100" required></label>
-    <label class="field">Category<select id="editCat">
-    <option value="REGULAR" ${p.cat!=='PRO'?'selected':''}>Regular</option>
-    <option value="PRO" ${p.cat==='PRO'?'selected':''}>Pro</option></select></label>
-    <div class="row mt"><button>Save</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div></form>`);
+    <label class="field">Category<select id="editCat">${category(p.cat)}</select></label>
+    <div class="row mt"><button>Save</button>${cancel}</div></form>`);
 }
-function savePlayer(event,id) {
-  event.preventDefault();
-  const name = $('editName').value.trim(), cat = $('editCat').value;
-  if (!name) return;
-  if (db.players.some(p=>p.id!==id && p.name.toLowerCase()===name.toLowerCase())) return toast('Player already exists.');
-  if (update(d=>{
+function savePlayer(e,id){
+  e.preventDefault();const name=$('editName').value.trim(),cat=$('editCat').value;
+  if(!name)return;
+  if(duplicate(name,id))return toast('Player already exists.');
+  if(update(d=>{
     Object.assign(d.players.find(p=>p.id===id),{name,cat});
-    for (const t of d.teams) for (const p of t.members || []) if (p.id===id) Object.assign(p,{name,cat});
-    for (const m of d.matches) for (const g of goalsOf(m)) if (g.playerId===id) g.playerName=name;
-  })) { closeModal(); render(); }
+    for(const t of d.teams)for(const p of t.members||[])if(p.id===id)Object.assign(p,{name,cat});
+    for(const m of d.matches)for(const g of goals(m))if(g.playerId===id)g.playerName=name;
+  })){closeModal();render()}
 }
-function deletePlayer(id) {
-  if (db.teams.some(t=>t.members?.some(p=>p.id===id))) return toast('This player is already assigned to a team.');
-  if (confirm('Delete this player?') && update(d=>d.players=d.players.filter(p=>p.id!==id))) render();
+function deletePlayer(id){
+  if(db.teams.some(t=>t.members?.some(p=>p.id===id)))return toast('This player is assigned to a team.');
+  if(confirm('Delete this player?')&&update(d=>d.players=d.players.filter(p=>p.id!==id)))render();
 }
-function download(url, name) {
-  const a=document.createElement('a');
-  a.href=url; a.download=name;
-  document.body.append(a); a.click(); a.remove();
+function lateForm(){
+  if(!db.teams.length)return toast('Generate teams first.');
+  lateDraft=null;
+  openModal(`<h2>Add Late Player</h2><p class="muted">Draw a team without changing the schedule, score or timer.</p>
+    <form onsubmit="drawLate(event)"><label class="field">Name<input id="lateName" maxlength="100" required></label>
+    <label class="field">Category<select id="lateCat">${category()}</select></label>
+    <div class="row mt"><button>Draw Team</button>${cancel}</div></form>`);
 }
-function exportCSV() {
-  const cell = v => `"${String(v).replace(/"/g,'""')}"`;
-  const csv = ['name,category',...db.players.map(p=>[cell(p.name),cell(p.cat)].join(','))].join('\r\n');
+function drawLate(e){
+  e.preventDefault();const name=$('lateName').value.trim(),cat=$('lateCat').value;
+  if(!name)return;
+  if(duplicate(name))return toast('Player already exists. Edit the existing record instead.');
+  const count=t=>(t.members||[]).length;
+  const pros=t=>(t.members||[]).filter(p=>p.cat==='PRO').length;
+  const low=Math.min(...db.teams.map(count));
+  let pool=db.teams.filter(t=>count(t)===low);
+  if(cat==='PRO'){
+    const lowPro=Math.min(...pool.map(pros));pool=pool.filter(t=>pros(t)===lowPro);
+  }
+  const t=pool[Math.floor(Math.random()*pool.length)];if(!t)return;
+  lateDraft={name,cat,teamId:t.id};
+  const playing=db.matches.some(m=>['LIVE','PAUSED'].includes(m.status)&&[m.teamA,m.teamB].includes(t.id));
+  openModal(`<h2>Confirm Team Assignment</h2><p><strong>${esc(name)}</strong> → <strong>${esc(t.name)}</strong></p>
+    <p>${playing?'This team is playing now. The player can join through a substitution.':'The player will be available for this team’s next match.'}</p>
+    <div class="row mt"><button onclick="saveLate()">Confirm Assignment</button>${cancel}</div>`);
+}
+function saveLate(){
+  if(!lateDraft||!team(lateDraft.teamId)||duplicate(lateDraft.name))return toast('Could not confirm this assignment.');
+  const {name,cat,teamId}=lateDraft;
+  if(update(d=>{
+    const p={id:uid(),name,cat};d.players.push(p);
+    const t=d.teams.find(t=>t.id===teamId);
+    (t.members||=[]).push({...p});
+  })){lateDraft=null;closeModal();render();toast(`${name} joined ${teamName(teamId)}.`)}
+}
+function download(url,name){
+  const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();
+}
+function exportCSV(){
+  const quote=v=>`"${String(v).replace(/"/g,'""')}"`;
+  const csv=['name,category',...db.players.map(p=>[quote(p.name),quote(p.cat)].join(','))].join('\r\n');
   download('data:text/csv;charset=utf-8,'+encodeURIComponent('\uFEFF'+csv),'classic-kairo-players.csv');
 }
-async function importCSV(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  try {
-    const lines = (await file.text()).replace(/^\uFEFF/,'').split(/\r?\n/).slice(1);
-    let count = 0;
-    if (update(d=>{
-      const names = new Set(d.players.map(p=>p.name.toLowerCase()));
-      for (const line of lines) {
-        const match = line.match(/^(?:"((?:[^"]|"")*)"|([^,]*)),\s*(?:"([^"]*)"|([^,]*))\s*$/);
-        if (!match) continue;
-        const name = (match[1] ?? match[2]).replace(/""/g,'"').trim().slice(0,100);
-        if (!name || names.has(name.toLowerCase())) continue;
-        const cat = (match[3] ?? match[4]).trim().toUpperCase()==='PRO'?'PRO':'REGULAR';
-        d.players.push({id:uid(),name,cat}); names.add(name.toLowerCase()); count++;
+async function importCSV(e){
+  const file=e.target.files[0];if(!file)return;
+  try{
+    const lines=(await file.text()).replace(/^\uFEFF/,'').split(/\r?\n/).slice(1);
+    let n=0;
+    if(update(d=>{
+      const known=new Set(d.players.map(p=>p.name.toLowerCase()));
+      for(const line of lines){
+        const m=line.match(/^(?:"((?:[^"]|"")*)"|([^,]*)),\s*(?:"([^"]*)"|([^,]*))\s*$/);
+        if(!m)continue;
+        const name=(m[1]??m[2]).replace(/""/g,'"').trim().slice(0,100);
+        if(!name||known.has(name.toLowerCase()))continue;
+        d.players.push({id:uid(),name,cat:(m[3]??m[4]).trim().toUpperCase()==='PRO'?'PRO':'REGULAR'});
+        known.add(name.toLowerCase());n++;
       }
-    })) { render(); toast(`${count} player(s) imported.`); }
-  } catch (error) { console.error(error); toast('Could not read this CSV.'); }
-  finally { event.target.value=''; }
+    })){render();toast(`${n} player(s) imported.`)}
+  }catch(err){console.error(err);toast('Could not read this CSV.')}
+  finally{e.target.value=''}
 }
 
-function teamsPage() {
-  return `<h1>Team Generator</h1><section class="panel">
-    <form class="row" onsubmit="makeTeams(event)">
-      <label>Teams <input id="teamCount" type="number" min="2" max="32" value="${esc(db.settings.teamCount)}" required></label>
-      <button>${db.teams.length?'Shuffle Teams':'Generate Teams'}</button>
-    </form><p class="muted mt">Pro players are distributed across teams before regular players.</p>
-    </section><div class="grid">${db.teams.map(t=>`<section class="panel"><h2>${esc(t.name)}</h2>
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+  return a;
+}
+function teamsPage(){
+  return `<h1>Team Generator</h1><section class="panel"><form class="row" onsubmit="makeTeams(event)">
+    <label>Teams <input id="teamCount" type="number" min="2" max="32" value="${esc(db.settings.teamCount)}" required></label>
+    <button ${seasonLocked()?'disabled':''}>${db.teams.length?'Shuffle Teams':'Generate Teams'}</button></form>
+    <p class="muted mt">${seasonLocked()?'Teams are locked after play starts. Use Add Late Player for new arrivals.':'Pro players are distributed before regular players.'}</p></section>
+    <div class="grid">${db.teams.map(t=>`<section class="panel"><h2>${esc(t.name)} <small>· ${(t.members||[]).length}</small></h2>
     ${(t.members||[]).map(p=>`<p>${esc(p.name)} <small>· ${esc(p.cat)}</small></p>`).join('')}</section>`).join('')}</div>`;
 }
-function shuffle(list) {
-  for (let i=list.length-1;i>0;i--) {
-    const j=Math.floor(Math.random()*(i+1)); [list[i],list[j]]=[list[j],list[i]];
-  }
-  return list;
-}
-function hasResults() {
-  return db.matches.some(m=>m.status!=='UPCOMING'||goalsOf(m).length);
-}
-function makeTeams(event) {
-  event.preventDefault();
-  const n = Number($('teamCount').value);
-  if (!Number.isInteger(n)||n<2||n>32||db.players.length<n) return toast('Enter a valid team count with at least one player per team.');
-  if (hasResults()) return toast('Teams cannot be shuffled after matches have started.');
-  if (db.matches.length && !confirm('Generate new teams and clear the current schedule?')) return;
-  const teams = Array.from({length:n},(_,i)=>({
-    id:uid(),name:`Tim ${i<26?String.fromCharCode(65+i):i+1}`,members:[]
-  }));
-  const pro = shuffle(db.players.filter(p=>p.cat==='PRO'));
-  const regular = shuffle(db.players.filter(p=>p.cat!=='PRO'));
-  [...pro,...regular].forEach((p,i)=>teams[i%n].members.push(p));
-  if (update(d=>{d.teams=teams;d.matches=[];d.settings.teamCount=n;})) {selectedMatch='';render();}
+function makeTeams(e){
+  e.preventDefault();const n=Number($('teamCount').value);
+  if(seasonLocked())return toast('Teams are locked.');
+  if(!int(n,2,32)||db.players.length<n)return toast('Each team needs at least one player.');
+  if(db.matches.length&&!confirm('Generate new teams and clear the current schedule?'))return;
+  const teams=Array.from({length:n},(_,i)=>({id:uid(),name:`Tim ${i<26?String.fromCharCode(65+i):i+1}`,members:[]}));
+  const pro=shuffle(db.players.filter(p=>p.cat==='PRO'));
+  const regular=shuffle(db.players.filter(p=>p.cat!=='PRO'));
+  [...pro,...regular].forEach((p,i)=>teams[i%n].members.push({...p}));
+  if(update(d=>{d.teams=teams;d.matches=[];d.settings.teamCount=n})){selectedMatch='';render()}
 }
 
-function schedulePage() {
-  const rows = db.matches.map(m=>`<tr>
-    ${cells([m.matchNo,teamName(m.teamA),teamName(m.teamB),`${score(m,m.teamA)}–${score(m,m.teamB)}`])}
-    <td><span class="status ${m.status==='LIVE'?'live':''}">${esc(m.status)}</span></td>
-    <td><button class="secondary" onclick="openMatch(${arg(m.id)})">Open</button></td></tr>`);
-  return `<h1>Match Schedule</h1><section class="panel">
-    <p class="muted">Round robin · ${esc(db.settings.matchMinutes)} minutes per match</p>
-    <button onclick="makeSchedule()">${db.matches.length?'Regenerate Schedule':'Generate Schedule'}</button>
-    </section><section class="panel">${table(['#','Team A','Team B','Score','Status','Actions'],rows,'Generate teams first, then create a schedule.')}</section>`;
+function localDateTime(ms){
+  const d=new Date(ms),pad=v=>String(v).padStart(2,'0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
-function makeSchedule() {
-  if (db.teams.length<2) return toast('Generate at least two teams first.');
-  if (hasResults()) return toast('The schedule cannot be replaced after matches have started.');
-  if (db.matches.length && !confirm('Replace the current schedule?')) return;
-  const rotation = shuffle(db.teams.map(t=>t.id));
-  if (rotation.length%2) rotation.push(null);
+function budget(){
+  const now=Date.now(),s=db.settings;
+  const start=db.sessionStart||now,end=start+s.rentalMinutes*60000,base=Math.max(now,start);
+  const remainingMatches=db.matches.filter(m=>m.status!=='FINISHED');
+  const unstarted=remainingMatches.filter(editable);
+  const committed=remainingMatches.filter(m=>!editable(m)).reduce((n,m)=>n+remaining(m),0);
+  const count=db.matches.length?remainingMatches.length:db.teams.length*(db.teams.length-1)/2;
+  const variableCount=db.matches.length?unstarted.length:count;
+  const gaps=Math.max(0,count-1)*s.gapMinutes*60;
+  const reserve=s.bufferMinutes*60;
+  const available=Math.floor((end-base)/1000)-gaps-reserve-committed;
+  const recommended=variableCount?Math.max(0,Math.floor(available/variableCount/60)):null;
+  const play=db.matches.length?committed+unstarted.reduce((n,m)=>n+planned(m),0):count*defaultSeconds();
+  const estimate=base+(play+gaps)*1000;
+  const over=Math.max(0,Math.ceil((estimate+reserve*1000-end)/60000));
+  return {end,estimate,over,recommended,count,variableCount};
+}
+function budgetSummary(){
+  const b=budget();
+  const recommendation=b.recommended===null?'No unstarted matches to adjust.':
+    b.recommended<1?'Not enough time for every remaining match, even at 1 minute each.':
+    `Recommended maximum: ${b.recommended} min per unstarted match.`;
+  return `<p><strong>${db.sessionStart?'Rental ends':'Estimated rental end'}</strong> ${clock(b.end)} ·
+    <strong>Estimated play ends</strong> ${clock(b.estimate)} · <strong>${b.count}</strong> match(es) remaining</p>
+    <p class="${b.over?'warning':'muted'}">${b.over?`${b.over} min over budget, including reserve.`:'Within budget, including reserve.'}</p>
+    <p class="${b.recommended===0?'warning':'muted'}">${recommendation}</p>
+    <small>Estimate assumes one court, scheduled breaks and no extra stoppages.</small>`;
+}
+function schedulePage(){
+  const rows=db.matches.map(m=>`<tr>${cells([m.matchNo,teamName(m.teamA),teamName(m.teamB),durationText(planned(m)),`${score(m,m.teamA)}–${score(m,m.teamB)}`,m.status])}
+    <td><div class="row"><button class="secondary" onclick="openMatch(${arg(m.id)})">Open</button>
+    ${editable(m)?`<button class="secondary" onclick="durationForm(${arg(m.id)})">Edit Duration</button>`:''}</div></td></tr>`);
+  return `<h1>Match Schedule</h1><section class="panel"><h2>Time Budget</h2>
+    <form onsubmit="saveBudget(event)"><div class="row">
+    <label class="field">Rental start<input id="sessionStart" type="datetime-local" value="${db.sessionStart?localDateTime(db.sessionStart):''}"></label>
+    <label class="field">Rental minutes<input id="rental" type="number" min="1" max="1440" value="${esc(db.settings.rentalMinutes)}" required></label>
+    <label class="field">Reserve minutes<input id="reserve" type="number" min="0" max="180" value="${esc(db.settings.bufferMinutes)}" required></label>
+    <label class="field">Break minutes<input id="gap" type="number" min="0" max="60" value="${esc(db.settings.gapMinutes)}" required></label>
+    </div><button>Save Time Budget</button></form>
+    <p class="muted mt">Set the actual rental start for accurate estimates. If blank, the first match starts the session clock.</p>
+    <div id="budgetSummary" class="mt">${budgetSummary()}</div></section>
+    <section class="panel"><h2>Match Duration</h2><form class="row" onsubmit="applyDuration(event)">
+    <label>Minutes <input id="bulkMinutes" type="number" min="1" max="120" value="${esc(db.settings.matchMinutes)}" required></label>
+    <button ${db.matches.length&&!db.matches.some(editable)?'disabled':''}>Apply to Unstarted Matches</button>
+    <button type="button" class="secondary" onclick="applyRecommended()" ${db.matches.length&&!db.matches.some(editable)?'disabled':''}>Use Recommendation</button></form>
+    <p class="muted mt">Started and finished matches keep their duration. Before scheduling, this sets the default.</p></section>
+    <section class="panel"><h2>Round Robin</h2><button onclick="makeSchedule()" ${seasonLocked()?'disabled':''}>
+    ${db.matches.length?'Regenerate Schedule':'Generate Schedule'}</button><div class="mt">
+    ${table(['#','Team A','Team B','Duration','Score','Status','Actions'],rows,'Generate teams first, then create a schedule.')}</div></section>`;
+}
+function saveBudget(e){
+  e.preventDefault();
+  const value=$('sessionStart').value,start=value?new Date(value).getTime():null;
+  const rental=Number($('rental').value),reserve=Number($('reserve').value),gap=Number($('gap').value);
+  if((value&&!Number.isFinite(start))||!int(rental,1,1440)||!int(reserve,0,180)||!int(gap,0,60)||reserve>=rental)
+    return toast('Check the rental time, break and reserve. Reserve must be shorter than the rental.');
+  if(update(d=>{d.sessionStart=start;Object.assign(d.settings,{rentalMinutes:rental,bufferMinutes:reserve,gapMinutes:gap})})){
+    render();toast('Time budget saved.');
+  }
+}
+function setMinutes(m,min){m.durationSeconds=min*60;m.timerRemain=min*60}
+function setBulk(min){
+  if(!int(min,1,120))return toast('Enter a duration from 1 to 120 minutes.');
+  if(db.matches.length&&!db.matches.some(editable))return toast('No unstarted matches to edit.');
+  if(update(d=>{d.settings.matchMinutes=min;for(const m of d.matches)if(editable(m))setMinutes(m,min)})){
+    render();toast(`Duration set to ${min} min for unstarted matches.`);
+  }
+}
+function applyDuration(e){e.preventDefault();setBulk(Number($('bulkMinutes').value))}
+function applyRecommended(){
+  const n=budget().recommended;
+  if(!n)return toast('No feasible duration to apply. Review the rental budget or schedule.');
+  setBulk(Math.min(120,n));
+}
+function durationForm(id){
+  const m=match(id);if(!m||!editable(m))return;
+  openModal(`<h2>Match #${esc(m.matchNo)} Duration</h2><form onsubmit="saveDuration(event,${arg(id)})">
+    <label class="field">Minutes<input id="oneDuration" type="number" min="1" max="120" value="${Math.ceil(planned(m)/60)}" required></label>
+    <div class="row mt"><button>Save</button>${cancel}</div></form>`);
+}
+function saveDuration(e,id){
+  e.preventDefault();const m=match(id),min=Number($('oneDuration').value);
+  if(!m||!editable(m)||!int(min,1,120))return toast('Only unstarted matches can be edited.');
+  if(update(d=>setMinutes(d.matches.find(x=>x.id===id),min))){closeModal();render()}
+}
+function makeSchedule(){
+  if(seasonLocked())return toast('The schedule is locked.');
+  if(db.teams.length<2)return toast('Generate at least two teams first.');
+  if(db.matches.length&&!confirm('Replace the current schedule?'))return;
+  const a=shuffle(db.teams.map(t=>t.id));if(a.length%2)a.push(null);
   const matches=[];
-  for (let r=0;r<rotation.length-1;r++) {
-    for (let i=0;i<rotation.length/2;i++) {
-      const a=rotation[i],b=rotation[rotation.length-1-i];
-      if (a&&b) matches.push({id:uid(),matchNo:matches.length+1,teamA:a,teamB:b,
-        status:'UPCOMING',goals:[],timerStart:null,timerRemain:duration(),elapsed:0});
+  for(let r=0;r<a.length-1;r++){
+    for(let i=0;i<a.length/2;i++){
+      const x=a[i],y=a[a.length-1-i];
+      if(x&&y)matches.push({id:uid(),matchNo:matches.length+1,teamA:x,teamB:y,status:'UPCOMING',
+        goals:[],timerStart:null,timerRemain:defaultSeconds(),durationSeconds:defaultSeconds(),started:false});
     }
-    rotation.splice(1,0,rotation.pop());
+    a.splice(1,0,a.pop());
   }
-  if (update(d=>d.matches=matches)) {selectedMatch='';render();}
+  if(update(d=>d.matches=matches)){selectedMatch='';render()}
 }
 
-function remaining(m) {
-  const base=Number(m.timerRemain ?? duration());
-  return Math.max(0,base-(m.status==='LIVE'&&m.timerStart ?
-    Math.max(0,Math.floor((Date.now()-m.timerStart)/1000)):0));
-}
-const timeText = seconds => `${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;
-
-function scoreboardPage() {
-  const m=db.matches.find(x=>x.id===selectedMatch);
-  const options=db.matches.map(x=>`<option value="${esc(x.id)}" ${m?.id===x.id?'selected':''}>
+function scoreboardPage(){
+  const m=match(selectedMatch);
+  const options=db.matches.map(x=>`<option value="${esc(x.id)}" ${x.id===selectedMatch?'selected':''}>
     #${esc(x.matchNo)} · ${esc(teamName(x.teamA))} vs ${esc(teamName(x.teamB))}</option>`).join('');
-  return `<h1>Live Scoreboard</h1><section class="panel">
+  return `<h1>Live Scoreboard</h1><section class="panel"><div class="row">
     <select aria-label="Select match" onchange="selectedMatch=this.value;render()"><option value="">Select match</option>${options}</select>
-    ${m?scoreboard(m):'<p class="muted mt">Select a match to manage the timer and score.</p>'}</section>`;
+    ${lateButton()}</div>${m?scoreboard(m):'<p class="muted mt">Select a match to manage the timer and score.</p>'}</section>`;
 }
-function scoreboard(m) {
-  const id=arg(m.id), done=m.status==='FINISHED';
-  const action=(type,text,cls='')=>`<button class="${cls}" onclick="matchAction(${id},'${type}')">${text}</button>`;
-  function side(teamId) {
-    const list=goalsOf(m).filter(g=>g.teamId===teamId);
-    return `<div><h3>${esc(teamName(teamId))}</h3>
-      ${m.status==='LIVE'||m.status==='PAUSED'?`<button onclick="goalForm(${id},${arg(teamId)})">+ Goal</button>`:''}
-      <ul class="goals">${list.map(g=>`<li>${esc(g.minute)}′ ${esc(g.playerName||player(g.playerId)?.name||'Unknown player')}
+function scoreboard(m){
+  const id=arg(m.id),done=m.status==='FINISHED';
+  const btn=(action,label,style='')=>`<button class="${style}" onclick="matchAction(${id},'${action}')">${label}</button>`;
+  function side(t){
+    return `<div><h3>${esc(teamName(t))}</h3>
+      ${['LIVE','PAUSED'].includes(m.status)?`<button onclick="goalForm(${id},${arg(t)})">+ Goal</button>`:''}
+      <ul class="goals">${goals(m).filter(g=>g.teamId===t).map(g=>`<li>${esc(g.minute)}′ ${esc(g.playerName||player(g.playerId)?.name||'Unknown player')}
       ${done?'':`<button class="secondary" aria-label="Remove goal" onclick="removeGoal(${id},${arg(g.id)})">×</button>`}</li>`).join('')}</ul></div>`;
   }
   return `<div class="timer" id="timer">${timeText(remaining(m))}</div>
-    <p class="status" style="text-align:center">${esc(m.status)}</p>
-    <div class="row center">
-      ${m.status==='UPCOMING'?action('start','Start'):''}
-      ${m.status==='LIVE'?action('pause','Pause','secondary'):''}
-      ${m.status==='PAUSED'?action('start','Resume'):''}
-      ${done?'':action('reset','Reset Timer','secondary')+action('finish','Finish Match','danger')}
-      ${done?action('reopen','Reopen Match','secondary'):''}
-    </div>
-    <div class="scoreboard mt">${side(m.teamA)}<div class="score">${score(m,m.teamA)}–${score(m,m.teamB)}</div>${side(m.teamB)}</div>`;
+  <p class="center muted">${esc(m.status)} · ${durationText(planned(m))} planned</p>
+  <div class="row center">${m.status==='UPCOMING'?btn('start','Start'):''}
+  ${m.status==='LIVE'?btn('pause','Pause','secondary'):''}${m.status==='PAUSED'&&remaining(m)>0?btn('start','Resume'):''}
+  ${done?btn('reopen','Reopen Match','secondary'):btn('reset','Reset Timer','secondary')+btn('finish','Finish Match','danger')}</div>
+  <div class="board mt">${side(m.teamA)}<div class="score">${score(m,m.teamA)}–${score(m,m.teamB)}</div>${side(m.teamB)}</div>`;
 }
-function matchAction(id,action,automatic=false) {
-  const current=db.matches.find(m=>m.id===id);
-  if (!current) return;
-  const status=current.status;
-  if (action==='start'&&!['PAUSED','UPCOMING'].includes(status)) return;
-  if (action==='pause'&&status!=='LIVE') return;
-  if (action==='reopen'&&(status!=='FINISHED'||!confirm('Reopen this match to correct the result?'))) return;
-  if (action!=='reopen'&&status==='FINISHED') return;
-  if (action==='finish'&&!automatic&&!confirm('Finish this match and record the result?')) return;
-  if (action==='reset'&&!confirm('Reset the timer? Recorded goals will be kept.')) return;
-  const saved=update(d=>{
-    const m=d.matches.find(x=>x.id===id);
-    if (action==='start') {
-      if (status==='UPCOMING'||!remaining(m)) m.timerRemain=duration();
-      m.status='LIVE'; m.timerStart=Date.now();
+function matchAction(id,action,automatic=false){
+  const m=match(id);if(!m)return;
+  const status=m.status;
+  if(action==='start'&&(!['UPCOMING','PAUSED'].includes(status)||(status==='PAUSED'&&!remaining(m))))return;
+  if(action==='start'&&db.matches.some(x=>x.id!==id&&x.status==='LIVE'))return toast('Pause or finish the other live match first.');
+  if(action==='pause'&&status!=='LIVE')return;
+  if(action==='reopen'&&(status!=='FINISHED'||!confirm('Reopen this match to correct the result?')))return;
+  if(action!=='reopen'&&status==='FINISHED')return;
+  if(action==='finish'&&!automatic&&!confirm('Finish this match and record the result?'))return;
+  if(action==='reset'&&!confirm('Reset the timer? Recorded goals will be kept.'))return;
+  const left=remaining(m),full=planned(m);
+  if(!update(d=>{
+    const x=d.matches.find(x=>x.id===id);
+    x.durationSeconds=full;
+    if(action==='start'){
+      if(status==='UPCOMING')x.timerRemain=full;
+      x.started=true;x.status='LIVE';x.timerStart=Date.now();
+      if(!d.sessionStart)d.sessionStart=Date.now();
     }
-    if (action==='pause'||action==='finish') {
-      m.timerRemain=remaining(m);
-      m.timerStart=null; m.status=action==='pause'?'PAUSED':'FINISHED';
+    if(action==='pause'||action==='finish'){
+      x.started=true;x.timerRemain=left;x.timerStart=null;x.status=action==='pause'?'PAUSED':'FINISHED';
+      if(!d.sessionStart)d.sessionStart=Date.now();
     }
-    if (action==='reset') {
-      m.timerRemain=duration(); m.timerStart=null; m.status='UPCOMING';
-    }
-    if (action==='reopen') {m.timerStart=null;m.status='PAUSED';}
-  });
-  if (!saved) return;
-  if (page===3||page===4||page===5||page===6||page===0) render();
-  if (action==='finish') toast('Match finished.');
+    if(action==='reset'){x.started=!!x.started||status!=='UPCOMING';x.timerRemain=full;x.timerStart=null;x.status='UPCOMING'}
+    if(action==='reopen'){x.started=true;x.timerStart=null;x.status='PAUSED'}
+  }))return;
+  if([0,3,4,5,6].includes(page))render();
+  if(action==='finish')toast('Match finished.');
 }
-function goalForm(id,teamId) {
-  const m=db.matches.find(x=>x.id===id), t=team(teamId);
-  if (!m||!t||!['LIVE','PAUSED'].includes(m.status)||![m.teamA,m.teamB].includes(teamId)) return;
-  if (!t.members?.length) return toast('This team has no players.');
-  const max=Math.ceil(duration()/60);
-  const minute=Math.min(max,Math.max(1,Math.ceil((duration()-remaining(m))/60)));
+function goalForm(id,teamId){
+  const m=match(id),t=team(teamId);
+  if(!m||!t||![m.teamA,m.teamB].includes(teamId)||!['LIVE','PAUSED'].includes(m.status))return;
+  if(!t.members?.length)return toast('This team has no players.');
+  const max=Math.ceil(planned(m)/60);
+  const minute=Math.min(max,Math.max(1,Math.ceil((planned(m)-remaining(m))/60)));
   openModal(`<h2>Goal · ${esc(t.name)}</h2><form onsubmit="saveGoal(event,${arg(id)},${arg(teamId)})">
     <label class="field">Player<select id="goalPlayer">${t.members.map(p=>`<option value="${esc(p.id)}">${esc(p.name)}</option>`).join('')}</select></label>
     <label class="field">Minute<input id="goalMinute" type="number" min="0" max="${max}" value="${minute}" required></label>
-    <div class="row mt"><button>Save Goal</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div></form>`);
+    <div class="row mt"><button>Save Goal</button>${cancel}</div></form>`);
 }
-function saveGoal(event,id,teamId) {
-  event.preventDefault();
-  const m=db.matches.find(x=>x.id===id), playerId=$('goalPlayer').value;
-  const p=team(teamId)?.members?.find(x=>x.id===playerId), minute=Number($('goalMinute').value);
-  if (!m||!p||!['LIVE','PAUSED'].includes(m.status)) return toast('This match is no longer accepting goals.');
-  if (update(d=>d.matches.find(x=>x.id===id).goals.push({id:uid(),teamId,playerId,playerName:p.name,minute}))) {
-    closeModal();render();
-  }
+function saveGoal(e,id,teamId){
+  e.preventDefault();
+  const m=match(id),p=team(teamId)?.members?.find(p=>p.id===$('goalPlayer').value),minute=Number($('goalMinute').value);
+  if(!m||!p||!['LIVE','PAUSED'].includes(m.status)||![m.teamA,m.teamB].includes(teamId)||!int(minute,0,Math.ceil(planned(m)/60)))
+    return toast('This goal could not be recorded. Check the match and minute.');
+  if(update(d=>{
+    const x=d.matches.find(x=>x.id===id);
+    x.goals=[...goals(x),{id:uid(),teamId,playerId:p.id,playerName:p.name,minute}];
+  })){closeModal();render()}
 }
-function removeGoal(id,goalId) {
-  const m=db.matches.find(x=>x.id===id);
-  if (!m||m.status==='FINISHED'||!confirm('Remove this goal?')) return;
-  if (update(d=>{const x=d.matches.find(x=>x.id===id);x.goals=goalsOf(x).filter(g=>g.id!==goalId);})) render();
+function removeGoal(id,goalId){
+  const m=match(id);if(!m||m.status==='FINISHED'||!confirm('Remove this goal?'))return;
+  if(update(d=>{const x=d.matches.find(x=>x.id===id);x.goals=goals(x).filter(g=>g.id!==goalId)}))render();
 }
 
-function leaguePage() {
+function leaguePage(){
   return `<h1>League Standings</h1><section class="panel">
-    <div class="row"><button class="share" onclick="shareLeague()" ${isFinal()?'':'disabled'}>Share Results</button></div>
-    <p class="muted mt">${isFinal()?'Share the standings and top scorers as one image.':'Finish all scheduled matches to share the final results.'}</p>
+    <button class="share" onclick="shareLeague()" ${isFinal()?'':'disabled'}>Share Results</button>
+    <p class="muted mt">${isFinal()?'Share the final standings and top scorers as one PNG.':'Finish every scheduled match to share the final results.'}</p>
     ${standingTable(standings())}</section>`;
 }
-function topPage() {
-  return `<h1>Top Scorers</h1><section class="panel">
-    <p class="muted">Goals from completed matches.</p>${scorerTable(scorers())}</section>`;
+function topPage(){return `<h1>Top Scorers</h1><section class="panel"><p class="muted">Goals from completed matches.</p>${scorerTable(scorers())}</section>`}
+function historyPage(){
+  return `<h1>History</h1><p class="muted">Standings and top scorers from previous sessions.</p>
+  ${archives.map((h,i)=>`<section class="panel"><h2>${esc(h.name)}</h2>
+  <p class="muted">${esc(dateLabel(h.date))} · <strong>${reportStatus(h)}</strong></p>
+  <button class="secondary" onclick="viewArchive(${i})">View Results</button></section>`).join('')||'<section class="panel">No archived tournaments yet.</section>'}`;
 }
-function historyPage() {
-  return `<h1>History</h1><p class="muted">Final standings and top scorers from previous weeks.</p>
-    ${archives.map((h,i)=>`<section class="panel"><h2>${esc(h.name)}</h2>
-      <p class="muted">${esc(dateLabel(h.date))}</p>
-      <button class="secondary" onclick="viewArchive(${i})">View Results</button>
-    </section>`).join('')||'<section class="panel">No archived tournaments yet.</section>'}`;
+function viewArchive(i){
+  const h=archives[i];if(!h)return;
+  openModal(`<h2>${esc(h.name)}</h2><p class="muted">${esc(dateLabel(h.date))} · <strong>${reportStatus(h)}</strong></p>
+  ${reportStatus(h)==='Partial'?'<p class="muted">Only completed matches are included.</p>':''}
+  <h3>League Standings</h3>${standingTable(h.standings||[])}
+  <h3 class="mt">Top Scorers</h3>${scorerTable(h.topScorers||[])}
+  <div class="row mt"><button class="share" onclick="shareArchive(${i})">Share Archived Results</button>
+  <button class="secondary" onclick="closeModal()">Close</button></div>`);
 }
-function viewArchive(i) {
-  const h=archives[i];
-  if (!h) return;
-  openModal(`<h2>${esc(h.name)}</h2><p class="muted">${esc(dateLabel(h.date))}</p>
-    <h3>League Standings</h3>${standingTable(h.standings||[])}
-    <h3 class="mt">Top Scorers</h3>${scorerTable(h.topScorers||[])}
-    <div class="row mt"><button class="share" onclick="shareArchive(${i})">Share Archived Results</button>
-    <button class="secondary" onclick="closeModal()">Close</button></div>`);
+function resetStart(){
+  if(!hasActive())return toast('There is no active data to reset.');
+  archiveDraft=defaultName();resetNameStep();
 }
-function resetStart() {
-  if (!isFinal()) return toast('Finish all scheduled matches before archiving and resetting.');
-  archiveDraft=defaultName();
-  resetNameStep();
-}
-function resetNameStep() {
+function resetNameStep(){
+  const n=finished().length;
   openModal(`<h2>Reset Tournament · 1 of 2</h2>
-    <p>Only the final standings and top scorers will be archived.</p>
-    <form onsubmit="resetConfirm(event)">
-      <label class="field">Archive name<input id="archiveName" maxlength="100" value="${esc(archiveDraft)}"></label>
-      <div class="row mt"><button>Continue</button><button type="button" class="secondary" onclick="closeModal()">Cancel</button></div>
-    </form>`);
+    <p>${n?`${n} completed match(es) will be archived as <strong>${isFinal()?'Final':'Partial'}</strong>. Only standings and top scorers are kept.`:'No matches have been completed. No archive will be created.'}</p>
+    <form onsubmit="resetConfirm(event)">${n?`<label class="field">Archive name<input id="archiveName" maxlength="100" value="${esc(archiveDraft)}"></label>`:''}
+    <div class="row mt"><button>Continue</button>${cancel}</div></form>`);
 }
-function resetConfirm(event) {
-  event.preventDefault();
-  archiveDraft=$('archiveName').value.trim()||defaultName();
+function resetSignature(){
+  return JSON.stringify({matches:db.matches,teams:db.teams,players:db.players,sessionStart:db.sessionStart});
+}
+let confirmedState='';
+function resetConfirm(e){
+  e.preventDefault();
+  archiveDraft=$('archiveName')?.value.trim()||defaultName();
+  confirmedState=resetSignature();
+  const n=finished().length,running=db.matches.some(m=>['LIVE','PAUSED'].includes(m.status));
   openModal(`<h2>Reset Tournament · 2 of 2</h2>
-    <p>Archive <strong>${esc(archiveDraft)}</strong>?</p>
-    <p class="notice">The active players, teams, matches, and goals will be cleared. This cannot be undone.</p>
-    <form onsubmit="commitReset(event)">
-      <label class="field">Type RESET to confirm<input id="resetText" autocomplete="off" required></label>
-      <div class="row mt"><button class="danger">Archive &amp; Reset</button>
-      <button type="button" class="secondary" onclick="resetNameStep()">Back</button>
-      <button type="button" class="secondary" onclick="closeModal()">Cancel</button></div>
-    </form>`);
+    <p>${n?`Save <strong>${esc(archiveDraft)}</strong> as ${isFinal()?'Final':'Partial'}.`:'No archive will be created.'}</p>
+    <p class="notice">Active players, teams, schedule and scores will be cleared.
+    ${running?'The timer and score of any live or paused match will be lost.':''} This cannot be undone.</p>
+    <form onsubmit="commitReset(event)"><label class="field">Type RESET to confirm<input id="resetText" autocomplete="off" required></label>
+    <div class="row mt"><button class="danger">Reset Tournament</button>
+    <button type="button" class="secondary" onclick="resetNameStep()">Back</button>${cancel}</div></form>`);
 }
-function commitReset(event) {
-  event.preventDefault();
-  if ($('resetText').value.trim()!=='RESET') return toast('Type RESET to confirm.');
-  if (!isFinal()) return toast('The tournament is no longer final.');
-  const report=snapshot(archiveDraft);
+function commitReset(e){
+  e.preventDefault();
+  if($('resetText').value.trim()!=='RESET')return toast('Type RESET to confirm.');
+  if(confirmedState!==resetSignature()){
+    resetNameStep();return toast('Match data changed while this dialog was open. Review the archive again.');
+  }
+  const report=finished().length?snapshot(archiveDraft):null;
   const next={...empty(),settings:{...db.settings}};
-  let previousHistory, nextHistory;
-  try {
-    // Refuse a reset if another tab changed the active tournament.
-    const saved=JSON.parse(localStorage.getItem(DB_KEY)||'null');
-    if (!saved || JSON.stringify({...empty(),...saved,settings:{...empty().settings,...saved.settings}})!==JSON.stringify(db)) {
-      return toast('Tournament changed in another tab. Reload before resetting.');
+  let previous=null,nextArchives=archives,wroteArchive=false;
+  try{
+    if(localStorage.getItem(DB_KEY)!==rawActive)throw Error('STALE');
+    if(report){
+      previous=localStorage.getItem(HIST_KEY);
+      const existing=JSON.parse(previous||'[]');
+      if(!Array.isArray(existing))throw Error('Invalid history');
+      nextArchives=[report,...existing];
+      localStorage.setItem(HIST_KEY,JSON.stringify(nextArchives));wroteArchive=true;
     }
-    previousHistory=localStorage.getItem(HIST_KEY);
-    const existing=JSON.parse(previousHistory||'[]');
-    nextHistory=[report,...existing];
-    localStorage.setItem(HIST_KEY,JSON.stringify(nextHistory));
-  } catch (error) {
-    console.error(error);
-    return toast('Could not save the archive. Tournament was not reset.');
-  }
-  try {
-    localStorage.setItem(DB_KEY,JSON.stringify(next));
-  } catch (error) {
-    console.error(error);
-    try {
-      if (previousHistory===null) localStorage.removeItem(HIST_KEY);
-      else localStorage.setItem(HIST_KEY,previousHistory);
-    } catch (rollback) {
-      console.error(rollback);
-      archives=nextHistory;
-      return toast('Archive saved, but active data could not be reset.');
+    persist(next);
+  }catch(err){
+    console.error(err);
+    if(wroteArchive){
+      try{
+        if(previous===null)localStorage.removeItem(HIST_KEY);
+        else localStorage.setItem(HIST_KEY,previous);
+      }catch(rollback){
+        console.error(rollback);archives=nextArchives;
+        return toast('Archive saved, but active data could not be reset. Reload before retrying.');
+      }
     }
-    return toast('Could not reset. Active data was not cleared.');
+    return toast(err.message==='STALE'?'Data changed in another tab. Reload before resetting.':'Could not save. Tournament was not reset.');
   }
-  archives=nextHistory; db=next; selectedMatch=''; archiveDraft='';
-  closeModal(); go(0); toast('Results archived. Ready for a new tournament.');
+  archives=nextArchives;selectedMatch='';archiveDraft='';lateDraft=null;
+  closeModal();go(0);toast(report?`${report.status} results saved to History.`:'Tournament reset. No archive was created.');
 }
 
-const reportLogo=new Image();
-reportLogo.src=LOGO;
-
-function makePNG(report) {
-  const standingsRows=report.standings||[], scorerRows=report.topScorers||[];
-  const width=1080, rowHeight=58, standingsY=310;
-  const scorerY=standingsY+112+Math.max(1,standingsRows.length)*rowHeight;
-  const height=scorerY+154+Math.max(1,scorerRows.length)*rowHeight;
-  const canvas=document.createElement('canvas');
-  canvas.width=width;canvas.height=height;
-  const ctx=canvas.getContext('2d');
-  if (!ctx) throw Error('Canvas unavailable');
-  const gold='#ffd36a', light='#f1f5fb', muted='#b9c9df';
-  const bg=ctx.createLinearGradient(0,0,width,height);
-  bg.addColorStop(0,'#203657');bg.addColorStop(1,'#080e19');
-  function rect(x,y,w,h,color){ctx.fillStyle=color;ctx.fillRect(x,y,w,h);}
-  function text(value,x,y,size=28,color=light,weight=500,align='left',max=968){
-    ctx.fillStyle=color;ctx.font=`${weight} ${size}px system-ui, sans-serif`;
-    ctx.textAlign=align;ctx.textBaseline='middle';
-    ctx.fillText(String(value??''),x,y,max);
+const reportLogo=new Image();reportLogo.src=LOGO;
+function makePNG(report){
+  const rows=report.standings||[],top=ranked(report.topScorers||[]);
+  const width=1080,rh=56,y1=320,y2=y1+112+Math.max(1,rows.length)*rh;
+  const height=y2+150+Math.max(1,top.length)*rh;
+  const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+  const ctx=canvas.getContext('2d');if(!ctx)throw Error('Canvas unavailable');
+  const gold='#ffd36a',light='#f1f5fb',muted='#b9c9df';
+  const bg=ctx.createLinearGradient(0,0,width,height);bg.addColorStop(0,'#203657');bg.addColorStop(1,'#080e19');
+  function rect(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(x,y,w,h)}
+  function text(v,x,y,size=28,color=light,weight=500,align='left',max=968){
+    ctx.font=`${weight} ${size}px system-ui,sans-serif`;ctx.fillStyle=color;ctx.textAlign=align;
+    ctx.textBaseline='middle';ctx.fillText(String(v??''),x,y,max);
   }
   rect(0,0,width,height,bg);rect(0,0,width,10,gold);
   const hasLogo=reportLogo.complete&&reportLogo.naturalWidth>0;
-  if (hasLogo) {
+  if(hasLogo){
     const scale=Math.min(128/reportLogo.naturalWidth,128/reportLogo.naturalHeight);
     const w=reportLogo.naturalWidth*scale,h=reportLogo.naturalHeight*scale;
-    ctx.drawImage(reportLogo,56+(128-w)/2,46+(128-h)/2,w,h);
+    ctx.drawImage(reportLogo,56+(128-w)/2,44+(128-h)/2,w,h);
   }
-  const titleX=hasLogo?208:56;
-  text('CLASSIC KAIRO FUTSAL CLUB',titleX,89,38,gold,800,'left',1024-titleX);
-  text('WEEKLY LEAGUE RESULTS',titleX,137,24,muted,700);
+  const start=hasLogo?208:56;
+  text('CLASSIC KAIRO FUTSAL CLUB',start,86,38,gold,800,'left',1024-start);
+  text(`${reportStatus(report).toUpperCase()} · WEEKLY LEAGUE RESULTS`,start,134,24,muted,750,'left',1024-start);
   text(report.name,56,208,43,light,800);
-  text(dateLabel(report.date),56,254,26,muted);
-  const xs=[84,126,480,549,618,687,756,825,894,977];
-  const tableHead=(y,title)=>{
-    text(title,56,y,33,gold,800);
-    rect(56,y+28,968,48,'#2a4262');
-  };
-  const rowBG=(y,i)=>rect(56,y,968,rowHeight,i%2?'#122138':'#1a2d48');
-  tableHead(standingsY,'LEAGUE STANDINGS');
-  standingHeaders.forEach((v,i)=>text(v,xs[i],standingsY+52,22,light,800,i===1?'left':'center'));
-  standingsRows.forEach((r,i)=>{
-    const y=standingsY+76+i*rowHeight;
-    rowBG(y,i);
-    standingValues(r,i).forEach((v,j)=>text(v,xs[j],y+29,27,
-      j===9?gold:light,j===1||j===9?800:500,j===1?'left':'center',j===1?310:65));
+  text(dateLabel(report.date)+(reportStatus(report)==='Partial'?' · Completed matches only':''),56,255,26,muted);
+  const xs=[84,128,480,549,618,687,756,825,894,977];
+  const heading=(title,y)=>{text(title,56,y,32,gold,800);rect(56,y+28,968,48,'#2a4262')};
+  const band=(y,i)=>rect(56,y,968,rh,i%2?'#122138':'#1a2d48');
+  heading('LEAGUE STANDINGS',y1);
+  headers.forEach((v,i)=>text(v,xs[i],y1+52,22,light,800,i===1?'left':'center'));
+  rows.forEach((r,i)=>{
+    const y=y1+76+i*rh;band(y,i);
+    standingValues(r,i).forEach((v,j)=>text(v,xs[j],y+rh/2,27,
+      j===9?gold:light,j===1||j===9?800:500,j===1?'left':'center',j===1?305:64));
   });
-  if (!standingsRows.length) text('No standings recorded',76,standingsY+105,26,muted);
-  tableHead(scorerY,'TOP SCORERS');
-  text('#',84,scorerY+52,22,light,800,'center');
-  text('Player',126,scorerY+52,22,light,800);
-  text('Team',590,scorerY+52,22,light,800);
-  text('Goals',978,scorerY+52,22,light,800,'right');
-  let rank=0;
-  scorerRows.forEach((r,i)=>{
-    if (!i||r.goals!==scorerRows[i-1].goals) rank=i+1;
-    const y=scorerY+76+i*rowHeight;
-    rowBG(y,i);
-    text(rank,84,y+29,26,light,500,'center',48);
-    text(r.name,126,y+29,27,light,750,'left',430);
-    text(r.team,590,y+29,25,muted,500,'left',280);
-    text(r.goals,978,y+29,28,gold,800,'right',78);
+  if(!rows.length)text('No standings recorded',76,y1+104,26,muted);
+  heading('TOP SCORERS',y2);
+  ['#','Player','Team','Goals'].forEach((v,i)=>text(v,[84,128,590,978][i],y2+52,22,light,800,['center','left','left','right'][i]));
+  top.forEach(([rank,name,teamName,goals],i)=>{
+    const y=y2+76+i*rh;band(y,i);
+    text(rank,84,y+rh/2,26,light,500,'center',48);
+    text(name,128,y+rh/2,27,light,750,'left',428);
+    text(teamName,590,y+rh/2,25,muted,500,'left',280);
+    text(goals,978,y+rh/2,27,gold,800,'right',78);
   });
-  if (!scorerRows.length) text('No goals recorded',76,scorerY+105,26,muted);
-  text('CLASSIC KAIRO  ·  EST. 2010',56,height-33,20,muted,700);
+  if(!top.length)text('No goals recorded',76,y2+104,26,muted);
+  text('CLASSIC KAIRO · EST. 2010',56,height-32,20,muted,700);
   const url=canvas.toDataURL('image/png');
-  if (!url.startsWith('data:image/png;base64,')) throw Error('Image too large or unavailable');
+  if(!url.startsWith('data:image/png;base64,'))throw Error('Image unavailable or too large');
   return url;
 }
-
-async function shareImage(report) {
-  try {
-    // Encode synchronously so the native share menu opens from the same tap.
-    const url=makePNG(report);
-    const stamp=new Date(report.date).toISOString().slice(0,10);
-    const name=`classic-kairo-results-${stamp}.png`;
-    if (navigator.share&&navigator.canShare&&typeof File==='function') {
+async function shareImage(report){
+  try{
+    const url=makePNG(report),name=`classic-kairo-${reportStatus(report).toLowerCase()}-${localDateTime(report.date).slice(0,10)}.png`;
+    if(navigator.share&&navigator.canShare&&typeof File==='function'){
       const bytes=Uint8Array.from(atob(url.split(',')[1]),c=>c.charCodeAt(0));
       const payload={files:[new File([bytes],name,{type:'image/png'})]};
-      if (navigator.canShare(payload)) {
-        try {await navigator.share(payload);return;}
-        catch (error) {if (error.name==='AbortError') return;}
+      if(navigator.canShare(payload)){
+        try{await navigator.share(payload);return}catch(e){if(e.name==='AbortError')return}
       }
     }
-    download(url,name);
-    toast('PNG downloaded. Attach it in WhatsApp.');
-  } catch (error) {
-    console.error(error);
-    toast('Could not create the image. Please reload and try again.');
-  }
+    download(url,name);toast('PNG downloaded. Attach the image in WhatsApp.');
+  }catch(e){console.error(e);toast('Could not create the image. Reload and try again.')}
 }
-function shareLeague() {
-  if (!isFinal()) return toast('Finish all matches first.');
-  return shareImage(snapshot());
-}
-function shareArchive(i) {
-  if (archives[i]) return shareImage(archives[i]);
-}
+function shareLeague(){if(isFinal())return shareImage(snapshot());toast('Finish all matches first.')}
+function shareArchive(i){if(archives[i])return shareImage(archives[i])}
 
 const renderers=[dashboard,playersPage,teamsPage,schedulePage,scoreboardPage,leaguePage,topPage,historyPage];
-function render() {
-  if (!storageReady) {
-    $('main').innerHTML='<h1>Storage unavailable</h1><p>Existing data has not been overwritten. Check browser storage, then reload this page.</p>';
+function render(){
+  if(!storageReady){
+    $('main').innerHTML='<h1>Storage unavailable</h1><p>Existing data was not overwritten. Check browser storage and reload.</p>';
     return;
   }
   $('nav').innerHTML=`<div class="brand">${logo(84)}<span>CLASSIC KAIRO<br>FUTSAL CLUB</span></div>`+
-    pages.map(([title,short,icon],i)=>`<button class="nav-item" title="${title}" aria-label="${title}"
-      ${page===i?'aria-current="page"':''} onclick="go(${i})"><span class="nav-icon" aria-hidden="true">${icon}</span><span>${short}</span></button>`).join('');
+    pages.map(([title,short,icon],i)=>`<button class="navbtn" onclick="go(${i})" aria-label="${title}" title="${title}" ${i===page?'aria-current="page"':''}>
+    <span class="icon" aria-hidden="true">${icon}</span><span class="long">${title}</span><span class="short">${short}</span></button>`).join('');
   $('main').innerHTML=renderers[page]();
-  if (page===1) renderPlayerList();
+  if(page===1)renderPlayerList();
 }
-
 const expiryAttempts=new Map();
+let lastBudgetSecond=-1;
 setInterval(()=>{
-  if (!storageReady) return;
+  if(!storageReady)return;
   const now=Date.now();
-  for (const m of db.matches) {
-    if (m.status!=='LIVE'||!m.timerStart||remaining(m)>0) continue;
-    if (now-(expiryAttempts.get(m.id)||0)<3000) continue;
-    expiryAttempts.set(m.id,now);
-    matchAction(m.id,'finish',true);
+  for(const m of db.matches){
+    if(m.status!=='LIVE'||!m.timerStart||remaining(m)>0)continue;
+    if(now-(expiryAttempts.get(m.id)||0)<3000)continue;
+    expiryAttempts.set(m.id,now);matchAction(m.id,'finish',true);
   }
-  const m=db.matches.find(x=>x.id===selectedMatch);
-  const el=$('timer');
-  if (el&&m) {
-    const seconds=remaining(m);
-    el.textContent=timeText(seconds);
-    el.style.color=seconds<=30&&m.status==='LIVE'?'var(--red)':'var(--gold)';
+  const timer=$('timer'),m=match(selectedMatch);
+  if(timer&&m){
+    const left=remaining(m);timer.textContent=timeText(left);
+    timer.style.color=m.status==='LIVE'&&left<=30?'var(--red)':'var(--gold)';
   }
-},350);
+  const second=Math.floor(now/1000),summary=$('budgetSummary');
+  if(summary&&second!==lastBudgetSecond){summary.innerHTML=budgetSummary();lastBudgetSecond=second}
+},400);
 render();
 </script>
 </body>
