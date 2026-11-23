@@ -6,35 +6,32 @@
 <meta name="theme-color" content="#101c2d">
 <title>Classic Kairo Futsal Club</title>
 <style>
-:root{color-scheme:dark;--bg:#080e19;--panel:#101c2d;--soft:#1a2b43;--line:#30435e;--gold:#ffd36a;--text:#f1f5fb;--dim:#b7c6da;--red:#ff7886;--green:#49d992}
+:root{color-scheme:dark;--bg:#080e19;--panel:#101c2d;--soft:#192b43;--line:#30435e;--gold:#ffd36a;--txt:#f1f5fb;--dim:#b7c6da;--red:#ff7886;--green:#49d992}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,sans-serif}
-h1,h2,h3,p{margin:0 0 .6rem}
-h1{font-size:clamp(1.5rem,5vw,2rem)}h2{font-size:1.15rem}h3{font-size:1rem}
-small,.dim{color:var(--dim)}strong,.emas{color:var(--gold)}.peringatan{color:var(--red)}
+body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.5 system-ui,sans-serif}
+h1,h2,h3,p{margin:0 0 9px}h1{font-size:clamp(1.5rem,5vw,2rem)}h2{font-size:1.13rem}h3{font-size:1rem}
+small,.dim{color:var(--dim)}strong{color:var(--gold)}.merah{color:var(--red)}
 #app{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:100vh}
 nav{position:sticky;top:0;height:100vh;overflow:auto;padding:14px;background:var(--panel);border-right:1px solid var(--line)}
-.merek{display:grid;justify-items:center;gap:8px;text-align:center;color:var(--gold);font-weight:800;margin-bottom:18px}
-.logo{display:block;max-width:100%;height:auto;object-fit:contain}
+.merek{display:grid;justify-items:center;gap:8px;text-align:center;color:var(--gold);font-weight:800;margin-bottom:16px}
+.logo{display:block;height:auto;max-width:100%;object-fit:contain}
 main{min-width:0;width:100%;max-width:1160px;padding:clamp(14px,3vw,32px)}
 .kartu,.hero{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:14px}
 .hero{display:flex;align-items:center;gap:clamp(10px,4vw,26px);background:linear-gradient(145deg,#203658,#101c2d);border-color:#776343}
-.hero .logo{width:clamp(78px,25vw,142px);flex:none}
-.hero h2{font-size:clamp(1.1rem,4vw,1.9rem);color:var(--gold);line-height:1.2}
+.hero .logo{width:clamp(78px,25vw,142px);flex:none}.hero h2{font-size:clamp(1.1rem,4vw,1.9rem);color:var(--gold);line-height:1.2}
 .baris{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:10px}
-.stat{grid-template-columns:repeat(auto-fit,minmax(min(100%,125px),1fr))}
-.stat strong{display:block;font-size:1.6rem}.mt{margin-top:12px}
+.stat{grid-template-columns:repeat(auto-fit,minmax(min(100%,125px),1fr))}.stat strong{display:block;font-size:1.6rem}
+.mt{margin-top:12px}
 button,input,select{font:inherit}
 button{border:0;border-radius:9px;padding:8px 12px;background:var(--gold);color:#221805;font-weight:750;cursor:pointer}
 button:disabled{opacity:.45;cursor:not-allowed}
-.sekunder{background:var(--soft);color:var(--text);border:1px solid var(--line)}
-.bahaya{background:var(--red);color:#27060c}.bagikan{background:var(--green);color:#062319}
+.sekunder{background:var(--soft);color:var(--txt);border:1px solid var(--line)}.bahaya{background:var(--red);color:#27060c}.bagikan{background:var(--green);color:#062319}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 .menu{width:100%;display:flex;align-items:center;gap:9px;text-align:left;margin-bottom:4px;background:transparent;color:var(--dim)}
-.menu[aria-current=page]{background:var(--soft);color:var(--gold)}.pendek{display:none}
-input,select{padding:8px 10px;max-width:100%;min-width:0;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text)}
-input[type=number]{width:6.5rem}label.bidang{display:grid;gap:5px;margin:8px 0}
+.menu[aria-current="page"]{background:var(--soft);color:var(--gold)}.pendek{display:none}
+input,select{padding:8px 10px;max-width:100%;min-width:0;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--txt)}
+input[type="number"]{width:6.5rem}label.bidang{display:grid;gap:5px;margin:8px 0}
 .geser{overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left;white-space:nowrap}
 th,td{padding:8px;border-bottom:1px solid var(--line)}th{color:var(--dim);font-size:.84rem}
 .jam{text-align:center;font-size:clamp(2.6rem,12vw,5rem);font-weight:900;color:var(--gold);font-variant-numeric:tabular-nums}
@@ -42,33 +39,33 @@ th,td{padding:8px;border-bottom:1px solid var(--line)}th{color:var(--dim);font-s
 .papan{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:8px;text-align:center;overflow-wrap:anywhere}
 .skor{font-size:clamp(1.4rem,7vw,3.5rem);font-weight:900;color:var(--gold)}
 .gol{padding:0;list-style:none}.gol li{margin:6px 0}.gol button{padding:2px 6px}
-dialog{width:min(680px,calc(100% - 24px));max-height:85vh;overflow:auto;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;padding:18px}
-dialog::backdrop{background:#000a}
-.catatan{background:var(--soft);border-left:3px solid var(--red);padding:10px;margin:10px 0}
+dialog{width:min(680px,calc(100% - 24px));max-height:85vh;overflow:auto;background:var(--panel);color:var(--txt);border:1px solid var(--line);border-radius:16px;padding:18px}
+dialog::backdrop{background:#000a}.catatan{background:var(--soft);border-left:3px solid var(--red);padding:10px;margin:10px 0}
 #pesan{position:fixed;z-index:5;bottom:76px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);background:var(--gold);color:#221805;border-radius:9px;padding:9px 13px;font-weight:700}
 [hidden]{display:none!important}
 @media(max-width:800px){
   #app{display:block}
   nav{position:fixed;inset:auto 0 0;height:auto;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:2px;z-index:4;padding:5px 3px calc(5px + env(safe-area-inset-bottom));border:0;border-top:1px solid var(--line)}
   .merek,.panjang{display:none}.pendek{display:block}
-  .menu{display:grid;justify-items:center;gap:0;text-align:center;font-size:.59rem;padding:6px 0;margin:0}
-  .ikon{font-size:1rem}
+  .menu{display:grid;justify-items:center;gap:0;text-align:center;font-size:.59rem;padding:6px 0;margin:0}.ikon{font-size:1rem}
   main{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
 }
 </style>
 </head>
 <body>
-<div id="app"><nav id="nav" aria-label="Navigasi utama"></nav><main id="utama"></main></div>
+<div id="app">
+  <nav id="nav" aria-label="Navigasi utama"></nav>
+  <main id="utama"></main>
+</div>
 <dialog id="modal" aria-label="Dialog aplikasi">
-  <div id="isiModal"></div>
-  <p id="pesanModal" class="peringatan mt" role="status" hidden></p>
+  <div id="isiModal"></div><p id="pesanModal" class="merah mt" role="status" hidden></p>
 </dialog>
 <div id="pesan" role="status" hidden></div>
+
 <script>
 'use strict';
 
-const DB_KEY='futsal_tournament_v1';
-const HIST_KEY='futsal_history_v1';
+const DB_KEY='futsal_tournament_v1', HIST_KEY='futsal_history_v1';
 const LOGO='./logo-kairo.png';
 const $=id=>document.getElementById(id);
 const aman=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
@@ -76,15 +73,27 @@ const arg=v=>aman(JSON.stringify(v));
 const uid=()=>globalThis.crypto?.randomUUID?.()||Math.random().toString(36).slice(2);
 const salin=v=>JSON.parse(JSON.stringify(v));
 const bulat=(v,min,max)=>Number.isInteger(v)&&v>=min&&v<=max;
+
+const kategori={PRO:'Pro',REGULAR:'Reguler',AMATEUR:'Amatir'};
+const kodeKategori=v=>{
+  const k=String(v??'').trim().toUpperCase();
+  if(k==='PRO')return 'PRO';
+  if(k==='AMATIR'||k==='AMATEUR')return 'AMATEUR';
+  if(k==='REGULER'||k==='REGULAR')return 'REGULAR';
+  return null;
+};
+const jenis=p=>kodeKategori(p.cat)||'REGULAR';
+const opsiKategori=(v='REGULAR')=>Object.entries(kategori).map(([kode,label])=>
+  `<option value="${kode}" ${kode===(kodeKategori(v)||'REGULAR')?'selected':''}>${label}</option>`).join('');
+
 const bawaan=()=>({matchMinutes:10,teamCount:4,rentalMinutes:120,bufferMinutes:15,gapMinutes:2});
 const kosong=()=>({players:[],teams:[],matches:[],settings:bawaan(),sessionStart:null});
 const tanggal=t=>new Date(t).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
 const jam=t=>new Date(t).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
 const statusLaga={UPCOMING:'Belum dimulai',LIVE:'Berlangsung',PAUSED:'Dijeda',FINISHED:'Selesai'};
 const statusArsip=h=>h.status==='Partial'?'Sementara':h.status==='Final'?'Final':'Arsip';
-const kategori=p=>p==='PRO'?'Pro':'Reguler';
-const gambar=w=>`<img class="logo" src="${LOGO}" width="${w}" alt="Logo Classic Kairo Futsal Club">`;
-const batal=`<button type="button" class="sekunder" onclick="tutup()">Batal</button>`;
+const logo=w=>`<img class="logo" src="${LOGO}" width="${w}" alt="Logo Classic Kairo Futsal Club">`;
+const batal='<button type="button" class="sekunder" onclick="tutup()">Batal</button>';
 
 let db=kosong(),riwayat=[],dataAwal=null,siap=true;
 try{
@@ -92,9 +101,8 @@ try{
   const aktif=JSON.parse(dataAwal||'null');
   const lama=JSON.parse(localStorage.getItem(HIST_KEY)||'[]');
   if(aktif&&!['players','teams','matches'].every(k=>Array.isArray(aktif[k])))throw Error('Data turnamen tidak valid');
-  if(!Array.isArray(lama)||lama.some(h=>!h||typeof h!=='object'))throw Error('Data riwayat tidak valid');
+  if(!Array.isArray(lama)||lama.some(h=>!h||typeof h!=='object'))throw Error('Riwayat tidak valid');
   if(aktif)db={...kosong(),...aktif,settings:{...bawaan(),...aktif.settings}};
-  // Simpan durasi tiap laga lama sebelum pengaturan durasi umum bisa diubah.
   for(const m of db.matches){
     if(!(Number(m.durationSeconds)>0))m.durationSeconds=60*(Number(db.settings.matchMinutes)||10);
   }
@@ -113,8 +121,7 @@ function info(teks){
     $('pesanModal').textContent=teks;$('pesanModal').hidden=false;return;
   }
   $('pesan').textContent=teks;$('pesan').hidden=false;
-  clearTimeout(pesanTimer);
-  pesanTimer=setTimeout(()=>$('pesan').hidden=true,4500);
+  clearTimeout(pesanTimer);pesanTimer=setTimeout(()=>$('pesan').hidden=true,4500);
 }
 function dialog(html){
   $('isiModal').innerHTML=html;$('pesanModal').hidden=true;
@@ -123,19 +130,15 @@ function dialog(html){
 function tutup(){$('modal').close()}
 function buka(n){halaman=n;tampil();window.scrollTo(0,0)}
 function bukaLaga(id){lagaDipilih=id;buka(4)}
-
 function simpanAktif(next){
   if(localStorage.getItem(DB_KEY)!==dataAwal)throw Error('TAB_LAIN');
-  const teks=JSON.stringify(next);
-  localStorage.setItem(DB_KEY,teks);
-  dataAwal=teks;db=next;
+  const teks=JSON.stringify(next);localStorage.setItem(DB_KEY,teks);dataAwal=teks;db=next;
 }
 function ubah(fn){
   if(!siap)return false;
   try{const next=salin(db);fn(next);simpanAktif(next);return true}
   catch(e){
-    console.error(e);
-    info(e.message==='TAB_LAIN'?'Data berubah di tab lain. Muat ulang sebelum melanjutkan.':'Data gagal disimpan. Data sebelumnya tidak diubah.');
+    console.error(e);info(e.message==='TAB_LAIN'?'Data berubah di tab lain. Muat ulang sebelum melanjutkan.':'Data gagal disimpan. Data sebelumnya tidak diubah.');
     return false;
   }
 }
@@ -144,6 +147,7 @@ const tim=id=>db.teams.find(t=>t.id===id);
 const pemain=id=>db.players.find(p=>p.id===id);
 const laga=id=>db.matches.find(m=>m.id===id);
 const namaTim=id=>tim(id)?.name||'Tim tidak diketahui';
+const timPemain=id=>db.teams.find(t=>t.members?.some(p=>p.id===id));
 const gol=m=>Array.isArray(m.goals)?m.goals:[];
 const skor=(m,id)=>gol(m).filter(g=>g.teamId===id).length;
 const selesai=()=>db.matches.filter(m=>m.status==='FINISHED');
@@ -156,15 +160,14 @@ const durasi=m=>Number(m.durationSeconds)||durasiAwal();
 const sisa=m=>Math.max(0,(Number(m.timerRemain??durasi(m))||0)-
   (m.status==='LIVE'&&m.timerStart?Math.max(0,Math.floor((Date.now()-m.timerStart)/1000)):0));
 const formatWaktu=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(Math.floor(s%60)).padStart(2,'0')}`;
-const teksDurasi=s=>`${Math.floor(s/60)} menit${s%60?' '+Math.floor(s%60)+' detik':''}`;
 const namaBawaan=()=>`Turnamen ${tanggal(db.sessionStart||Date.now())}`;
+const duplikat=(nama,id)=>db.players.some(p=>p.id!==id&&p.name.toLowerCase()===nama.toLowerCase());
 
 function klasemen(){
   const rows=db.teams.map(t=>({id:t.id,name:t.name,p:0,w:0,d:0,l:0,gf:0,ga:0,gd:0,pts:0}));
   const daftar=new Map(rows.map(r=>[r.id,r]));
   for(const m of selesai()){
-    const a=daftar.get(m.teamA),b=daftar.get(m.teamB);
-    if(!a||!b)continue;
+    const a=daftar.get(m.teamA),b=daftar.get(m.teamB);if(!a||!b)continue;
     const x=skor(m,m.teamA),y=skor(m,m.teamB);
     a.p++;b.p++;a.gf+=x;a.ga+=y;b.gf+=y;b.ga+=x;
     if(x>y){a.w++;b.l++;a.pts+=3}
@@ -174,13 +177,14 @@ function klasemen(){
   rows.forEach(r=>r.gd=r.gf-r.ga);
   return rows.sort((a,b)=>b.pts-a.pts||b.gd-a.gd||b.gf-a.gf||a.name.localeCompare(b.name,'id'));
 }
+function namaPencetak(g){
+  return g.playerName||pemain(g.playerId)?.name||tim(g.teamId)?.members?.find(p=>p.id===g.playerId)?.name;
+}
 function pencetak(){
   const daftar=new Map();
   for(const m of selesai())for(const g of gol(m)){
-    const t=tim(g.teamId);
-    const nama=g.playerName||pemain(g.playerId)?.name||t?.members?.find(p=>p.id===g.playerId)?.name;
-    if(!g.playerId||!nama)continue;
-    if(!daftar.has(g.playerId))daftar.set(g.playerId,{name:nama,team:t?.name||'',goals:0});
+    const nama=namaPencetak(g);if(!g.playerId||!nama)continue;
+    if(!daftar.has(g.playerId))daftar.set(g.playerId,{name:nama,team:tim(g.teamId)?.name||'',goals:0});
     daftar.get(g.playerId).goals++;
   }
   return [...daftar.values()].sort((a,b)=>b.goals-a.goals||a.name.localeCompare(b.name,'id'));
@@ -198,45 +202,37 @@ function tabel(judul,baris,pesan){
 }
 function urutan(rows){
   let rank=0;
-  return rows.map((r,i)=>{
-    if(!i||r.goals!==rows[i-1].goals)rank=i+1;
-    return [rank,r.name,r.team,r.goals];
-  });
+  return rows.map((r,i)=>{if(!i||r.goals!==rows[i-1].goals)rank=i+1;return [rank,r.name,r.team,r.goals]});
 }
-function tabelLiga(rows){return tabel(kepala,rows.map((r,i)=>`<tr>${sel(nilai(r,i))}</tr>`),'Belum ada klasemen.')}
-function tabelGol(rows){return tabel(['#','Pemain','Tim','Gol'],urutan(rows).map(r=>`<tr>${sel(r)}</tr>`),'Belum ada gol tercatat.')}
+const tabelLiga=rows=>tabel(kepala,rows.map((r,i)=>`<tr>${sel(nilai(r,i))}</tr>`),'Belum ada klasemen.');
+const tabelGol=rows=>tabel(['#','Pemain','Tim','Gol'],urutan(rows).map(r=>`<tr>${sel(r)}</tr>`),'Belum ada gol tercatat.');
 
 function dasbor(){
   const aktif=db.matches.filter(m=>['LIVE','PAUSED'].includes(m.status));
-  const angka=[['Pemain',db.players.length],['Pro',db.players.filter(p=>p.cat==='PRO').length],
-    ['Reguler',db.players.filter(p=>p.cat!=='PRO').length],['Tim',db.teams.length],
-    ['Pertandingan',db.matches.length],['Selesai',selesai().length],['Tersisa',db.matches.length-selesai().length],
-    ['Gol tercatat',db.matches.reduce((n,m)=>n+gol(m).length,0)]];
-  return `<h1>Dasbor Turnamen</h1><div class="hero">${gambar(142)}
+  const angka=[['Pemain',db.players.length],
+    ...Object.entries(kategori).map(([k,v])=>[v,db.players.filter(p=>jenis(p)===k).length]),
+    ['Tim',db.teams.length],['Pertandingan',db.matches.length],['Selesai',selesai().length],
+    ['Tersisa',db.matches.length-selesai().length],['Gol tercatat',db.matches.reduce((n,m)=>n+gol(m).length,0)]];
+  return `<h1>Dasbor Turnamen</h1><div class="hero">${logo(142)}
     <div><h2>CLASSIC KAIRO<br>FUTSAL CLUB</h2><p class="dim">REUNITE · EST. 2010</p></div></div>
     <div class="grid stat">${angka.map(([k,v])=>`<div class="kartu"><strong>${v}</strong>${k}</div>`).join('')}</div>
     <section class="kartu"><h2>Pertandingan Aktif</h2>
     ${aktif.map(m=>`<p class="baris"><button class="sekunder" onclick="bukaLaga(${arg(m.id)})">Buka</button>
-    ${aman(namaTim(m.teamA))} vs ${aman(namaTim(m.teamB))} · ${statusLaga[m.status]}</p>`).join('')||'<p class="dim">Tidak ada pertandingan aktif.</p>'}</section>
+    ${aman(namaTim(m.teamA))} melawan ${aman(namaTim(m.teamB))} · ${statusLaga[m.status]}</p>`).join('')||'<p class="dim">Tidak ada pertandingan aktif.</p>'}</section>
     <section class="kartu"><h2>Reset Turnamen</h2>
-    <p class="dim">Bisa dilakukan kapan saja. Hanya hasil dari laga yang sudah selesai yang masuk Riwayat.</p>
+    <p class="dim">Bisa dilakukan kapan saja. Hanya hasil laga yang sudah selesai yang masuk Riwayat.</p>
     <button class="bahaya" onclick="mulaiReset()" ${adaData()?'':'disabled'}>Reset Turnamen</button></section>`;
 }
 
-const pilihanKategori=(v='REGULAR')=>`<option value="REGULAR" ${v!=='PRO'?'selected':''}>Reguler</option><option value="PRO" ${v==='PRO'?'selected':''}>Pro</option>`;
 const tombolTelat=()=>`<button class="sekunder" onclick="formTelat()" ${db.teams.length?'':'disabled'}>Tambah Pemain Terlambat</button>`;
-const duplikat=(nama,id)=>db.players.some(p=>p.id!==id&&p.name.toLowerCase()===nama.toLowerCase());
 function halamanPemain(){
-  return `<h1>Pemain</h1><section class="kartu">
-    <form class="baris" onsubmit="tambahPemain(event)">
-      <input id="namaPemain" aria-label="Nama pemain" placeholder="Nama pemain" maxlength="100" required>
-      <select id="katPemain" aria-label="Kategori">${pilihanKategori()}</select><button>Tambah Pemain</button>
-    </form>
-    <div class="baris mt">${tombolTelat()}<button class="sekunder" onclick="eksporCSV()">Ekspor CSV</button>
-      <button class="sekunder" onclick="$('fileCSV').click()">Impor CSV</button>
-      <input id="fileCSV" type="file" accept=".csv,text/csv" hidden onchange="imporCSV(event)">
-    </div>
-    ${db.teams.length?'<p class="dim mt">Untuk langsung memasukkan pemain ke tim yang sudah dibentuk, gunakan Tambah Pemain Terlambat.</p>':''}
+  return `<h1>Pemain</h1><section class="kartu"><form class="baris" onsubmit="tambahPemain(event)">
+    <input id="namaPemain" aria-label="Nama pemain" placeholder="Nama pemain" maxlength="100" required>
+    <select id="katPemain" aria-label="Kategori">${opsiKategori()}</select><button>Tambah Pemain</button>
+    </form><div class="baris mt">${tombolTelat()}<button class="sekunder" onclick="eksporCSV()">Ekspor CSV</button>
+    <button class="sekunder" onclick="$('fileCSV').click()">Impor CSV</button>
+    <input id="fileCSV" type="file" accept=".csv,text/csv" hidden onchange="imporCSV(event)"></div>
+    ${db.teams.length?'<p class="dim mt">Gunakan Tambah Pemain Terlambat untuk langsung menempatkan pemain baru ke tim.</p>':''}
     </section><section class="kartu"><h2>Daftar Pemain</h2>
     <input id="cari" type="search" aria-label="Cari pemain" placeholder="Cari pemain" oninput="daftarPemain()">
     <div id="daftarPemain" class="mt"></div></section>`;
@@ -245,16 +241,17 @@ function daftarPemain(){
   const q=$('cari').value.trim().toLowerCase();
   $('daftarPemain').innerHTML=tabel(['Nama','Kategori','Tim','Aksi'],
     db.players.filter(p=>p.name.toLowerCase().includes(q)).map(p=>{
-      const t=db.teams.find(t=>t.members?.some(x=>x.id===p.id));
-      return `<tr>${sel([p.name,kategori(p.cat),t?.name||'Belum punya tim'])}<td><div class="baris">
-        <button class="sekunder" onclick="formUbahPemain(${arg(p.id)})">Ubah</button>
-        <button class="bahaya" onclick="hapusPemain(${arg(p.id)})" ${t?'disabled':''}>Hapus</button></div></td></tr>`;
+      const t=timPemain(p.id),id=arg(p.id);
+      return `<tr>${sel([p.name,kategori[jenis(p)],t?.name||'Belum punya tim'])}<td><div class="baris">
+        <button class="sekunder" onclick="formUbahPemain(${id})">Ubah</button>
+        ${!t&&db.teams.length?`<button class="sekunder" onclick="tempatkanPemain(${id})">Tempatkan</button>`:''}
+        <button class="bahaya" onclick="hapusPemain(${id})" ${t?'disabled':''}>Hapus</button></div></td></tr>`;
     }),'Tidak ada pemain yang ditemukan.');
 }
 function tambahPemain(e){
   e.preventDefault();
-  const name=$('namaPemain').value.trim(),cat=$('katPemain').value;
-  if(!name)return info('Nama pemain wajib diisi.');
+  const name=$('namaPemain').value.trim(),cat=kodeKategori($('katPemain').value);
+  if(!name||!cat)return info('Isi nama dan pilih kategori pemain.');
   if(duplikat(name))return info('Nama pemain sudah terdaftar.');
   if(ubah(d=>d.players.push({id:uid(),name,cat})))tampil();
 }
@@ -262,13 +259,13 @@ function formUbahPemain(id){
   const p=pemain(id);if(!p)return;
   dialog(`<h2>Ubah Pemain</h2><form onsubmit="simpanPemain(event,${arg(id)})">
     <label class="bidang">Nama<input id="ubahNama" maxlength="100" value="${aman(p.name)}" required></label>
-    <label class="bidang">Kategori<select id="ubahKat">${pilihanKategori(p.cat)}</select></label>
+    <label class="bidang">Kategori<select id="ubahKat">${opsiKategori(p.cat)}</select></label>
     <div class="baris mt"><button>Simpan</button>${batal}</div></form>`);
 }
 function simpanPemain(e,id){
   e.preventDefault();
-  const name=$('ubahNama').value.trim(),cat=$('ubahKat').value;
-  if(!name)return info('Nama pemain wajib diisi.');
+  const name=$('ubahNama').value.trim(),cat=kodeKategori($('ubahKat').value);
+  if(!name||!cat)return info('Isi nama dan pilih kategori pemain.');
   if(duplikat(name,id))return info('Nama pemain sudah terdaftar.');
   if(ubah(d=>{
     Object.assign(d.players.find(p=>p.id===id),{name,cat});
@@ -277,110 +274,110 @@ function simpanPemain(e,id){
   })){tutup();tampil()}
 }
 function hapusPemain(id){
-  if(db.teams.some(t=>t.members?.some(p=>p.id===id)))return info('Pemain ini sudah masuk tim.');
+  if(timPemain(id))return info('Pemain ini sudah masuk tim.');
   if(confirm('Hapus pemain ini?')&&ubah(d=>d.players=d.players.filter(p=>p.id!==id)))tampil();
 }
 
 function formTelat(){
   if(!db.teams.length)return info('Buat tim terlebih dahulu.');
   calonPemain=null;
-  dialog(`<h2>Tambah Pemain Terlambat</h2><p class="dim">Undi tim tanpa mengubah jadwal, skor, atau waktu pertandingan.</p>
+  dialog(`<h2>Tambah Pemain Terlambat</h2><p class="dim">Penempatan tidak mengubah jadwal, skor, atau waktu pertandingan.</p>
     <form onsubmit="undiTelat(event)"><label class="bidang">Nama<input id="namaTelat" maxlength="100" required></label>
-    <label class="bidang">Kategori<select id="katTelat">${pilihanKategori()}</select></label>
+    <label class="bidang">Kategori<select id="katTelat">${opsiKategori()}</select></label>
     <div class="baris mt"><button>Undi Tim</button>${batal}</div></form>`);
 }
 function undiTelat(e){
   e.preventDefault();
-  const name=$('namaTelat').value.trim(),cat=$('katTelat').value;
-  if(!name)return info('Nama pemain wajib diisi.');
-  if(duplikat(name))return info('Nama sudah terdaftar. Gunakan tombol Tempatkan pada daftar pemain jika ia belum punya tim.');
+  const name=$('namaTelat').value.trim(),cat=kodeKategori($('katTelat').value);
+  if(!name||!cat)return info('Isi nama dan pilih kategori pemain.');
+  if(duplikat(name))return info('Nama sudah terdaftar. Jika belum punya tim, gunakan tombol Tempatkan pada daftar pemain.');
   pilihTimTelat({name,cat});
 }
 function tempatkanPemain(id){
-  const p=pemain(id);
-  if(!p||!db.teams.length||db.teams.some(t=>t.members?.some(x=>x.id===id)))return;
-  pilihTimTelat({id,name:p.name,cat:p.cat});
+  const p=pemain(id);if(!p||!db.teams.length||timPemain(id))return;
+  pilihTimTelat({id,name:p.name,cat:jenis(p)});
 }
 function pilihTimTelat(data){
   const jumlah=t=>(t.members||[]).length;
-  const pro=t=>(t.members||[]).filter(p=>p.cat==='PRO').length;
+  const sejenis=t=>(t.members||[]).filter(p=>jenis(p)===data.cat).length;
   const minimum=Math.min(...db.teams.map(jumlah));
-  let pilihan=db.teams.filter(t=>jumlah(t)===minimum);
-  if(data.cat==='PRO'){
-    const batas=Math.min(...pilihan.map(pro));
-    pilihan=pilihan.filter(t=>pro(t)===batas);
-  }
+  const kecil=db.teams.filter(t=>jumlah(t)===minimum);
+  const batas=Math.min(...kecil.map(sejenis));
+  const pilihan=kecil.filter(t=>sejenis(t)===batas);
   const t=pilihan[Math.floor(Math.random()*pilihan.length)];
   if(!t)return info('Belum ada tim untuk dipilih.');
   calonPemain={...data,teamId:t.id};
   const bermain=db.matches.some(m=>['LIVE','PAUSED'].includes(m.status)&&[m.teamA,m.teamB].includes(t.id));
-  dialog(`<h2>Konfirmasi Penempatan</h2><p><strong>${aman(data.name)}</strong> → <strong>${aman(t.name)}</strong></p>
-    <p>${bermain?'Tim ini sedang bermain atau dijeda. Pemain bisa masuk melalui pergantian sesuai aturan klub.':'Pemain akan tersedia untuk laga tim berikutnya.'}</p>
+  dialog(`<h2>Konfirmasi Penempatan</h2><p><strong>${aman(data.name)}</strong> (${kategori[data.cat]}) → <strong>${aman(t.name)}</strong></p>
+    <p>${bermain?'Tim ini sedang bermain atau dijeda. Pemain bisa masuk melalui pergantian sesuai aturan klub.':'Pemain tersedia untuk laga berikutnya jika tim masih memiliki jadwal.'}</p>
     <div class="baris mt"><button onclick="simpanTelat()">Simpan Penempatan</button>${batal}</div>`);
 }
 function simpanTelat(){
   if(!calonPemain||!tim(calonPemain.teamId))return info('Tim tidak tersedia.');
   const {id,name,cat,teamId}=calonPemain;
-  if(id?(!pemain(id)||db.teams.some(t=>t.members?.some(p=>p.id===id))):duplikat(name))
-    return info('Pemain sudah terdaftar atau sudah masuk tim.');
+  if(id?(!pemain(id)||timPemain(id)):duplikat(name))return info('Pemain sudah terdaftar atau sudah masuk tim.');
   if(ubah(d=>{
     const p=id?d.players.find(x=>x.id===id):{id:uid(),name,cat};
     if(!id)d.players.push(p);
-    const t=d.teams.find(t=>t.id===teamId);
-    (t.members||=[]).push({...p});
-  })){
-    calonPemain=null;tutup();tampil();info(`${name} masuk ke ${namaTim(teamId)}.`);
-  }
+    const t=d.teams.find(t=>t.id===teamId);(t.members||=[]).push({...p});
+  })){calonPemain=null;tutup();tampil();info(`${name} masuk ke ${namaTim(teamId)}.`)}
 }
 
 function unduh(url,nama){
   const a=document.createElement('a');a.href=url;a.download=nama;
-  document.body.appendChild(a);a.click();a.remove();
+  document.body.append(a);a.click();a.remove();
 }
 function eksporCSV(){
   const kutip=v=>{
-    let teks=String(v);
-    if(/^\s*[=+\-@]/.test(teks))teks="'"+teks;
+    let teks=String(v);if(/^\s*[=+\-@]/.test(teks))teks="'"+teks;
     return `"${teks.replace(/"/g,'""')}"`;
   };
-  const csv=['name,category',...db.players.map(p=>[kutip(p.name),kutip(p.cat)].join(','))].join('\r\n');
+  const csv=['name,category',...db.players.map(p=>[kutip(p.name),kutip(jenis(p))].join(','))].join('\r\n');
   unduh('data:text/csv;charset=utf-8,'+encodeURIComponent('\uFEFF'+csv),'pemain-classic-kairo.csv');
 }
 async function imporCSV(e){
   const file=e.target.files[0];if(!file)return;
   try{
-    const rows=(await file.text()).replace(/^\uFEFF/,'').split(/\r?\n/).slice(1);
-    let jumlah=0;
+    const rows=(await file.text()).replace(/^\uFEFF/,'').split(/\r?\n/);
+    const barisAwal=rows[0]||'';
+    const pemisah=barisAwal.includes(';')&&!barisAwal.includes(',')?';':',';
+    const pola=pemisah===';'
+      ? /^(?:"((?:[^"]|"")*)"|([^;]*));\s*(?:"([^"]*)"|([^;]*))\s*$/
+      : /^(?:"((?:[^"]|"")*)"|([^,]*)),\s*(?:"([^"]*)"|([^,]*))\s*$/;
+    let jumlah=0,lewat=0;
     if(ubah(d=>{
       const dikenal=new Set(d.players.map(p=>p.name.toLowerCase()));
-      for(const row of rows){
-        const m=row.match(/^(?:"((?:[^"]|"")*)"|([^,]*)),\s*(?:"([^"]*)"|([^,]*))\s*$/);
-        if(!m)continue;
+      for(const row of rows.slice(1)){
+        if(!row.trim())continue;
+        const m=row.match(pola);if(!m){lewat++;continue}
         const name=(m[1]??m[2]).replace(/""/g,'"').trim().slice(0,100);
-        if(!name||dikenal.has(name.toLowerCase()))continue;
-        const cat=(m[3]??m[4]).trim().toUpperCase()==='PRO'?'PRO':'REGULAR';
+        const nilaiKat=(m[3]??m[4]).trim();
+        const cat=nilaiKat?kodeKategori(nilaiKat):'REGULAR';
+        if(!name||!cat||dikenal.has(name.toLowerCase())){lewat++;continue}
         d.players.push({id:uid(),name,cat});dikenal.add(name.toLowerCase());jumlah++;
       }
-    })){tampil();info(`${jumlah} pemain berhasil diimpor.`)}
+    })){tampil();info(`${jumlah} pemain diimpor.${lewat?` ${lewat} baris dilewati karena duplikat atau tidak valid.`:''}`)}
   }catch(err){console.error(err);info('File CSV tidak dapat dibaca.')}
   finally{e.target.value=''}
 }
 
 function acak(a){
   for(let i=a.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [a[i],a[j]]=[a[j],a[i]];
+    const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];
   }
   return a;
 }
 function halamanTim(){
-  return `<h1>Pembagian Tim</h1><section class="kartu">
-    <form class="baris" onsubmit="buatTim(event)">
+  return `<h1>Pembagian Tim</h1><section class="kartu"><form class="baris" onsubmit="buatTim(event)">
     <label>Jumlah tim <input id="jumlahTim" type="number" min="2" max="32" value="${aman(db.settings.teamCount)}" required></label>
     <button ${terkunci()?'disabled':''}>${db.teams.length?'Undi Ulang Tim':'Buat Tim'}</button></form>
-    <p class="dim mt">${terkunci()?'Tim dan jadwal dikunci setelah laga dimulai. Gunakan Tambah Pemain Terlambat untuk pemain yang baru datang.':'Pemain Pro dibagi terlebih dahulu, lalu pemain Reguler.'}</p>
-    </section><div class="grid">${db.teams.map(t=>`<section class="kartu"><h2>${aman(t.name)} <small>· ${(t.members||[]).length} pemain</small></h2>
-    ${(t.members||[]).map(p=>`<p>${aman(p.name)} <small>· ${kategori(p.cat)}</small></p>`).join('')}</section>`).join('')}</div>`;
+    <p class="dim mt">${terkunci()?'Tim dan jadwal dikunci setelah laga dimulai. Gunakan Tambah Pemain Terlambat untuk pemain yang baru datang.':'Pemain Pro, Reguler, dan Amatir diacak per kategori lalu dibagikan bergiliran.'}</p></section>
+    <div class="grid">${db.teams.map(t=>{
+      const anggota=t.members||[];
+      return `<section class="kartu"><h2>${aman(t.name)} <small>· ${anggota.length} pemain</small></h2>
+      <p class="dim">${Object.entries(kategori).map(([k,v])=>`${v}: ${anggota.filter(p=>jenis(p)===k).length}`).join(' · ')}</p>
+      ${anggota.map(p=>`<p>${aman(p.name)} <small>· ${kategori[jenis(p)]}</small></p>`).join('')}</section>`;
+    }).join('')}</div>`;
 }
 function buatTim(e){
   e.preventDefault();const n=Number($('jumlahTim').value);
@@ -388,26 +385,29 @@ function buatTim(e){
   if(!bulat(n,2,32)||db.players.length<n)return info('Pilih 2–32 tim, dengan minimal satu pemain per tim.');
   if(db.matches.length&&!confirm('Buat susunan tim baru dan hapus jadwal saat ini?'))return;
   const teams=Array.from({length:n},(_,i)=>({id:uid(),name:`Tim ${i<26?String.fromCharCode(65+i):i+1}`,members:[]}));
-  const pro=acak(db.players.filter(p=>p.cat==='PRO'));
-  const reg=acak(db.players.filter(p=>p.cat!=='PRO'));
-  [...pro,...reg].forEach((p,i)=>teams[i%n].members.push({...p}));
+  const giliran=acak([...teams]);
+  let i=0;
+  for(const k of Object.keys(kategori)){
+    for(const p of acak(db.players.filter(p=>jenis(p)===k))){
+      giliran[i++%n].members.push({...p});
+    }
+  }
   if(ubah(d=>{d.teams=teams;d.matches=[];d.settings.teamCount=n})){lagaDipilih='';tampil()}
 }
+
 function tanggalLokal(ms){
   const d=new Date(ms),pad=n=>String(n).padStart(2,'0');
   return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 function alokasi(){
   const now=Date.now(),s=db.settings;
-  const mulai=db.sessionStart||now,akhir=mulai+s.rentalMinutes*60000;
-  const dasar=Math.max(now,mulai);
-  const sisaLaga=db.matches.filter(m=>m.status!=='FINISHED');
-  const belum=sisaLaga.filter(bisaUbah);
-  const tetap=sisaLaga.filter(m=>!bisaUbah(m)).reduce((n,m)=>n+sisa(m),0);
-  const jumlah=db.matches.length?sisaLaga.length:db.teams.length*(db.teams.length-1)/2;
+  const mulai=db.sessionStart||now,akhir=mulai+s.rentalMinutes*60000,dasar=Math.max(now,mulai);
+  const tersisa=db.matches.filter(m=>m.status!=='FINISHED');
+  const belum=tersisa.filter(bisaUbah);
+  const tetap=tersisa.filter(m=>!bisaUbah(m)).reduce((n,m)=>n+sisa(m),0);
+  const jumlah=db.matches.length?tersisa.length:db.teams.length*(db.teams.length-1)/2;
   const fleksibel=db.matches.length?belum.length:jumlah;
-  const jeda=Math.max(0,jumlah-1)*s.gapMinutes*60;
-  const cadangan=s.bufferMinutes*60;
+  const jeda=Math.max(0,jumlah-1)*s.gapMinutes*60,cadangan=s.bufferMinutes*60;
   const tersedia=Math.floor((akhir-dasar)/1000)-jeda-cadangan-tetap;
   const rekomendasi=fleksibel?Math.min(120,Math.max(0,Math.floor(tersedia/fleksibel/60))):null;
   const main=db.matches.length?tetap+belum.reduce((n,m)=>n+durasi(m),0):jumlah*durasiAwal();
@@ -416,19 +416,18 @@ function alokasi(){
   return {akhir,perkiraan,lebih,rekomendasi,jumlah};
 }
 function ringkasanWaktu(){
-  const w=alokasi();
-  if(!w.jumlah)return `<p><strong>${db.sessionStart?'Sewa berakhir':'Perkiraan sewa berakhir'}</strong> ${jam(w.akhir)} · Tidak ada laga tersisa.</p>`;
+  const w=alokasi(),label=db.sessionStart?'Sewa berakhir':'Perkiraan sewa berakhir';
+  if(!w.jumlah)return `<p><strong>${label}</strong> ${jam(w.akhir)} · Tidak ada laga tersisa.</p>`;
   const saran=w.rekomendasi===null?'Tidak ada laga yang belum dimulai untuk disesuaikan.':
-    w.rekomendasi===0?'Waktu tidak cukup untuk semua laga tersisa, bahkan dengan durasi 1 menit per laga.':
+    w.rekomendasi===0?'Waktu tidak cukup, bahkan dengan durasi 1 menit per laga yang belum dimulai.':
     `Rekomendasi maksimum: ${w.rekomendasi} menit per laga yang belum dimulai.`;
-  return `<p><strong>${db.sessionStart?'Sewa berakhir':'Perkiraan sewa berakhir'}</strong> ${jam(w.akhir)} ·
-    <strong>Perkiraan laga terakhir selesai</strong> ${jam(w.perkiraan)} · <strong>${w.jumlah}</strong> laga tersisa</p>
-    <p class="${w.lebih?'peringatan':'dim'}">${w.lebih?`Melebihi jatah waktu ${w.lebih} menit, termasuk cadangan.`:'Masih dalam jatah waktu, termasuk cadangan.'}</p>
-    <p class="${w.rekomendasi===0?'peringatan':'dim'}">${saran}</p>
+  return `<p><strong>${label}</strong> ${jam(w.akhir)} · <strong>Perkiraan laga terakhir selesai</strong> ${jam(w.perkiraan)} · ${w.jumlah} laga tersisa</p>
+    <p class="${w.lebih?'merah':'dim'}">${w.lebih?`Melebihi jatah waktu ${w.lebih} menit, termasuk cadangan.`:'Masih dalam jatah waktu, termasuk cadangan.'}</p>
+    <p class="${w.rekomendasi===0?'merah':'dim'}">${saran}</p>
     <small>Perkiraan untuk satu lapangan, dengan jeda terjadwal dan tanpa penghentian tambahan.</small>`;
 }
 function halamanJadwal(){
-  const rows=db.matches.map(m=>`<tr>${sel([m.matchNo,namaTim(m.teamA),namaTim(m.teamB),teksDurasi(durasi(m)),
+  const rows=db.matches.map(m=>`<tr>${sel([m.matchNo,namaTim(m.teamA),namaTim(m.teamB),formatWaktu(durasi(m)),
     `${skor(m,m.teamA)}–${skor(m,m.teamB)}`,statusLaga[m.status]||m.status])}
     <td><div class="baris"><button class="sekunder" onclick="bukaLaga(${arg(m.id)})">Buka</button>
     ${bisaUbah(m)?`<button class="sekunder" onclick="formDurasi(${arg(m.id)})">Ubah Durasi</button>`:''}</div></td></tr>`);
@@ -440,24 +439,23 @@ function halamanJadwal(){
     <label class="bidang">Cadangan (menit)<input id="cadangan" type="number" min="0" max="180" value="${aman(db.settings.bufferMinutes)}" required></label>
     <label class="bidang">Jeda antarlaga (menit)<input id="jeda" type="number" min="0" max="60" value="${aman(db.settings.gapMinutes)}" required></label>
     </div><button>Simpan Alokasi Waktu</button></form>
-    <p class="dim mt">Isi jam mulai sewa yang sebenarnya. Jika kosong, aplikasi mulai menghitung waktu sesi saat laga pertama dimulai.</p>
+    <p class="dim mt">Isi jam mulai sewa yang sebenarnya. Jika kosong, waktu sesi dihitung sejak laga pertama dimulai.</p>
     <div id="ringkasanWaktu" class="mt">${ringkasanWaktu()}</div></section>
     <section class="kartu"><h2>Durasi Pertandingan</h2><form class="baris" onsubmit="terapkanDurasi(event)">
     <label>Menit <input id="durasiUmum" type="number" min="1" max="120" value="${aman(db.settings.matchMinutes)}" required></label>
     <button ${nonaktif}>Terapkan ke Laga yang Belum Dimulai</button>
     <button type="button" class="sekunder" onclick="pakaiSaran()" ${nonaktif}>Pakai Rekomendasi</button></form>
-    <p class="dim mt">Durasi laga yang sudah dimulai tidak berubah. Sebelum jadwal dibuat, pengaturan ini menjadi durasi awal.</p></section>
+    <p class="dim mt">Durasi laga yang sudah dimulai tidak berubah. Jika belum ada jadwal, pengaturan ini menjadi durasi awal.</p></section>
     <section class="kartu"><h2>Semua Tim Saling Bertemu</h2>
     <button onclick="buatJadwal()" ${terkunci()?'disabled':''}>${db.matches.length?'Buat Ulang Jadwal':'Buat Jadwal'}</button>
     <div class="mt">${tabel(['#','Tim A','Tim B','Durasi','Skor','Status','Aksi'],rows,'Buat tim terlebih dahulu, lalu buat jadwal.')}</div></section>`;
 }
 function simpanAlokasi(e){
   e.preventDefault();
-  const v=$('mulaiSewa').value;
-  const start=v?new Date(v).getTime():null;
+  const v=$('mulaiSewa').value,start=v?new Date(v).getTime():null;
   const rentalMinutes=Number($('sewa').value),bufferMinutes=Number($('cadangan').value),gapMinutes=Number($('jeda').value);
   if((v&&!Number.isFinite(start))||!bulat(rentalMinutes,1,1440)||!bulat(bufferMinutes,0,180)||
-     !bulat(gapMinutes,0,60)||bufferMinutes>=rentalMinutes)
+    !bulat(gapMinutes,0,60)||bufferMinutes>=rentalMinutes)
     return info('Periksa durasi sewa, cadangan, dan jeda. Cadangan harus lebih pendek daripada durasi sewa.');
   if(ubah(d=>{
     d.sessionStart=start||(terkunci()?d.sessionStart:null);
@@ -476,7 +474,7 @@ function simpanDurasiUmum(min){
 function terapkanDurasi(e){e.preventDefault();simpanDurasiUmum(Number($('durasiUmum').value))}
 function pakaiSaran(){
   const n=alokasi().rekomendasi;
-  if(!n)return info('Tidak ada rekomendasi yang dapat diterapkan. Periksa kembali jadwal atau alokasi waktu.');
+  if(!n)return info('Tidak ada rekomendasi yang dapat diterapkan. Periksa jadwal atau alokasi waktu.');
   simpanDurasiUmum(n);
 }
 function formDurasi(id){
@@ -493,7 +491,7 @@ function simpanDurasiLaga(e,id){
 function buatJadwal(){
   if(terkunci())return info('Jadwal sudah dikunci.');
   if(db.teams.length<2)return info('Buat minimal dua tim terlebih dahulu.');
-  if(db.matches.length&&!confirm('Ganti jadwal saat ini? Pengaturan durasi per laga akan diganti dengan durasi umum.'))return;
+  if(db.matches.length&&!confirm('Ganti jadwal saat ini? Durasi per laga akan diganti dengan durasi umum.'))return;
   const a=acak(db.teams.map(t=>t.id));if(a.length%2)a.push(null);
   const matches=[];
   for(let r=0;r<a.length-1;r++){
@@ -512,9 +510,8 @@ function halamanSkor(){
   return `<h1>Papan Skor Langsung</h1><section class="kartu"><div class="baris">
     <select aria-label="Pilih pertandingan" onchange="lagaDipilih=this.value;tampil()"><option value="">Pilih pertandingan</option>
     ${db.matches.map(x=>`<option value="${aman(x.id)}" ${x.id===lagaDipilih?'selected':''}>#${aman(x.matchNo)} ·
-    ${aman(namaTim(x.teamA))} vs ${aman(namaTim(x.teamB))}</option>`).join('')}</select>
-    ${tombolTelat()}</div>
-    ${m?papanSkor(m):'<p class="dim mt">Pilih pertandingan untuk mengelola waktu dan skor.</p>'}</section>`;
+    ${aman(namaTim(x.teamA))} melawan ${aman(namaTim(x.teamB))}</option>`).join('')}</select>
+    ${tombolTelat()}</div>${m?papanSkor(m):'<p class="dim mt">Pilih pertandingan untuk mengelola waktu dan skor.</p>'}</section>`;
 }
 function papanSkor(m){
   const id=arg(m.id),habis=m.status==='FINISHED';
@@ -522,12 +519,11 @@ function papanSkor(m){
   function sisi(t){
     return `<div><h3>${aman(namaTim(t))}</h3>
       ${['LIVE','PAUSED'].includes(m.status)?`<button onclick="formGol(${id},${arg(t)})">+ Gol</button>`:''}
-      <ul class="gol">${gol(m).filter(g=>g.teamId===t).map(g=>`<li>${aman(g.minute)}′
-      ${aman(g.playerName||pemain(g.playerId)?.name||tim(t)?.members?.find(p=>p.id===g.playerId)?.name||'Pemain tidak diketahui')}
+      <ul class="gol">${gol(m).filter(g=>g.teamId===t).map(g=>`<li>${aman(g.minute)}′ ${aman(namaPencetak(g)||'Pemain tidak diketahui')}
       ${habis?'':`<button class="sekunder" aria-label="Hapus gol" onclick="hapusGol(${id},${arg(g.id)})">×</button>`}</li>`).join('')}</ul></div>`;
   }
   return `<div class="jam" id="penghitung">${formatWaktu(sisa(m))}</div>
-    <p class="tengah dim">${aman(statusLaga[m.status]||m.status)} · Durasi ${teksDurasi(durasi(m))}</p>
+    <p class="tengah dim">${aman(statusLaga[m.status]||m.status)} · Durasi ${formatWaktu(durasi(m))}</p>
     <div class="baris tengah">
     ${m.status==='UPCOMING'?btn('mulai','Mulai'):''}
     ${m.status==='LIVE'?btn('jeda','Jeda','sekunder'):''}
@@ -547,17 +543,15 @@ function aksiLaga(id,aksi,otomatis=false){
   if(aksi!=='buka'&&status==='FINISHED')return false;
   if(aksi==='selesai'&&!otomatis&&!confirm('Akhiri laga ini dan catat hasilnya?'))return false;
   if(aksi==='ulang'&&!confirm('Atur ulang waktu? Gol yang sudah tercatat tetap disimpan.'))return false;
-  const sisaDetik=sisa(m),penuh=durasi(m),now=Date.now();
+  const left=sisa(m),penuh=durasi(m),now=Date.now();
   if(!ubah(d=>{
-    const x=d.matches.find(x=>x.id===id);
-    x.durationSeconds=penuh;
+    const x=d.matches.find(x=>x.id===id);x.durationSeconds=penuh;
     if(aksi==='mulai'){
       if(status==='UPCOMING')x.timerRemain=penuh;
       x.started=true;x.status='LIVE';x.timerStart=now;
       if(!d.sessionStart)d.sessionStart=now;
     }else if(aksi==='jeda'||aksi==='selesai'){
-      x.started=true;x.timerRemain=sisaDetik;x.timerStart=null;
-      x.status=aksi==='jeda'?'PAUSED':'FINISHED';
+      x.started=true;x.timerRemain=left;x.timerStart=null;x.status=aksi==='jeda'?'PAUSED':'FINISHED';
       if(!d.sessionStart)d.sessionStart=now;
     }else if(aksi==='ulang'){
       x.started=!!x.started||status!=='UPCOMING';x.timerRemain=penuh;x.timerStart=null;x.status='UPCOMING';
@@ -573,8 +567,7 @@ function formGol(id,teamId){
   const m=laga(id),t=tim(teamId);
   if(!m||!t||![m.teamA,m.teamB].includes(teamId)||!['LIVE','PAUSED'].includes(m.status))return;
   if(!t.members?.length)return info('Tim ini belum memiliki pemain.');
-  const max=Math.ceil(durasi(m)/60);
-  const menit=Math.max(1,Math.min(max,Math.ceil((durasi(m)-sisa(m))/60)));
+  const max=Math.ceil(durasi(m)/60),menit=Math.max(1,Math.min(max,Math.ceil((durasi(m)-sisa(m))/60)));
   dialog(`<h2>Catat Gol · ${aman(t.name)}</h2><form onsubmit="simpanGol(event,${arg(id)},${arg(teamId)})">
     <label class="bidang">Pemain<select id="pencetakGol">${t.members.map(p=>`<option value="${aman(p.id)}">${aman(p.name)}</option>`).join('')}</select></label>
     <label class="bidang">Menit ke-<input id="menitGol" type="number" min="0" max="${max}" value="${menit}" required></label>
@@ -599,16 +592,15 @@ function hapusGol(id,goalId){
 function halamanLiga(){
   return `<h1>Klasemen Liga</h1><section class="kartu">
     <button class="bagikan" onclick="bagikanLiga()" ${final()?'':'disabled'}>Bagikan Hasil</button>
-    <p class="dim mt">${final()?'Bagikan klasemen dan pencetak gol dalam satu gambar PNG.':'Selesaikan semua laga terjadwal untuk membagikan hasil final.'}</p>
-    ${tabelLiga(klasemen())}
-    <small>M: Menang · S: Seri · K: Kalah · GM: Gol Memasukkan · GK: Gol Kemasukan · SG: Selisih Gol</small>
+    <p class="dim mt">${final()?'Bagikan klasemen dan pencetak gol dalam satu PNG.':'Selesaikan semua laga terjadwal untuk membagikan hasil final.'}</p>
+    ${tabelLiga(klasemen())}<small>M: Menang · S: Seri · K: Kalah · GM: Gol Memasukkan · GK: Gol Kemasukan · SG: Selisih Gol</small>
     </section>`;
 }
 function halamanGol(){
   return `<h1>Pencetak Gol</h1><section class="kartu"><p class="dim">Hanya gol dari pertandingan yang sudah selesai.</p>${tabelGol(pencetak())}</section>`;
 }
 function halamanRiwayat(){
-  return `<h1>Riwayat Turnamen</h1><p class="dim">Klasemen dan pencetak gol dari sesi sebelumnya. Arsip tersimpan di browser ini.</p>
+  return `<h1>Riwayat Turnamen</h1><p class="dim">Arsip klasemen dan pencetak gol tersimpan di browser ini.</p>
     ${riwayat.map((h,i)=>`<section class="kartu"><h2>${aman(h.name)}</h2>
     <p class="dim">${aman(tanggal(h.date))} · <strong>${statusArsip(h)}</strong></p>
     <button class="sekunder" onclick="lihatArsip(${i})">Lihat Hasil</button></section>`).join('')||'<section class="kartu">Belum ada arsip turnamen.</section>'}`;
@@ -616,7 +608,7 @@ function halamanRiwayat(){
 function lihatArsip(i){
   const h=riwayat[i];if(!h)return;
   dialog(`<h2>${aman(h.name)}</h2><p class="dim">${aman(tanggal(h.date))} · <strong>${statusArsip(h)}</strong></p>
-    ${h.status==='Partial'?'<p class="dim">Hanya hasil dari pertandingan yang sudah selesai.</p>':''}
+    ${h.status==='Partial'?'<p class="dim">Hanya hasil dari laga yang sudah selesai.</p>':''}
     <h3>Klasemen Liga</h3>${tabelLiga(h.standings||[])}
     <h3 class="mt">Pencetak Gol</h3>${tabelGol(h.topScorers||[])}
     <div class="baris mt"><button class="bagikan" onclick="bagikanArsip(${i})">Bagikan Hasil Arsip</button>
@@ -637,14 +629,12 @@ function langkahReset(){
 }
 function periksaReset(e){
   e.preventDefault();
-  namaArsip=$('namaArsip')?.value.trim()||namaBawaan();
-  konfirmasiData=JSON.stringify(db);
+  namaArsip=$('namaArsip')?.value.trim()||namaBawaan();konfirmasiData=JSON.stringify(db);
   const n=selesai().length,aktif=db.matches.some(m=>['LIVE','PAUSED'].includes(m.status));
   dialog(`<h2>Reset Turnamen · Tahap 2 dari 2</h2>
     <p>${n?`Simpan <strong>${aman(namaArsip)}</strong> sebagai hasil ${final()?'final':'sementara'}.`:'Arsip tidak akan dibuat.'}</p>
     <p class="catatan">Daftar pemain, tim, jadwal, dan skor aktif akan dihapus.
-    ${aktif?'Waktu dan skor laga yang sedang berlangsung atau dijeda tidak masuk arsip.':''}
-    Tindakan ini tidak dapat dibatalkan.</p>
+    ${aktif?'Waktu dan skor laga yang sedang berlangsung atau dijeda tidak masuk arsip.':''} Tindakan ini tidak dapat dibatalkan.</p>
     <form onsubmit="jalankanReset(event)"><label class="bidang">Ketik RESET untuk konfirmasi
     <input id="teksReset" autocomplete="off" required></label>
     <div class="baris mt"><button class="bahaya">Reset Turnamen</button>
@@ -666,8 +656,7 @@ function jalankanReset(e){
       const data=JSON.parse(lama||'[]');
       if(!Array.isArray(data))throw Error('Riwayat tidak valid');
       baru=[h,...data];
-      localStorage.setItem(HIST_KEY,JSON.stringify(baru));
-      arsipDitulis=true;
+      localStorage.setItem(HIST_KEY,JSON.stringify(baru));arsipDitulis=true;
     }
     simpanAktif(next);
   }catch(err){
@@ -688,19 +677,15 @@ function jalankanReset(e){
   info(h?`Hasil ${statusArsip(h).toLowerCase()} disimpan di Riwayat.`:'Turnamen direset tanpa membuat arsip.');
 }
 
-const logoLaporan=new Image();
-logoLaporan.src=LOGO;
+const logoLaporan=new Image();logoLaporan.src=LOGO;
 function buatPNG(h){
   const rows=h.standings||[],top=urutan(h.topScorers||[]);
   const W=1080,R=54,Y1=312,Y2=Y1+112+Math.max(1,rows.length)*R;
   const H=Y2+150+Math.max(1,top.length)*R;
-  const canvas=document.createElement('canvas');
-  canvas.width=W;canvas.height=H;
-  const c=canvas.getContext('2d');
-  if(!c)throw Error('Kanvas tidak tersedia');
+  const canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
+  const c=canvas.getContext('2d');if(!c)throw Error('Kanvas tidak tersedia');
   const emas='#ffd36a',putih='#f1f5fb',redup='#bccbe0';
-  const latar=c.createLinearGradient(0,0,W,H);
-  latar.addColorStop(0,'#233b5e');latar.addColorStop(1,'#080e19');
+  const latar=c.createLinearGradient(0,0,W,H);latar.addColorStop(0,'#233b5e');latar.addColorStop(1,'#080e19');
   function kotak(x,y,w,z,color){c.fillStyle=color;c.fillRect(x,y,w,z)}
   function teks(v,x,y,size=28,color=putih,weight=500,align='left',max=968){
     c.font=`${weight} ${size}px system-ui,sans-serif`;c.fillStyle=color;
@@ -710,8 +695,8 @@ function buatPNG(h){
   const adaLogo=logoLaporan.complete&&logoLaporan.naturalWidth>0;
   if(adaLogo){
     const skala=Math.min(128/logoLaporan.naturalWidth,128/logoLaporan.naturalHeight);
-    const w=logoLaporan.naturalWidth*skala,tinggi=logoLaporan.naturalHeight*skala;
-    c.drawImage(logoLaporan,56+(128-w)/2,43+(128-tinggi)/2,w,tinggi);
+    const w=logoLaporan.naturalWidth*skala,z=logoLaporan.naturalHeight*skala;
+    c.drawImage(logoLaporan,56+(128-w)/2,43+(128-z)/2,w,z);
   }
   const x=adaLogo?208:56;
   teks('CLASSIC KAIRO FUTSAL CLUB',x,86,38,emas,800,'left',1024-x);
@@ -725,8 +710,7 @@ function buatPNG(h){
   kepala.forEach((v,i)=>teks(v,xs[i],Y1+52,22,putih,800,i===1?'left':'center'));
   rows.forEach((r,i)=>{
     const y=Y1+76+i*R;pita(y,i);
-    nilai(r,i).forEach((v,j)=>teks(v,xs[j],y+R/2,27,j===9?emas:putih,
-      j===1||j===9?800:500,j===1?'left':'center',j===1?306:64));
+    nilai(r,i).forEach((v,j)=>teks(v,xs[j],y+R/2,27,j===9?emas:putih,j===1||j===9?800:500,j===1?'left':'center',j===1?306:64));
   });
   if(!rows.length)teks('Belum ada klasemen',76,Y1+103,26,redup);
   judul('PENCETAK GOL',Y2);
@@ -745,7 +729,7 @@ function buatPNG(h){
   return url;
 }
 async function bagikanGambar(h){
-  if(!logoLaporan.complete)return info('Logo masih dimuat. Coba tekan Bagikan Hasil beberapa saat lagi.');
+  if(!logoLaporan.complete)return info('Logo masih dimuat. Coba tekan tombol bagikan lagi sebentar.');
   try{
     const url=buatPNG(h),nama=`classic-kairo-${statusArsip(h).toLowerCase()}-${tanggalLokal(h.date).slice(0,10)}.png`;
     if(navigator.share&&navigator.canShare&&typeof File==='function'){
@@ -772,29 +756,12 @@ function tampil(){
     $('utama').innerHTML='<h1>Penyimpanan tidak tersedia</h1><p>Data lama tidak ditimpa. Periksa penyimpanan browser, lalu muat ulang halaman.</p>';
     return;
   }
-  $('nav').innerHTML=`<div class="merek">${gambar(84)}<span>CLASSIC KAIRO<br>FUTSAL CLUB</span></div>`+
+  $('nav').innerHTML=`<div class="merek">${logo(84)}<span>CLASSIC KAIRO<br>FUTSAL CLUB</span></div>`+
     menu.map(([nama,singkat,ikon],i)=>`<button class="menu" onclick="buka(${i})" aria-label="${nama}" title="${nama}" ${i===halaman?'aria-current="page"':''}>
     <span class="ikon" aria-hidden="true">${ikon}</span><span class="panjang">${nama}</span><span class="pendek">${singkat}</span></button>`).join('');
   $('utama').innerHTML=perender[halaman]();
   if(halaman===1)daftarPemain();
 }
-
-// Tambahkan aksi penempatan bagi pemain yang telanjur terdaftar tanpa tim.
-const daftarPemainDasar=daftarPemain;
-daftarPemain=function(){
-  daftarPemainDasar();
-  if(!db.teams.length)return;
-  const q=$('cari').value.trim().toLowerCase();
-  const rows=$('daftarPemain').querySelectorAll('tbody tr');
-  db.players.filter(p=>p.name.toLowerCase().includes(q)).forEach((p,i)=>{
-    if(db.teams.some(t=>t.members?.some(x=>x.id===p.id)))return;
-    const tempat=rows[i]?.querySelector('.baris');if(!tempat)return;
-    const btn=document.createElement('button');
-    btn.className='sekunder';btn.textContent='Tempatkan';btn.onclick=()=>tempatkanPemain(p.id);
-    tempat.appendChild(btn);
-  });
-};
-
 let detikTerakhir=-1;
 const percobaanSelesai=new Map();
 setInterval(()=>{
