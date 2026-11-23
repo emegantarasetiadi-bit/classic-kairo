@@ -15,7 +15,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 .wrap{display:flex;min-height:100vh}
 nav{width:240px;background:var(--panel);border-right:1px solid var(--line);padding:18px 12px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
 .logo-box{display:flex;flex-direction:column;align-items:center;padding:8px 0 14px;gap:8px}
-.logo-box svg{width:84px;height:84px;filter:drop-shadow(0 0 12px rgba(255,210,74,.2))}
+.logo-box svg{width:84px;height:auto;filter:drop-shadow(0 0 12px rgba(255,210,74,.2))}
 .club-name{font-weight:800;font-size:13px;text-align:center;color:var(--accent);letter-spacing:1px;text-transform:uppercase;line-height:1.3}
 .nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:var(--dim);font-weight:600;cursor:pointer;transition:.15s;font-size:14px}
 .nav-item:hover{background:var(--panel2);color:var(--txt)}
@@ -27,7 +27,7 @@ h1 .accent{color:var(--accent)}
 .sub{color:var(--dim);font-size:13px;margin-top:4px}
 .hero{display:flex;align-items:center;gap:24px;margin-top:18px;background:linear-gradient(135deg,rgba(26,43,74,.75),rgba(255,210,74,.08));border:1px solid rgba(255,210,74,.3);border-radius:18px;padding:24px 28px}
 .hero .logo-wrap{background:radial-gradient(circle,rgba(255,210,74,.12),transparent 70%);border-radius:50%;padding:10px;flex-shrink:0}
-.hero svg{width:110px;height:110px;display:block}
+.hero svg{width:110px;height:auto;display:block}
 .hero h2{font-size:24px;font-weight:900;color:var(--accent);letter-spacing:1.5px;line-height:1.2}
 .hero .est{color:var(--dim);font-size:12px;letter-spacing:3px;margin-top:4px}
 .grid{display:grid;gap:16px;margin-top:20px}
@@ -80,6 +80,11 @@ tr:hover td{background:var(--panel2)}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:50}
 .modal.show{display:flex}
 .modal-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;width:90%;max-width:520px;max-height:85vh;overflow-y:auto}
+.warn{background:rgba(255,77,94,.12);border:1px solid var(--red);border-radius:12px;padding:12px;color:#ffb3ba;font-size:13px;margin-top:12px}
+.hist-card{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.hist-card h3{color:var(--accent);font-size:16px;font-weight:800;margin-bottom:6px}
+.hist-card .meta{color:var(--dim);font-size:12px;margin-bottom:10px}
+.champ{font-size:15px;color:var(--accent);font-weight:700;margin:6px 0}
 @media(max-width:800px){
   nav{position:fixed;bottom:0;top:auto;width:100%;height:auto;flex-direction:row;justify-content:space-around;z-index:40;border-top:1px solid var(--line);overflow-x:auto;padding:8px}
   .logo-box{display:none}
@@ -88,8 +93,8 @@ tr:hover td{background:var(--panel2)}
   .nav-item .ic{width:auto}
   main{padding:16px;padding-bottom:90px}
   .score{font-size:44px}.timer{font-size:52px}
-  .hero svg{width:96px;height:auto}
   .hero{gap:14px;padding:18px 16px}
+  .hero svg{width:96px;height:auto}
   .hero h2{font-size:18px}
   .scoreboard{grid-template-columns:1fr auto 1fr;gap:8px}
 }
@@ -104,7 +109,6 @@ tr:hover td{background:var(--panel2)}
 <div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
 
 <script>
-/* ===== LOGO SVG (redesigned) ===== */
 function logoSVG(size){
 const h=Math.round(size*235/200);
 return `<svg viewBox="0 0 200 235" width="${size}" height="${h}" xmlns="http://www.w3.org/2000/svg">
@@ -119,7 +123,6 @@ return `<svg viewBox="0 0 200 235" width="${size}" height="${h}" xmlns="http://w
     </clipPath>
   </defs>
 
-  <!-- 5 bintang melengkung di atas -->
   <g fill="url(#goldGrad)">
     <use href="#starShape" transform="translate(100,14) scale(1.5)"/>
     <use href="#starShape" transform="translate(71,20) scale(1.15)"/>
@@ -128,33 +131,27 @@ return `<svg viewBox="0 0 200 235" width="${size}" height="${h}" xmlns="http://w
     <use href="#starShape" transform="translate(152,30) scale(0.9)"/>
   </g>
 
-  <!-- perisai: border emas + isi navy -->
   <path d="M30 42 Q100 30 170 42 L170 130 Q170 185 100 220 Q30 185 30 130 Z" fill="url(#goldGrad)"/>
   <path d="M37 48 Q100 37 163 48 L163 128 Q163 176 100 211 Q37 176 37 128 Z" fill="#14243e"/>
   <path d="M42 52 Q100 42 158 52 L158 126 Q158 170 100 204 Q42 170 42 126 Z" fill="none" stroke="#c9a44a" stroke-width="1.2" opacity="0.65"/>
 
   <g clip-path="url(#shieldClip)">
-    <!-- aliran sungai (di belakang piramida) -->
     <path d="M20 140 Q55 128 85 140 Q115 152 150 138 Q175 128 185 132" fill="none" stroke="#c9a44a" stroke-width="3"/>
     <path d="M20 152 Q55 140 85 152 Q115 164 150 150 Q175 140 185 144" fill="none" stroke="#c9a44a" stroke-width="2" opacity="0.85"/>
 
-    <!-- piramida kiri (besar) dengan arsiran -->
     <g>
       <path d="M88 88 L128 158 L48 158 Z" fill="url(#goldGrad)"/>
       <path d="M88 88 L104 158 M88 88 L118 158 M88 88 L92 158" stroke="#14243e" stroke-width="1" opacity="0.55"/>
       <path d="M88 88 L128 158 L48 158 Z" fill="none" stroke="#a8842e" stroke-width="1"/>
     </g>
-    <!-- piramida kanan -->
     <g>
       <path d="M124 100 L156 158 L92 158 Z" fill="url(#goldGrad)" opacity="0.9"/>
       <path d="M124 100 L136 158 M124 100 L146 158 M124 100 L112 158" stroke="#14243e" stroke-width="1" opacity="0.5"/>
     </g>
 
-    <!-- aliran sungai depan (menyilang piramida) -->
     <path d="M20 160 Q50 150 80 160 Q112 171 145 158 Q170 149 185 153" fill="none" stroke="#c9a44a" stroke-width="3"/>
     <path d="M20 171 Q50 162 80 171 Q112 181 145 169 Q170 161 185 164" fill="none" stroke="#c9a44a" stroke-width="2" opacity="0.85"/>
 
-    <!-- bola futsal di tengah depan -->
     <g>
       <circle cx="100" cy="138" r="19" fill="#14243e" stroke="url(#goldGrad)" stroke-width="3"/>
       <path d="M100 128 l7 5 -2.5 8 h-9 L93 133 Z" fill="url(#goldGrad)"/>
@@ -162,12 +159,10 @@ return `<svg viewBox="0 0 200 235" width="${size}" height="${h}" xmlns="http://w
     </g>
   </g>
 
-  <!-- teks CLASSIC melengkung -->
   <text font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-size="24" letter-spacing="3" fill="url(#goldGrad)">
     <textPath href="#classicArc" startOffset="50%" text-anchor="middle">CLASSIC</textPath>
   </text>
 
-  <!-- KAIRO / REUNITE / EST -->
   <text x="100" y="185" text-anchor="middle" font-family="Georgia, serif" font-weight="bold" font-size="25" letter-spacing="4" fill="url(#goldGrad)">KAIRO</text>
   <text x="100" y="198" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="10" letter-spacing="4" fill="#c9a44a">REUNITE</text>
   <text x="100" y="207" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="7.5" letter-spacing="3" fill="#a8842e">EST. 2010</text>
@@ -176,15 +171,22 @@ return `<svg viewBox="0 0 200 235" width="${size}" height="${h}" xmlns="http://w
 
 const CLUB='Classic Kairo Futsal Club';
 
-/* ===== STATE & STORAGE ===== */
 const DB_KEY='futsal_tournament_v1';
+const HIST_KEY='futsal_history_v1';
 let db=load();
+let history=loadHistory();
 function load(){
   const d=localStorage.getItem(DB_KEY);
   if(d) return JSON.parse(d);
   return {players:[],teams:[],matches:[],settings:{matchMinutes:10,teamCount:4}};
 }
+function loadHistory(){
+  const h=localStorage.getItem(HIST_KEY);
+  if(h) return JSON.parse(h);
+  return [];
+}
 function save(){try{localStorage.setItem(DB_KEY,JSON.stringify(db));}catch(e){}}
+function saveHistory(){try{localStorage.setItem(HIST_KEY,JSON.stringify(history));}catch(e){}}
 function uid(){return Math.random().toString(36).slice(2,9);}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
 
@@ -195,7 +197,6 @@ function addPlayer(name,cat){
   db.players.push({id:uid(),name,cat:cat||'REGULAR'});
   save();
 }
-
 function generateTeams(){
   const n=db.settings.teamCount;
   const total=db.players.length;
@@ -214,7 +215,6 @@ function generateTeams(){
   db.teams=teams;save();
 }
 function autoName(i){return ['Tim A','Tim B','Tim C','Tim D','Tim E','Tim F','Tim G','Tim H','Tim I','Tim J','Tim K','Tim L'][i]||('Tim '+(i+1));}
-
 function generateSchedule(){
   const t=db.teams;
   if(t.length<2) return toast('Minimal 2 tim');
@@ -231,7 +231,6 @@ function generateSchedule(){
   }
   db.matches=matches;save();
 }
-
 function addGoal(matchId,teamId,playerId,minute){
   const m=db.matches.find(x=>x.id===matchId);
   if(!m) return;
@@ -242,7 +241,6 @@ function removeGoal(matchId,goalId){
   const m=db.matches.find(x=>x.id===matchId);
   m.goals=m.goals.filter(g=>g.id!==goalId);save();
 }
-
 function standings(){
   const rows=db.teams.map(t=>({id:t.id,name:t.name,p:0,w:0,d:0,l:0,gf:0,ga:0,gd:0,pts:0}));
   db.matches.filter(m=>m.status==='FINISHED').forEach(m=>{
@@ -301,7 +299,52 @@ function remaining(m){
 }
 function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(Math.floor(s%60)).padStart(2,'0');}
 
-/* ===== SHARE / WA ===== */
+function defaultHistName(){
+  const d=new Date();
+  const bulan=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  const hari=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  return 'Turnamen '+hari[d.getDay()]+' '+d.getDate()+' '+bulan[d.getMonth()]+' '+d.getFullYear();
+}
+function resetPrompt1(){
+  document.getElementById('modalBox').innerHTML=`<h2 style="margin-bottom:6px">🔄 Reset Turnamen</h2>
+  <p class="sub" style="font-size:14px">Turnamen aktif akan diarsipkan ke History, lalu data dibersihkan untuk turnamen berikutnya.</p>
+  <label style="display:block;margin-top:14px;font-weight:600">Nama arsip:</label>
+  <input id="histName" value="${defaultHistName()}">
+  <div class="warn">⚠️ Data aktif berikut akan dihapus: ${db.players.length} pemain, ${db.teams.length} tim, ${db.matches.length} pertandingan. Klasemen & top scorer disimpan ke History.</div>
+  <div class="row mt"><button class="btn" onclick="resetPrompt2()">Lanjut →</button><button class="btn ghost" onclick="closeModal()">Batal</button></div>`;
+  document.getElementById('modal').classList.add('show');
+}
+function resetPrompt2(){
+  const name=document.getElementById('histName').value.trim()||defaultHistName();
+  document.getElementById('modalBox').innerHTML=`<h2 style="margin-bottom:6px">⚠️ Konfirmasi Final</h2>
+  <p class="sub" style="font-size:14px">Ketuk RESET untuk mengarsipkan turnamen ini sebagai "<b style="color:var(--accent)">${name}</b>" dan mengosongkan data aktif.</p>
+  <div class="warn">Tindakan ini TIDAK bisa dibatalkan. Ketik <b>RESET</b> di bawah untuk melanjutkan.</div>
+  <input id="confirmText" placeholder="Ketik: RESET" style="margin-top:12px">
+  <div class="row mt"><button class="btn danger" onclick="doReset('${name.replace(/'/g,"\\'")}')">🔄 RESET SEKARANG</button><button class="btn ghost" onclick="resetPrompt1()">← Kembali</button></div>`;
+  document.getElementById('modal').classList.add('show');
+}
+function doReset(name){
+  const txt=document.getElementById('confirmText').value.trim();
+  if(txt!=='RESET') return toast('Ketik RESET untuk konfirmasi');
+  const rows=standings();
+  const scorers=topScorers();
+  if(rows.length){
+    history.unshift({
+      id:uid(),
+      name,
+      date:Date.now(),
+      standings:rows.map(r=>({name:r.name,p:r.p,w:r.w,d:r.d,l:r.l,gf:r.gf,ga:r.ga,gd:r.gd,pts:r.pts})),
+      topScorers:scorers.map(s=>({name:s.name,team:teamOf(s.teamId)?.name||'',goals:s.goals}))
+    });
+    saveHistory();
+  }
+  db={players:[],teams:[],matches:[],settings:{matchMinutes:db.settings.matchMinutes,teamCount:db.settings.teamCount}};
+  save();
+  closeModal();
+  go('Dashboard');
+  toast(rows.length?'Turnamen diarsipkan & data direset':'Data direset');
+}
+
 function buildStandingsText(){
   const rows=standings();
   if(!rows.length) return null;
@@ -317,45 +360,18 @@ function buildTopScorerText(){
   let t='⚽ *CLASSIC KAIRO FUTSAL CLUB* ⚽\n';
   t+='👟 *TOP SCORER*\n\n';
   t+='🏅 Golden Boot: *'+list[0].name+'* ('+list[0].goals+' gol)\n\n';
-  list.forEach((p,i)=>{
-    const rank=(i>0&&list[i-1].goals===p.goals)?'=':(i+1);
-    t+=`${rank}. ${p.name} — ${p.goals} gol\n`;
-  });
-  return t;
-}
-function buildFullText(){
-  const rows=standings();
-  const list=topScorers();
-  const done=db.matches.filter(m=>m.status==='FINISHED');
-  if(!rows.length) return null;
-  let t='⚽ *CLASSIC KAIRO FUTSAL CLUB* ⚽\n';
-  t+='🏆 *HASIL TURNAMEN FUTSAL*\n\n';
-  t+='📊 *Klasemen Akhir*\n';
-  rows.forEach((r,i)=>{t+=`${i+1}. ${r.name} — ${r.pts} pts (M${r.w} S${r.d} K${r.l}, GF${r.gf} GA${r.ga})\n`;});
-  if(list.length){
-    t+='\n👟 *Top Scorer*\n';
-    list.slice(0,5).forEach((p,i)=>{t+=`${i+1}. ${p.name} — ${p.goals} gol\n`;});
-  }
-  if(done.length){
-    t+='\n📋 *Hasil Pertandingan*\n';
-    done.forEach(m=>{
-      const gA=m.goals.filter(g=>g.teamId===m.teamA).length;
-      const gB=m.goals.filter(g=>g.teamId===m.teamB).length;
-      t+=`• ${teamOf(m.teamA).name} ${gA} - ${gB} ${teamOf(m.teamB).name}\n`;
-    });
-  }
+  list.forEach((p,i)=>{const rank=(i>0&&list[i-1].goals===p.goals)?'=':(i+1);t+=`${rank}. ${p.name} — ${p.goals} gol\n`;});
   return t;
 }
 function shareWA(text){
   if(!text) return toast('Belum ada data untuk dibagikan');
-  const url='https://wa.me/?text='+encodeURIComponent(text);
-  window.open(url,'_blank');
+  window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
 }
 function shareModal(){
   const hasFinished=db.matches.some(m=>m.status==='FINISHED');
   if(!hasFinished){
     document.getElementById('modalBox').innerHTML=`<h2 style="margin-bottom:12px">⚠️ Belum Ada Hasil</h2>
-    <p class="sub" style="font-size:14px">Belum ada pertandingan yang selesai. Selesaikan minimal satu pertandingan dulu untuk membagikan hasil turnamen.</p>
+    <p class="sub" style="font-size:14px">Belum ada pertandingan yang selesai.</p>
     <div class="row mt"><button class="btn" onclick="closeModal()">Tutup</button></div>`;
     document.getElementById('modal').classList.add('show');
     return;
@@ -364,24 +380,22 @@ function shareModal(){
   <div style="display:flex;flex-direction:column;gap:10px">
     <button class="btn wa" onclick="shareWA(buildStandingsText());closeModal()">📊 Share Klasemen Akhir</button>
     <button class="btn wa" onclick="shareWA(buildTopScorerText());closeModal()">👟 Share Top Scorer</button>
-    <button class="btn wa" onclick="shareWA(buildFullText());closeModal()">🏆 Share Hasil Lengkap Turnamen</button>
     <button class="btn ghost" onclick="closeModal()">Batal</button>
   </div>`;
   document.getElementById('modal').classList.add('show');
 }
 
-/* ===== RENDER ===== */
-const pages=['Dashboard','Players','Team Generator','Match Schedule','Live Scoreboard','Standings','Top Scorer'];
-const icons=['📊','👥','🛡️','📅','🎯','🏆','⚽'];
+const pages=['Dashboard','Players','Team Generator','Match Schedule','Live Scoreboard','Standings','Top Scorer','History'];
+const icons=['📊','👥','🛡️','📅','🎯','🏆','⚽','🗂️'];
 let current='Dashboard';
 function renderNav(){
   document.getElementById('nav').innerHTML=
   `<div class="logo-box">${logoSVG(84)}<div class="club-name">Classic Kairo<br>Futsal Club</div></div>`
   +pages.map((p,i)=>`<div class="nav-item ${p===current?'active':''}" onclick="go('${p}')"><span class="ic">${icons[i]}</span><span>${p}</span></div>`).join('');
 }
-function go(p){current=p;renderNav();render();}
-
+function go(p){current=p;render();}
 function render(){
+  renderNav();
   const m=document.getElementById('main');
   if(current==='Dashboard')renderDashboard(m);
   else if(current==='Players')renderPlayers(m);
@@ -390,8 +404,8 @@ function render(){
   else if(current==='Live Scoreboard')renderScoreboard(m);
   else if(current==='Standings')renderStandings(m);
   else if(current==='Top Scorer')renderTop(m);
+  else if(current==='History')renderHistory(m);
 }
-
 function stat(v,l){return `<div class="stat"><div class="val">${v}</div><div class="lbl">${l}</div></div>`;}
 function renderDashboard(m){
   const done=db.matches.filter(x=>x.status==='FINISHED').length;
@@ -418,9 +432,13 @@ function renderDashboard(m){
   </div>
   <div class="panel mt"><h2>Pertandingan Berjalan</h2>
   ${live.length?live.map(x=>`<div class="row" style="justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span><span class="status live">LIVE</span> Match ${x.matchNo}: ${teamOf(x.teamA).name} vs ${teamOf(x.teamB).name}</span><span class="btn small" onclick="openMatch('${x.id}')">Buka</span></div>`).join(''):'<div class="sub">Tidak ada pertandingan berlangsung.</div>'}
+  </div>
+  <div class="panel mt" style="border-color:var(--red)">
+    <h2 style="color:var(--red)">🔄 Reset Turnamen</h2>
+    <p class="sub" style="font-size:13px">Arsipkan turnamen ini ke History dan bersihkan data untuk turnamen minggu berikutnya.</p>
+    <div class="row mt"><button class="btn danger" onclick="resetPrompt1()">🔄 Reset Turnamen</button></div>
   </div>`;
 }
-
 function renderPlayers(m){
   m.innerHTML=`<h1>Player <span class="accent">Management</span></h1>
   <div class="sub">Kelola pemain PRO dan REGULAR</div>
@@ -454,8 +472,8 @@ function renderPlayersList(){
   el.innerHTML=`<table><tr><th>Nama</th><th>Kategori</th><th>Aksi</th></tr>`+
     list.map(p=>`<tr><td>${p.name}</td><td><span class="badge ${p.cat==='PRO'?'pro':'reg'}">${p.cat}</span></td><td class="row"><button class="btn ghost small" onclick="editPlayer('${p.id}')">Edit</button><button class="btn danger small" onclick="delPlayer('${p.id}')">Hapus</button></td></tr>`).join('')+'</table>';
 }
-function addPlayerClick(){addPlayer(document.getElementById('inName').value,document.getElementById('inCat').value);document.getElementById('inName').value='';renderPlayers(document.getElementById('main'));}
-function delPlayer(id){db.players=db.players.filter(p=>p.id!==id);save();renderPlayers(document.getElementById('main'));toast('Pemain dihapus');}
+function addPlayerClick(){addPlayer(document.getElementById('inName').value,document.getElementById('inCat').value);document.getElementById('inName').value='';render();}
+function delPlayer(id){db.players=db.players.filter(p=>p.id!==id);save();render();toast('Pemain dihapus');}
 function editPlayer(id){
   const p=db.players.find(x=>x.id===id);
   document.getElementById('modalBox').innerHTML=`<h2 style="margin-bottom:12px">Edit Pemain</h2>
@@ -468,7 +486,7 @@ function saveEdit(id){
   const p=db.players.find(x=>x.id===id);
   p.name=document.getElementById('eName').value.trim()||p.name;
   p.cat=document.getElementById('eCat').value;
-  save();closeModal();renderPlayers(document.getElementById('main'));
+  save();closeModal();render();
 }
 function closeModal(){document.getElementById('modal').classList.remove('show');}
 function exportCSV(){
@@ -477,10 +495,9 @@ function exportCSV(){
 }
 function importCSV(e){
   const f=e.target.files[0];if(!f)return;const r=new FileReader();
-  r.onload=()=>{r.result.split('\n').slice(1).forEach(l=>{const c=l.split(',');if(c[0]&&c[0].trim())addPlayer(c[0],c[1]&&c[1].trim().toUpperCase()==='PRO'?'PRO':'REGULAR');});renderPlayers(document.getElementById('main'));toast('Import selesai');};
+  r.onload=()=>{r.result.split('\n').slice(1).forEach(l=>{const c=l.split(',');if(c[0]&&c[0].trim())addPlayer(c[0],c[1]&&c[1].trim().toUpperCase()==='PRO'?'PRO':'REGULAR');});render();toast('Import selesai');};
   r.readAsText(f);
 }
-
 function renderTeams(m){
   m.innerHTML=`<h1>Team <span class="accent">Generator</span></h1>
   <div class="sub">Bentuk tim secara otomatis dan seimbang</div>
@@ -488,33 +505,30 @@ function renderTeams(m){
     <label style="font-weight:600">Jumlah Tim:</label>
     <input type="number" id="teamCount" value="${db.settings.teamCount}" min="2" style="max-width:80px">
     <button class="btn ghost" onclick="setTeamCount()">Set</button>
-    <button class="btn" onclick="generateTeams();renderTeams(document.getElementById('main'))">🛠️ GENERATE TEAM</button>
-    <button class="btn ghost" onclick="shuffleTeams()">🔀 SHUFFLE TEAM</button>
+    <button class="btn" onclick="generateTeams();render()">🛠️ GENERATE TEAM</button>
+    <button class="btn ghost" onclick="generateTeams();render();toast('Tim diacak ulang')">🔀 SHUFFLE TEAM</button>
   </div></div>
   <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))" id="teamCards"></div>`;
   renderTeamCards();
 }
 function setTeamCount(){db.settings.teamCount=Math.max(2,parseInt(document.getElementById('teamCount').value)||4);save();toast('Jumlah tim diset: '+db.settings.teamCount);}
-function shuffleTeams(){generateTeams();renderTeams(document.getElementById('main'));toast('Tim diacak ulang');}
 function renderTeamCards(){
   const el=document.getElementById('teamCards');if(!el)return;
   if(!db.teams.length){el.innerHTML='<div class="sub" style="grid-column:1/-1">Belum ada tim. Masukkan pemain lalu tekan GENERATE TEAM.</div>';return;}
   el.innerHTML=db.teams.map(t=>`<div class="team-card"><h3>${t.name} <span style="color:var(--dim);font-size:12px">(${t.members.length} pemain)</span></h3>
   <ul>${t.members.map(p=>`<li><span>${p.name}</span><span class="badge ${p.cat==='PRO'?'pro':'reg'}">${p.cat}</span></li>`).join('')}</ul></div>`).join('');
 }
-
 function renderSchedule(m){
   m.innerHTML=`<h1>Match <span class="accent">Schedule</span></h1>
   <div class="sub">Jadwal round-robin — setiap tim bertemu satu kali</div>
   <div class="panel"><div class="row">
-    <button class="btn" onclick="generateSchedule();renderSchedule(document.getElementById('main'))">📅 GENERATE MATCH SCHEDULE</button>
-    <button class="btn ghost" onclick="generateSchedule();renderSchedule(document.getElementById('main'));toast('Jadwal diacak ulang')">🔀 Acak Ulang</button>
+    <button class="btn" onclick="generateSchedule();render()">📅 GENERATE MATCH SCHEDULE</button>
+    <button class="btn ghost" onclick="generateSchedule();render();toast('Jadwal diacak ulang')">🔀 Acak Ulang</button>
   </div></div>
   <div class="panel mt"><table><tr><th>Match</th><th>Team A</th><th>Team B</th><th>Durasi</th><th>Status</th><th>Aksi</th></tr>
   ${db.matches.map(x=>`<tr><td>#${x.matchNo}</td><td><b>${teamOf(x.teamA)?.name||'?'}</b></td><td><b>${teamOf(x.teamB)?.name||'?'}</b></td><td>${db.settings.matchMinutes} menit</td><td><span class="status ${x.status.toLowerCase()}">${x.status}</span></td><td><button class="btn small" onclick="openMatch('${x.id}')">Buka</button></td></tr>`).join('')||'<tr><td colspan="6" class="sub">Belum ada jadwal. Bentuk tim dulu, lalu generate schedule.</td></tr>'}
   </table></div>`;
 }
-
 function renderScoreboard(m){
   m.innerHTML=`<h1>Live <span class="accent">Scoreboard</span></h1>
   <div class="sub">Pilih pertandingan untuk mengelola skor</div>
@@ -568,7 +582,6 @@ function saveGoal(matchId,teamId){
   addGoal(matchId,teamId,document.getElementById('gPlayer').value,parseInt(document.getElementById('gMin').value)||0);
   closeModal();renderBoard();toast('Gol tercatat');
 }
-
 function renderStandings(m){
   const rows=standings();
   m.innerHTML=`<h1>League <span class="accent">Standings</span></h1>
@@ -578,7 +591,6 @@ function renderStandings(m){
   ${rows.map((r,i)=>`<tr><td>${i+1}</td><td><b>${r.name}</b></td><td>${r.p}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td><td>${r.gf}</td><td>${r.ga}</td><td>${r.gd}</td><td><b style="color:var(--accent)">${r.pts}</b></td></tr>`).join('')||'<tr><td colspan="10" class="sub">Belum ada data klasemen.</td></tr>'}
   </table></div>`;
 }
-
 function renderTop(m){
   const list=topScorers();
   const hero=list[0];
@@ -589,6 +601,37 @@ function renderTop(m){
   <div class="panel"><table><tr><th>Rank</th><th>Pemain</th><th>Tim</th><th>Total Gol</th></tr>
   ${list.map((p,i)=>{const rank=(i>0&&list[i-1].goals===p.goals)?'=':(i+1);return `<tr><td>${rank}</td><td><b>${p.name}</b></td><td>${teamOf(p.teamId)?.name||''}</td><td style="color:var(--accent);font-weight:800">${p.goals}</td></tr>`;}).join('')||'<tr><td colspan="4" class="sub">Belum ada gol.</td></tr>'}
   </table></div>`;
+}
+function renderHistory(m){
+  m.innerHTML=`<h1>Turnamen <span class="accent">History</span></h1>
+  <div class="sub">Arsip hasil turnamen minggu-minggu sebelumnya</div>
+  <div class="row mt"><button class="btn ghost" onclick="clearHistory()">🗑 Hapus Semua History</button></div>
+  ${history.length?history.map(h=>`<div class="hist-card mt">
+    <h3>🏆 ${h.name}</h3>
+    <div class="meta">${new Date(h.date).toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</div>
+    ${h.standings&&h.standings.length?`<div class="champ">🥇 Juara: ${h.standings[0].name} (${h.standings[0].pts} pts)</div>`:''}
+    ${h.topScorers&&h.topScorers.length?`<div class="sub" style="color:var(--dim)">👟 Top Scorer: ${h.topScorers[0].name} (${h.topScorers[0].goals} gol)</div>`:''}
+    <div class="row mt"><button class="btn small" onclick="viewHistory('${h.id}')">Lihat Detail</button><button class="btn danger small" onclick="delHistory('${h.id}')">Hapus</button></div>
+  </div>`).join(''):'<div class="panel mt"><div class="sub">Belum ada history. Hasil turnamen akan tersimpan otomatis saat Anda menekan Reset.</div></div>'}`;
+}
+function viewHistory(id){
+  const h=history.find(x=>x.id===id);if(!h)return;
+  document.getElementById('modalBox').innerHTML=`<h2 style="margin-bottom:4px">🏆 ${h.name}</h2>
+  <div class="sub">${new Date(h.date).toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</div>
+  <h3 style="margin:16px 0 8px;font-size:14px">📊 Klasemen Akhir</h3>
+  <table><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>PTS</th></tr>
+  ${h.standings.map((r,i)=>`<tr><td>${i+1}</td><td><b>${r.name}</b></td><td>${r.p}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td><td>${r.gf}</td><td>${r.ga}</td><td><b style="color:var(--accent)">${r.pts}</b></td></tr>`).join('')}</table>
+  <h3 style="margin:16px 0 8px;font-size:14px">👟 Top Scorer</h3>
+  <table><tr><th>#</th><th>Pemain</th><th>Tim</th><th>Gol</th></tr>
+  ${h.topScorers.map((s,i)=>`<tr><td>${i+1}</td><td><b>${s.name}</b></td><td>${s.team||''}</td><td style="color:var(--accent);font-weight:800">${s.goals}</td></tr>`).join('')}</table>
+  <div class="row mt"><button class="btn" onclick="closeModal()">Tutup</button></div>`;
+  document.getElementById('modal').classList.add('show');
+}
+function delHistory(id){history=history.filter(x=>x.id!==id);saveHistory();render();toast('History dihapus');}
+function clearHistory(){
+  if(!history.length) return toast('History kosong');
+  if(!confirm('Hapus semua history turnamen?')) return;
+  history=[];saveHistory();render();toast('Semua history dihapus');
 }
 
 function tick(){
@@ -605,15 +648,16 @@ function tick(){
 }
 setInterval(tick,250);
 
-renderNav();render();
+render();
 window.go=go;window.renderBoard=renderBoard;window.tick=tick;
-window.generateTeams=generateTeams;window.shuffleTeams=shuffleTeams;window.generateSchedule=generateSchedule;
+window.generateTeams=generateTeams;window.generateSchedule=generateSchedule;
 window.addPlayerClick=addPlayerClick;window.delPlayer=delPlayer;window.editPlayer=editPlayer;window.saveEdit=saveEdit;
 window.closeModal=closeModal;window.exportCSV=exportCSV;window.importCSV=importCSV;window.setTeamCount=setTeamCount;
 window.startMatch=startMatch;window.pauseMatch=pauseMatch;window.resumeMatch=resumeMatch;window.resetMatch=resetMatch;window.finishMatch=finishMatch;
 window.goalPrompt=goalPrompt;window.saveGoal=saveGoal;window.removeGoal=removeGoal;window.renderPlayersList=renderPlayersList;
 window.shareModal=shareModal;window.shareWA=shareWA;
-window.buildStandingsText=buildStandingsText;window.buildTopScorerText=buildTopScorerText;window.buildFullText=buildFullText;
+window.resetPrompt1=resetPrompt1;window.resetPrompt2=resetPrompt2;window.doReset=doReset;
+window.viewHistory=viewHistory;window.delHistory=delHistory;window.clearHistory=clearHistory;
 window.openMatch=(id)=>{go('Live Scoreboard');setTimeout(()=>{const s=document.getElementById('matchSel');if(s){s.value=id;renderBoard();}},60);};
 </script>
 </body>
