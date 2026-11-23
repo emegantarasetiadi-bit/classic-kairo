@@ -98,6 +98,35 @@ tr:hover td{background:var(--panel2)}
   .hero h2{font-size:18px}
   .scoreboard{grid-template-columns:1fr auto 1fr;gap:8px}
 }
+.club-logo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.hero .club-logo {
+  width: 110px;
+}
+
+@media (max-width: 800px) {
+  .hero {
+    gap: 12px;
+    padding: 16px 12px;
+  }
+
+  .hero .logo-wrap {
+    padding: 0;
+    background: none;
+  }
+
+  .hero .club-logo {
+    width: clamp(76px, 24vw, 100px);
+  }
+
+  .hero > div:last-child {
+    min-width: 0;
+  }
+}
 </style>
 </head>
 <body>
@@ -109,64 +138,13 @@ tr:hover td{background:var(--panel2)}
 <div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
 
 <script>
-function logoSVG(size){
-const h=Math.round(size*235/200);
-return `<svg viewBox="0 0 200 235" width="${size}" height="${h}" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f0d489"/><stop offset="55%" stop-color="#c9a44a"/><stop offset="100%" stop-color="#a8842e"/>
-    </linearGradient>
-    <path id="starShape" d="M0,-10 L2.35,-3.24 L9.51,-3.09 L3.80,1.24 L5.88,8.09 L0,4 L-5.88,8.09 L-3.80,1.24 L-9.51,-3.09 L-2.35,-3.24 Z"/>
-    <path id="classicArc" d="M42 82 Q100 50 158 82" fill="none"/>
-    <clipPath id="shieldClip">
-      <path d="M38 48 Q100 37 162 48 L162 128 Q162 176 100 208 Q38 176 38 128 Z"/>
-    </clipPath>
-  </defs>
-
-  <g fill="url(#goldGrad)">
-    <use href="#starShape" transform="translate(100,14) scale(1.5)"/>
-    <use href="#starShape" transform="translate(71,20) scale(1.15)"/>
-    <use href="#starShape" transform="translate(129,20) scale(1.15)"/>
-    <use href="#starShape" transform="translate(48,30) scale(0.9)"/>
-    <use href="#starShape" transform="translate(152,30) scale(0.9)"/>
-  </g>
-
-  <path d="M30 42 Q100 30 170 42 L170 130 Q170 185 100 220 Q30 185 30 130 Z" fill="url(#goldGrad)"/>
-  <path d="M37 48 Q100 37 163 48 L163 128 Q163 176 100 211 Q37 176 37 128 Z" fill="#14243e"/>
-  <path d="M42 52 Q100 42 158 52 L158 126 Q158 170 100 204 Q42 170 42 126 Z" fill="none" stroke="#c9a44a" stroke-width="1.2" opacity="0.65"/>
-
-  <g clip-path="url(#shieldClip)">
-    <path d="M20 140 Q55 128 85 140 Q115 152 150 138 Q175 128 185 132" fill="none" stroke="#c9a44a" stroke-width="3"/>
-    <path d="M20 152 Q55 140 85 152 Q115 164 150 150 Q175 140 185 144" fill="none" stroke="#c9a44a" stroke-width="2" opacity="0.85"/>
-
-    <g>
-      <path d="M88 88 L128 158 L48 158 Z" fill="url(#goldGrad)"/>
-      <path d="M88 88 L104 158 M88 88 L118 158 M88 88 L92 158" stroke="#14243e" stroke-width="1" opacity="0.55"/>
-      <path d="M88 88 L128 158 L48 158 Z" fill="none" stroke="#a8842e" stroke-width="1"/>
-    </g>
-    <g>
-      <path d="M124 100 L156 158 L92 158 Z" fill="url(#goldGrad)" opacity="0.9"/>
-      <path d="M124 100 L136 158 M124 100 L146 158 M124 100 L112 158" stroke="#14243e" stroke-width="1" opacity="0.5"/>
-    </g>
-
-    <path d="M20 160 Q50 150 80 160 Q112 171 145 158 Q170 149 185 153" fill="none" stroke="#c9a44a" stroke-width="3"/>
-    <path d="M20 171 Q50 162 80 171 Q112 181 145 169 Q170 161 185 164" fill="none" stroke="#c9a44a" stroke-width="2" opacity="0.85"/>
-
-    <g>
-      <circle cx="100" cy="138" r="19" fill="#14243e" stroke="url(#goldGrad)" stroke-width="3"/>
-      <path d="M100 128 l7 5 -2.5 8 h-9 L93 133 Z" fill="url(#goldGrad)"/>
-      <path d="M100 128 v-9 M107 133 l8 -4 M104.5 141 l6 7 M95.5 141 l-6 7 M93 133 l-8 -4" stroke="url(#goldGrad)" stroke-width="2" fill="none"/>
-    </g>
-  </g>
-
-  <text font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-size="24" letter-spacing="3" fill="url(#goldGrad)">
-    <textPath href="#classicArc" startOffset="50%" text-anchor="middle">CLASSIC</textPath>
-  </text>
-
-  <text x="100" y="185" text-anchor="middle" font-family="Georgia, serif" font-weight="bold" font-size="25" letter-spacing="4" fill="url(#goldGrad)">KAIRO</text>
-  <text x="100" y="198" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="10" letter-spacing="4" fill="#c9a44a">REUNITE</text>
-  <text x="100" y="207" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="7.5" letter-spacing="3" fill="#a8842e">EST. 2010</text>
-</svg>`;
+function logoSVG(size) {
+  return `<img
+    class="club-logo"
+    src="./logo-kairo.png"
+    alt="Logo Classic Kairo Futsal Club"
+    width="${size}"
+  >`;
 }
 
 const CLUB='Classic Kairo Futsal Club';
