@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classic Kairo Futsal Club</title>
+<style>
+:root{
+  --bg:#070b12; --panel:#0e1521; --panel2:#131c2b; --line:#1f2c3f;
+  --txt:#e8eef7; --dim:#8b9bb0; --accent:#ffd24a; --gold:#c9a44a;
+  --navy:#1a2b4a; --navy2:#223a63; --red:#ff4d5e; --wa:#25d366;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+.wrap{display:flex;min-height:100vh}
+nav{width:240px;background:var(--panel);border-right:1px solid var(--line);padding:18px 12px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
+.logo-box{display:flex;flex-direction:column;align-items:center;padding:8px 0 14px;gap:8px}
+.logo-box svg{width:84px;height:84px;filter:drop-shadow(0 0 12px rgba(255,210,74,.2))}
+.club-name{font-weight:800;font-size:13px;text-align:center;color:var(--accent);letter-spacing:1px;text-transform:uppercase;line-height:1.3}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:var(--dim);font-weight:600;cursor:pointer;transition:.15s;font-size:14px}
+.nav-item:hover{background:var(--panel2);color:var(--txt)}
+.nav-item.active{background:linear-gradient(90deg,rgba(255,210,74,.15),transparent);color:var(--accent)}
+.nav-item .ic{font-size:18px;width:22px;text-align:center}
+main{flex:1;padding:24px 30px;max-width:1200px;width:100%}
+h1{font-size:24px;font-weight:800}
+h1 .accent{color:var(--accent)}
+.sub{color:var(--dim);font-size:13px;margin-top:4px}
+.hero{display:flex;align-items:center;gap:24px;margin-top:18px;background:linear-gradient(135deg,rgba(26,43,74,.75),rgba(255,210,74,.08));border:1px solid rgba(255,210,74,.3);border-radius:18px;padding:24px 28px}
+.hero .logo-wrap{background:radial-gradient(circle,rgba(255,210,74,.12),transparent 70%);border-radius:50%;padding:10px;flex-shrink:0}
+.hero svg{width:110px;height:110px;display:block}
+.hero h2{font-size:24px;font-weight:900;color:var(--accent);letter-spacing:1.5px;line-height:1.2}
+.hero .est{color:var(--dim);font-size:12px;letter-spacing:3px;margin-top:4px}
+.grid{display:grid;gap:16px;margin-top:20px}
+.statgrid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.stat .val{font-size:30px;font-weight:800;color:var(--accent)}
+.stat .lbl{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px}
+.panel h2{font-size:16px;font-weight:700;margin-bottom:14px}
+.btn{background:var(--accent);color:#1a1200;border:none;padding:10px 18px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;transition:.15s}
+.btn:hover{filter:brightness(1.1)}
+.btn.ghost{background:var(--panel2);color:var(--txt);border:1px solid var(--line)}
+.btn.danger{background:var(--red);color:#fff}
+.btn.wa{background:var(--wa);color:#053d1f}
+.btn.small{padding:6px 12px;font-size:12px}
+input,select,textarea{background:var(--panel2);border:1px solid var(--line);color:var(--txt);padding:10px 12px;border-radius:10px;font-size:14px;width:100%}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.mt{margin-top:14px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{color:var(--dim);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);text-transform:uppercase;font-size:11px;letter-spacing:.5px}
+td{padding:10px;border-bottom:1px solid var(--line)}
+tr:hover td{background:var(--panel2)}
+.badge{display:inline-block;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700}
+.pro{background:var(--accent);color:#1a1200}
+.reg{background:var(--panel2);color:var(--dim);border:1px solid var(--line)}
+.status{font-weight:700;font-size:11px;padding:3px 8px;border-radius:6px}
+.up{background:#1f2c3f;color:var(--dim)}
+.live{background:var(--red);color:#fff;animation:pulse 1.2s infinite}
+.fin{background:var(--accent);color:#1a1200}
+.paused{background:var(--accent);color:#1a1200}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
+.team-card{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px}
+.team-card h3{font-size:15px;font-weight:800;color:var(--accent);margin-bottom:8px}
+.team-card ul{list-style:none}
+.team-card li{display:flex;justify-content:space-between;padding:4px 0;font-size:13px;border-bottom:1px dashed var(--line)}
+.team-card li:last-child{border:none}
+.scoreboard{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center;text-align:center;padding:24px}
+.team-name{font-size:20px;font-weight:800;text-transform:uppercase}
+.score{font-size:64px;font-weight:900;color:var(--accent);line-height:1}
+.timer{font-size:72px;font-weight:900;letter-spacing:2px;color:var(--accent);text-align:center;font-variant-numeric:tabular-nums}
+.goals-list{font-size:12px;color:var(--dim);margin-top:8px;text-align:left}
+.goals-list div{padding:2px 0}
+.bigbtn{font-size:22px;width:56px;height:56px;border-radius:50%;border:none;font-weight:900;cursor:pointer;background:var(--accent);color:#1a1200}
+.hidden{display:none}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--accent);color:#1a1200;padding:12px 20px;border-radius:10px;font-weight:700;z-index:99;opacity:0;transition:.3s}
+.toast.show{opacity:1}
+.top-scorer-hero{background:linear-gradient(135deg,rgba(255,210,74,.15),rgba(26,43,74,.5));border:1px solid var(--accent);border-radius:16px;padding:20px;text-align:center;margin-bottom:16px}
+.top-scorer-hero .name{font-size:28px;font-weight:900;color:var(--accent)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:50}
+.modal.show{display:flex}
+.modal-box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;width:90%;max-width:520px;max-height:85vh;overflow-y:auto}
+@media(max-width:800px){
+  nav{position:fixed;bottom:0;top:auto;width:100%;height:auto;flex-direction:row;justify-content:space-around;z-index:40;border-top:1px solid var(--line);overflow-x:auto;padding:8px}
+  .logo-box{display:none}
+  .nav-item{padding:10px;font-size:12px}
+  .nav-item span:not(.ic){display:none}
+  .nav-item .ic{width:auto}
+  main{padding:16px;padding-bottom:90px}
+  .score{font-size:44px}.timer{font-size:52px}
+  .hero svg{width:72px;height:72px}
+  .hero h2{font-size:18px}
+  .scoreboard{grid-template-columns:1fr auto 1fr;gap:8px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav id="nav"></nav>
+<main id="main"></main>
+</div>
+<div class="toast" id="toast"></div>
+<div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
+
+<script>
+/* ===== LOGO SVG (redesigned) ===== */
+function logoSVG(size){
+return `<svg viewBox="0 0 200 230" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0d489"/>
+      <stop offset="50%" stop-color="#c9a44a"/>
+      <stop offset="100%" stop-color="#a8842e"/>
+    </linearGradient>
+    <linearGradient id="navyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#26446f"/>
+      <stop offset="100%" stop-color="#14243e"/>
+    </linearGradient>
+  </defs>
+
+  <g fill="url(#goldGrad)">
+    <path d="M100 8 l3.2 6.8 7.5 1-5.4 5.2 1.3 7.5-6.6-3.6-6.6 3.6 1.3-7.5-5.4-5.2 7.5-1z"/>
+    <path d="M64 16 l2.6 5.5 6 0.8-4.3 4.2 1 6-5.3-2.9-5.3 2.9 1-6-4.3-4.2 6-0.8z"/>
+    <path d="M136 16 l2.6 5.5 6 0.8-4.3 4.2 1 6-5.3-2.9-5.3 2.9 1-6-4.3-4.2 6-0.8z"/>
+    <path d="M36 26 l2.2 4.6 5 0.7-3.6 3.5 0.9 5-4.5-2.4-4.5 2.4 0.9-5-3.6-3.5 5-0.7z"/>
+    <path d="M164 26 l2.2 4.6 5 0.7-3.6 3.5 0.9 5-4.5-2.4-4.5 2.4 0.9-5-3.6-3.5 5-0.7z"/>
+  </g>
+
+  <path d="M30 44 L170 44 L170 132 Q170 184 100 212 Q30 184 30 132 Z" fill="url(#navyGrad)" stroke="url(#goldGrad)" stroke-width="5"/>
+  <path d="M40 52 L160 52 L160 130 Q160 174 100 199 Q40 174 40 130 Z" fill="none" stroke="#c9a44a" stroke-width="1.5" opacity="0.7"/>
+
+  <text x="100" y="72" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-size="22" letter-spacing="3" fill="url(#goldGrad)">CLASSIC</text>
+  <line x1="52" y1="80" x2="148" y2="80" stroke="#c9a44a" stroke-width="1" opacity="0.6"/>
+
+  <g>
+    <path d="M62 138 L88 96 L108 128 L96 148 Z" fill="url(#goldGrad)" opacity="0.95"/>
+    <path d="M138 138 L112 96 L92 128 L104 148 Z" fill="url(#goldGrad)" opacity="0.8"/>
+    <path d="M70 130 L90 104 M78 138 L96 112 M86 144 L102 118" stroke="#14243e" stroke-width="1.5" opacity="0.7"/>
+    <path d="M130 130 L110 104 M122 138 L104 112 M114 144 L98 118" stroke="#14243e" stroke-width="1.5" opacity="0.7"/>
+    <circle cx="100" cy="126" r="15" fill="none" stroke="url(#goldGrad)" stroke-width="2.5"/>
+    <path d="M100 111 v30 M87 117 l26 18 M113 117 l-26 18" stroke="url(#goldGrad)" stroke-width="1.8" fill="none"/>
+  </g>
+
+  <path d="M48 154 Q60 144 72 150 Q84 156 96 150 Q108 144 120 150 Q132 156 144 150 Q150 147 152 148" fill="none" stroke="#c9a44a" stroke-width="2.5"/>
+  <path d="M50 162 Q64 154 78 159 Q92 164 106 158 Q120 152 134 158 Q144 162 150 160" fill="none" stroke="#c9a44a" stroke-width="2"/>
+
+  <text x="100" y="181" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="bold" font-size="27" letter-spacing="4" fill="url(#goldGrad)">KAIRO</text>
+  <text x="100" y="199" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="11" letter-spacing="3" fill="#c9a44a">REUNITE</text>
+  <text x="100" y="212" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="9" letter-spacing="2" fill="#a8842e">EST. 2010</text>
+</svg>`;
+}
+
+const CLUB='Classic Kairo Futsal Club';
+
+/* ===== STATE & STORAGE ===== */
+const DB_KEY='futsal_tournament_v1';
+let db=load();
+function load(){
+  const d=localStorage.getItem(DB_KEY);
+  if(d) return JSON.parse(d);
+  return {players:[],teams:[],matches:[],settings:{matchMinutes:10,teamCount:4}};
+}
+function save(){try{localStorage.setItem(DB_KEY,JSON.stringify(db));}catch(e){}}
+function uid(){return Math.random().toString(36).slice(2,9);}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+
+function addPlayer(name,cat){
+  name=name.trim();
+  if(!name) return toast('Nama tidak boleh kosong');
+  if(db.players.some(p=>p.name.toLowerCase()===name.toLowerCase())) return toast('Nama sudah terdaftar');
+  db.players.push({id:uid(),name,cat:cat||'REGULAR'});
+  save();
+}
+
+function generateTeams(){
+  const n=db.settings.teamCount;
+  const total=db.players.length;
+  if(total===0) return toast('Belum ada pemain');
+  if(total<n) return toast('Jumlah pemain kurang dari jumlah tim');
+  const sh=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+  const P=sh(db.players.filter(p=>p.cat==='PRO'));
+  const R=sh(db.players.filter(p=>p.cat==='REGULAR'));
+  const base=Math.floor(total/n), extra=total%n;
+  const teams=Array.from({length:n},(_,i)=>({id:uid(),name:autoName(i),members:[]}));
+  P.forEach((p,i)=>teams[i%n].members.push(p));
+  const target=teams.map((t,i)=>base+(i<extra?1:0));
+  let ri=0;
+  for(let i=0;i<n;i++){while(teams[i].members.length<target[i]&&ri<R.length){teams[i].members.push(R[ri++]);}}
+  while(ri<R.length){teams[ri%n].members.push(R[ri++]);}
+  db.teams=teams;save();
+}
+function autoName(i){return ['Tim A','Tim B','Tim C','Tim D','Tim E','Tim F','Tim G','Tim H','Tim I','Tim J','Tim K','Tim L'][i]||('Tim '+(i+1));}
+
+function generateSchedule(){
+  const t=db.teams;
+  if(t.length<2) return toast('Minimal 2 tim');
+  let arr=t.map(x=>x.id);
+  if(arr.length%2!==0) arr.push(null);
+  const rounds=arr.length-1, half=arr.length/2;
+  const matches=[];let m=1;
+  for(let r=0;r<rounds;r++){
+    for(let i=0;i<half;i++){
+      const a=arr[i], b=arr[arr.length-1-i];
+      if(a&&b) matches.push({id:uid(),matchNo:m++,teamA:a,teamB:b,status:'UPCOMING',goals:[],timerStart:null,timerRemain:db.settings.matchMinutes*60,elapsed:0});
+    }
+    arr.splice(1,0,arr.pop());
+  }
+  db.matches=matches;save();
+}
+
+function addGoal(matchId,teamId,playerId,minute){
+  const m=db.matches.find(x=>x.id===matchId);
+  if(!m) return;
+  m.goals.push({id:uid(),teamId,playerId,minute:minute||0});
+  save();
+}
+function removeGoal(matchId,goalId){
+  const m=db.matches.find(x=>x.id===matchId);
+  m.goals=m.goals.filter(g=>g.id!==goalId);save();
+}
+
+function standings(){
+  const rows=db.teams.map(t=>({id:t.id,name:t.name,p:0,w:0,d:0,l:0,gf:0,ga:0,gd:0,pts:0}));
+  db.matches.filter(m=>m.status==='FINISHED').forEach(m=>{
+    const A=rows.find(r=>r.id===m.teamA), B=rows.find(r=>r.id===m.teamB);
+    if(!A||!B) return;
+    const gA=m.goals.filter(g=>g.teamId===m.teamA).length;
+    const gB=m.goals.filter(g=>g.teamId===m.teamB).length;
+    A.p++;B.p++;A.gf+=gA;A.ga+=gB;B.gf+=gB;B.ga+=gA;
+    if(gA>gB){A.w++;B.l++;A.pts+=3;}else if(gB>gA){B.w++;A.l++;B.pts+=3;}else{A.d++;B.d++;A.pts++;B.pts++;}
+  });
+  rows.forEach(r=>r.gd=r.gf-r.ga);
+  rows.sort((a,b)=>b.pts-a.pts||b.gd-a.gd||b.gf-a.gf||a.name.localeCompare(b.name));
+  return rows;
+}
+function topScorers(){
+  const map={};
+  db.matches.forEach(m=>m.goals.forEach(g=>{
+    const p=db.players.find(x=>x.id===g.playerId);
+    if(!p) return;
+    if(!map[p.id]) map[p.id]={id:p.id,name:p.name,teamId:g.teamId,goals:0};
+    map[p.id].goals++;
+  }));
+  return Object.values(map).sort((a,b)=>b.goals-a.goals);
+}
+function teamOf(id){return db.teams.find(t=>t.id===id);}
+function playerOf(id){return db.players.find(p=>p.id===id);}
+
+function startMatch(id){
+  const m=db.matches.find(x=>x.id===id);
+  if(m.status==='FINISHED') return;
+  if(m.status!=='LIVE'){m.status='LIVE';m.timerStart=Date.now();m.elapsed=0;}
+  save();
+}
+function pauseMatch(id){
+  const m=db.matches.find(x=>x.id===id);
+  if(m.status!=='LIVE') return;
+  m.timerRemain=Math.max(0,m.timerRemain-Math.floor((Date.now()-m.timerStart)/1000));
+  m.status='PAUSED';m.timerStart=null;save();
+}
+function resumeMatch(id){
+  const m=db.matches.find(x=>x.id===id);
+  if(m.status!=='PAUSED') return;
+  m.status='LIVE';m.timerStart=Date.now();save();
+}
+function resetMatch(id){
+  const m=db.matches.find(x=>x.id===id);
+  m.timerRemain=db.settings.matchMinutes*60;m.timerStart=null;m.status='UPCOMING';m.elapsed=0;save();
+}
+function finishMatch(id){
+  const m=db.matches.find(x=>x.id===id);
+  m.status='FINISHED';m.timerStart=null;save();
+}
+function remaining(m){
+  if(m.status==='LIVE') return Math.max(0,m.timerRemain-Math.floor((Date.now()-m.timerStart)/1000));
+  return m.timerRemain;
+}
+function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(Math.floor(s%60)).padStart(2,'0');}
+
+/* ===== SHARE / WA ===== */
+function buildStandingsText(){
+  const rows=standings();
+  if(!rows.length) return null;
+  let t='⚽ *CLASSIC KAIRO FUTSAL CLUB* ⚽\n';
+  t+='📊 *KLASEMEN AKHIR*\n\n';
+  rows.forEach((r,i)=>{t+=`${i+1}. ${r.name} — ${r.pts} pts (M${r.w} S${r.d} K${r.l}, GF${r.gf} GA${r.ga})\n`;});
+  t+='\n🏆 Juara: *'+rows[0].name+'*';
+  return t;
+}
+function buildTopScorerText(){
+  const list=topScorers();
+  if(!list.length) return null;
+  let t='⚽ *CLASSIC KAIRO FUTSAL CLUB* ⚽\n';
+  t+='👟 *TOP SCORER*\n\n';
+  t+='🏅 Golden Boot: *'+list[0].name+'* ('+list[0].goals+' gol)\n\n';
+  list.forEach((p,i)=>{
+    const rank=(i>0&&list[i-1].goals===p.goals)?'=':(i+1);
+    t+=`${rank}. ${p.name} — ${p.goals} gol\n`;
+  });
+  return t;
+}
+function buildFullText(){
+  const rows=standings();
+  const list=topScorers();
+  const done=db.matches.filter(m=>m.status==='FINISHED');
+  if(!rows.length) return null;
+  let t='⚽ *CLASSIC KAIRO FUTSAL CLUB* ⚽\n';
+  t+='🏆 *HASIL TURNAMEN FUTSAL*\n\n';
+  t+='📊 *Klasemen Akhir*\n';
+  rows.forEach((r,i)=>{t+=`${i+1}. ${r.name} — ${r.pts} pts (M${r.w} S${r.d} K${r.l}, GF${r.gf} GA${r.ga})\n`;});
+  if(list.length){
+    t+='\n👟 *Top Scorer*\n';
+    list.slice(0,5).forEach((p,i)=>{t+=`${i+1}. ${p.name} — ${p.goals} gol\n`;});
+  }
+  if(done.length){
+    t+='\n📋 *Hasil Pertandingan*\n';
+    done.forEach(m=>{
+      const gA=m.goals.filter(g=>g.teamId===m.teamA).length;
+      const gB=m.goals.filter(g=>g.teamId===m.teamB).length;
+      t+=`• ${teamOf(m.teamA).name} ${gA} - ${gB} ${teamOf(m.teamB).name}\n`;
+    });
+  }
+  return t;
+}
+function shareWA(text){
+  if(!text) return toast('Belum ada data untuk dibagikan');
+  const url='https://wa.me/?text='+encodeURIComponent(text);
+  window.open(url,'_blank');
+}
+function shareModal(){
+  const hasFinished=db.matches.some(m=>m.status==='FINISHED');
+  if(!hasFinished){
+    document.getElementById('modalBox').innerHTML=`<h2 style="margin-bottom:12px">⚠️ Belum Ada Hasil</h2>
+    <p class="sub" style="font-size:14px">Belum ada pertandingan yang selesai. Selesaikan minimal satu pertandingan dulu untuk membagikan hasil turnamen.</p>
+    <div class="row mt"><button class="btn" onclick="closeModal()">Tutup</button></div>`;
+    document.getElementById('modal').classList.add('show');
+    return;
+  }
+  document.getElementById('modalBox').innerHTML=`<h2 style="margin-bottom:14px">📤 Share ke WhatsApp</h2>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <button class="btn wa" onclick="shareWA(buildStandingsText());closeModal()">📊 Share Klasemen Akhir</button>
+    <button class="btn wa" onclick="shareWA(buildTopScorerText());closeModal()">👟 Share Top Scorer</button>
+    <button class="btn wa" onclick="shareWA(buildFullText());closeModal()">🏆 Share Hasil Lengkap Turnamen</button>
+    <button class="btn ghost" onclick="closeModal()">Batal</button>
+  </div>`;
+  document.getElementById('modal').classList.add('show');
+}
+
+/* ===== RENDER ===== */
+const pages=['Dashboard','Players','Team Generator','Match Schedule','Live Scoreboard','Standings','Top Scorer'];
+const icons=['📊','👥','🛡️','📅','🎯','🏆','⚽'];
+let current='Dashboard';
+function renderNav(){
+  document.getElementById('nav').innerHTML=
+  `<div class="logo-box">${logoSVG(84)}<div class="club-name">Classic Kairo<br>Futsal Club</div></div>`
+  +pages.map((p,i)=>`<div class="nav-item ${p===current?'active':''}" onclick="go('${p}')"><span class="ic">${icons[i]}</span><span>${p}</span></div>`).join('');
+}
+function go(p){current=p;renderNav();render();}
+
+function render(){
+  const m=document.getElementById('main');
+  if(current==='Dashboard')renderDashboard(m);
+  else if(current==='Players')renderPlayers(m);
+  else if(current==='Team Generator')renderTeams(m);
+  else if(current==='Match Schedule')renderSchedule(m);
+  else if(current==='Live Scoreboard')renderScoreboard(m);
+  else if(current==='Standings')renderStandings(m);
+  else if(current==='Top Scorer')renderTop(m);
+}
+
+function stat(v,l){return `<div class="stat"><div class="val">${v}</div><div class="lbl">${l}</div></div>`;}
+function renderDashboard(m){
+  const done=db.matches.filter(x=>x.status==='FINISHED').length;
+  const goals=db.matches.reduce((s,x)=>s+x.goals.length,0);
+  const live=db.matches.filter(x=>x.status==='LIVE');
+  m.innerHTML=`<h1>Dashboard <span class="accent">Turnamen</span></h1>
+  <div class="hero">
+    <div class="logo-wrap">${logoSVG(110)}</div>
+    <div>
+      <h2>CLASSIC KAIRO<br>FUTSAL CLUB</h2>
+      <div class="est">REUNITE · EST. 2010</div>
+      <div class="row mt"><button class="btn wa" onclick="shareModal()">📤 Share Hasil ke WA</button></div>
+    </div>
+  </div>
+  <div class="grid statgrid">
+    ${stat(db.players.length,'Total Players')}
+    ${stat(db.players.filter(p=>p.cat==='PRO').length,'Pro Players')}
+    ${stat(db.players.filter(p=>p.cat==='REGULAR').length,'Regular Players')}
+    ${stat(db.teams.length,'Total Teams')}
+    ${stat(db.matches.length,'Total Matches')}
+    ${stat(done,'Matches Completed')}
+    ${stat(db.matches.length-done,'Matches Remaining')}
+    ${stat(goals,'Total Goals Scored')}
+  </div>
+  <div class="panel mt"><h2>Pertandingan Berjalan</h2>
+  ${live.length?live.map(x=>`<div class="row" style="justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span><span class="status live">LIVE</span> Match ${x.matchNo}: ${teamOf(x.teamA).name} vs ${teamOf(x.teamB).name}</span><span class="btn small" onclick="openMatch('${x.id}')">Buka</span></div>`).join(''):'<div class="sub">Tidak ada pertandingan berlangsung.</div>'}
+  </div>`;
+}
+
+function renderPlayers(m){
+  m.innerHTML=`<h1>Player <span class="accent">Management</span></h1>
+  <div class="sub">Kelola pemain PRO dan REGULAR</div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+    <div class="panel"><h2>➕ Tambah Pemain</h2>
+      <input id="inName" placeholder="Nama pemain">
+      <div class="row" style="margin-top:10px">
+        <select id="inCat" style="flex:1"><option value="REGULAR">Regular Player</option><option value="PRO">Pro Player</option></select>
+        <button class="btn" onclick="addPlayerClick()">Tambah</button>
+      </div>
+      <div class="row mt">
+        <button class="btn ghost small" onclick="exportCSV()">⬇ Export CSV</button>
+        <button class="btn ghost small" onclick="document.getElementById('impFile').click()">⬆ Import CSV</button>
+        <input type="file" id="impFile" accept=".csv" class="hidden" onchange="importCSV(event)">
+      </div>
+    </div>
+    <div class="panel"><h2>Statistik Pemain</h2>
+      <div class="grid statgrid">${stat(db.players.length,'Total')}${stat(db.players.filter(p=>p.cat==='PRO').length,'Pro')}${stat(db.players.filter(p=>p.cat==='REGULAR').length,'Regular')}</div>
+    </div>
+  </div>
+  <div class="panel mt">
+    <h2>Daftar Pemain <input id="search" placeholder="Cari nama..." style="max-width:200px;display:inline-block;margin-left:10px" oninput="renderPlayersList()"></h2>
+    <div id="playersList"></div>
+  </div>`;
+  renderPlayersList();
+}
+function renderPlayersList(){
+  const el=document.getElementById('playersList');if(!el)return;
+  const q=(document.getElementById('search')?.value||'').toLowerCase();
+  const list=db.players.filter(p=>p.name.toLowerCase().includes(q));
+  el.innerHTML=`<table><tr><th>Nama</th><th>Kategori</th><th>Aksi</th></tr>`+
+    list.map(p=>`<tr><td>${p.name}</td><td><span class="badge ${p.cat==='PRO'?'pro':'reg'}">${p.cat}</span></td><td class="row"><button class="btn ghost small" onclick="editPlayer('${p.id}')">Edit</button><button class="btn danger small" onclick="delPlayer('${p.id}')">Hapus</button></td></tr>`).join('')+'</table>';
+}
+function addPlayerClick(){addPlayer(document.getElementById('inName').value,document.getElementById('inCat').value);document.getElementById('inName').value='';renderPlayers(document.getElementById('main'));}
+function delPlayer(id){db.players=db.players.filter(p=>p.id!==id);save();renderPlayers(document.getElementById('main'));toast('Pemain dihapus');}
+function editPlayer(id){
+  const p=db.players.find(x=>x.id===id);
+  document.getElementById('modalBox').innerHTML=`<h2 style="margin-bottom:12px">Edit Pemain</h2>
+  <input id="eName" value="${p.name}">
+  <div class="row mt"><select id="eCat"><option ${p.cat==='REGULAR'?'selected':''}>REGULAR</option><option ${p.cat==='PRO'?'selected':''}>PRO</option></select></div>
+  <div class="row mt"><button class="btn" onclick="saveEdit('${id}')">Simpan</button><button class="btn ghost" onclick="closeModal()">Batal</button></div>`;
+  document.getElementById('modal').classList.add('show');
+}
+function saveEdit(id){
+  const p=db.players.find(x=>x.id===id);
+  p.name=document.getElementById('eName').value.trim()||p.name;
+  p.cat=document.getElementById('eCat').value;
+  save();closeModal();renderPlayers(document.getElementById('main'));
+}
+function closeModal(){document.getElementById('modal').classList.remove('show');}
+function exportCSV(){
+  const csv=['name,category',...db.players.map(p=>`${p.name},${p.cat}`)].join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='players.csv';a.click();
+}
+function importCSV(e){
+  const f=e.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{r.result.split('\n').slice(1).forEach(l=>{const c=l.split(',');if(c[0]&&c[0].trim())addPlayer(c[0],c[1]&&c[1].trim().toUpperCase()==='PRO'?'PRO':'REGULAR');});renderPlayers(document.getElementById('main'));toast('Import selesai');};
+  r.readAsText(f);
+}
+
+function renderTeams(m){
+  m.innerHTML=`<h1>Team <span class="accent">Generator</span></h1>
+  <div class="sub">Bentuk tim secara otomatis dan seimbang</div>
+  <div class="panel"><div class="row">
+    <label style="font-weight:600">Jumlah Tim:</label>
+    <input type="number" id="teamCount" value="${db.settings.teamCount}" min="2" style="max-width:80px">
+    <button class="btn ghost" onclick="setTeamCount()">Set</button>
+    <button class="btn" onclick="generateTeams();renderTeams(document.getElementById('main'))">🛠️ GENERATE TEAM</button>
+    <button class="btn ghost" onclick="shuffleTeams()">🔀 SHUFFLE TEAM</button>
+  </div></div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))" id="teamCards"></div>`;
+  renderTeamCards();
+}
+function setTeamCount(){db.settings.teamCount=Math.max(2,parseInt(document.getElementById('teamCount').value)||4);save();toast('Jumlah tim diset: '+db.settings.teamCount);}
+function shuffleTeams(){generateTeams();renderTeams(document.getElementById('main'));toast('Tim diacak ulang');}
+function renderTeamCards(){
+  const el=document.getElementById('teamCards');if(!el)return;
+  if(!db.teams.length){el.innerHTML='<div class="sub" style="grid-column:1/-1">Belum ada tim. Masukkan pemain lalu tekan GENERATE TEAM.</div>';return;}
+  el.innerHTML=db.teams.map(t=>`<div class="team-card"><h3>${t.name} <span style="color:var(--dim);font-size:12px">(${t.members.length} pemain)</span></h3>
+  <ul>${t.members.map(p=>`<li><span>${p.name}</span><span class="badge ${p.cat==='PRO'?'pro':'reg'}">${p.cat}</span></li>`).join('')}</ul></div>`).join('');
+}
+
+function renderSchedule(m){
+  m.innerHTML=`<h1>Match <span class="accent">Schedule</span></h1>
+  <div class="sub">Jadwal round-robin — setiap tim bertemu satu kali</div>
+  <div class="panel"><div class="row">
+    <button class="btn" onclick="generateSchedule();renderSchedule(document.getElementById('main'))">📅 GENERATE MATCH SCHEDULE</button>
+    <button class="btn ghost" onclick="generateSchedule();renderSchedule(document.getElementById('main'));toast('Jadwal diacak ulang')">🔀 Acak Ulang</button>
+  </div></div>
+  <div class="panel mt"><table><tr><th>Match</th><th>Team A</th><th>Team B</th><th>Durasi</th><th>Status</th><th>Aksi</th></tr>
+  ${db.matches.map(x=>`<tr><td>#${x.matchNo}</td><td><b>${teamOf(x.teamA)?.name||'?'}</b></td><td><b>${teamOf(x.teamB)?.name||'?'}</b></td><td>${db.settings.matchMinutes} menit</td><td><span class="status ${x.status.toLowerCase()}">${x.status}</span></td><td><button class="btn small" onclick="openMatch('${x.id}')">Buka</button></td></tr>`).join('')||'<tr><td colspan="6" class="sub">Belum ada jadwal. Bentuk tim dulu, lalu generate schedule.</td></tr>'}
+  </table></div>`;
+}
+
+function renderScoreboard(m){
+  m.innerHTML=`<h1>Live <span class="accent">Scoreboard</span></h1>
+  <div class="sub">Pilih pertandingan untuk mengelola skor</div>
+  <div class="row mt"><select id="matchSel" onchange="renderBoard()" style="max-width:420px">
+    <option value="">— Pilih Pertandingan —</option>
+    ${db.matches.map(x=>`<option value="${x.id}">Match ${x.matchNo}: ${teamOf(x.teamA)?.name} vs ${teamOf(x.teamB)?.name} (${x.status})</option>`).join('')}
+  </select></div>
+  <div id="board"></div>`;
+}
+function renderBoard(){
+  const el=document.getElementById('board');if(!el)return;
+  const id=document.getElementById('matchSel')?.value;if(!id){el.innerHTML='';return;}
+  const x=db.matches.find(mm=>mm.id===id);if(!x)return;
+  const A=teamOf(x.teamA),B=teamOf(x.teamB);
+  const gA=x.goals.filter(g=>g.teamId===x.teamA),gB=x.goals.filter(g=>g.teamId===x.teamB);
+  const rem=remaining(x);
+  const timerColor=rem<=30?'var(--red)':'var(--accent)';
+  el.innerHTML=`<div class="panel mt">
+  <div class="timer" id="timer" style="color:${timerColor}">${fmt(rem)}</div>
+  <div class="row" style="justify-content:center;margin:12px 0">
+    ${x.status!=='LIVE'&&x.status!=='PAUSED'?`<button class="btn" onclick="startMatch('${x.id}');renderBoard();tick()">▶ START</button>`:''}
+    ${x.status==='LIVE'?`<button class="btn ghost" onclick="pauseMatch('${x.id}');renderBoard()">⏸ PAUSE</button>`:''}
+    ${x.status==='PAUSED'?`<button class="btn" onclick="resumeMatch('${x.id}');renderBoard();tick()">▶ RESUME</button>`:''}
+    <button class="btn ghost" onclick="resetMatch('${x.id}');renderBoard()">↺ RESET</button>
+    <button class="btn danger" onclick="finishMatch('${x.id}');renderBoard();toast('Pertandingan selesai')">✓ SELESAI</button>
+  </div>
+  <div class="scoreboard">
+    <div>
+      <div class="team-name">${A.name}</div>
+      <div class="row" style="justify-content:center"><button class="bigbtn" onclick="goalPrompt('${x.id}','${x.teamA}')">+</button></div>
+      <div class="goals-list">${gA.map(g=>`<div>${String(g.minute).padStart(2,'0')}' - ${playerOf(g.playerId)?.name||'?'} <span style="cursor:pointer;color:var(--red)" onclick="removeGoal('${x.id}','${g.id}');renderBoard()">✕</span></div>`).join('')||'<div>-</div>'}</div>
+    </div>
+    <div class="score">${gA.length} - ${gB.length}</div>
+    <div>
+      <div class="team-name">${B.name}</div>
+      <div class="row" style="justify-content:center"><button class="bigbtn" onclick="goalPrompt('${x.id}','${x.teamB}')">+</button></div>
+      <div class="goals-list">${gB.map(g=>`<div>${String(g.minute).padStart(2,'0')}' - ${playerOf(g.playerId)?.name||'?'} <span style="cursor:pointer;color:var(--red)" onclick="removeGoal('${x.id}','${g.id}');renderBoard()">✕</span></div>`).join('')||'<div>-</div>'}</div>
+    </div>
+  </div></div>`;
+}
+function goalPrompt(matchId,teamId){
+  const t=teamOf(teamId);
+  const cur=db.matches.find(m=>m.id===matchId);
+  document.getElementById('modalBox').innerHTML=`<h2 style="margin-bottom:12px">Gol ${t.name}</h2>
+  <select id="gPlayer">${t.members.map(p=>`<option value="${p.id}">${p.name}</option>`).join('')}</select>
+  <div class="row mt"><label>Menit ke:</label><input type="number" id="gMin" value="${Math.min(cur?.elapsed||0,db.settings.matchMinutes)}" min="0" max="${db.settings.matchMinutes}" style="max-width:80px"></div>
+  <div class="row mt"><button class="btn" onclick="saveGoal('${matchId}','${teamId}')">Simpan Gol</button><button class="btn ghost" onclick="closeModal()">Batal</button></div>`;
+  document.getElementById('modal').classList.add('show');
+}
+function saveGoal(matchId,teamId){
+  addGoal(matchId,teamId,document.getElementById('gPlayer').value,parseInt(document.getElementById('gMin').value)||0);
+  closeModal();renderBoard();toast('Gol tercatat');
+}
+
+function renderStandings(m){
+  const rows=standings();
+  m.innerHTML=`<h1>League <span class="accent">Standings</span></h1>
+  <div class="sub">Klasemen diperbarui otomatis setelah pertandingan selesai</div>
+  <div class="row mt"><button class="btn wa" onclick="shareModal()">📤 Share ke WA</button></div>
+  <div class="panel mt"><table><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>PTS</th></tr>
+  ${rows.map((r,i)=>`<tr><td>${i+1}</td><td><b>${r.name}</b></td><td>${r.p}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td><td>${r.gf}</td><td>${r.ga}</td><td>${r.gd}</td><td><b style="color:var(--accent)">${r.pts}</b></td></tr>`).join('')||'<tr><td colspan="10" class="sub">Belum ada data klasemen.</td></tr>'}
+  </table></div>`;
+}
+
+function renderTop(m){
+  const list=topScorers();
+  const hero=list[0];
+  m.innerHTML=`<h1>Top <span class="accent">Scorer</span></h1>
+  <div class="sub">Pencetak gol terbanyak turnamen</div>
+  <div class="row mt"><button class="btn wa" onclick="shareModal()">📤 Share ke WA</button></div>
+  ${hero?`<div class="top-scorer-hero mt"><div style="color:var(--dim);letter-spacing:2px">👟 GOLDEN BOOT</div><div class="name">${hero.name}</div><div class="sub">${teamOf(hero.teamId)?.name||''} · ${hero.goals} gol</div></div>`:'<div class="panel mt"><div class="sub">Belum ada gol tercatat.</div></div>'}
+  <div class="panel"><table><tr><th>Rank</th><th>Pemain</th><th>Tim</th><th>Total Gol</th></tr>
+  ${list.map((p,i)=>{const rank=(i>0&&list[i-1].goals===p.goals)?'=':(i+1);return `<tr><td>${rank}</td><td><b>${p.name}</b></td><td>${teamOf(p.teamId)?.name||''}</td><td style="color:var(--accent);font-weight:800">${p.goals}</td></tr>`;}).join('')||'<tr><td colspan="4" class="sub">Belum ada gol.</td></tr>'}
+  </table></div>`;
+}
+
+function tick(){
+  if(current!=='Live Scoreboard')return;
+  const el=document.getElementById('timer'),id=document.getElementById('matchSel')?.value;
+  if(!el||!id)return;
+  const x=db.matches.find(m=>m.id===id);if(!x)return;
+  if(x.status==='LIVE'){
+    const rem=remaining(x);
+    el.textContent=fmt(rem);
+    el.style.color=rem<=30?'var(--red)':'var(--accent)';
+    if(rem<=0){finishMatch(id);renderBoard();toast('Pertandingan selesai!');}
+  } else {el.textContent=fmt(x.timerRemain);el.style.color='var(--accent)';}
+}
+setInterval(tick,250);
+
+renderNav();render();
+window.go=go;window.renderBoard=renderBoard;window.tick=tick;
+window.generateTeams=generateTeams;window.shuffleTeams=shuffleTeams;window.generateSchedule=generateSchedule;
+window.addPlayerClick=addPlayerClick;window.delPlayer=delPlayer;window.editPlayer=editPlayer;window.saveEdit=saveEdit;
+window.closeModal=closeModal;window.exportCSV=exportCSV;window.importCSV=importCSV;window.setTeamCount=setTeamCount;
+window.startMatch=startMatch;window.pauseMatch=pauseMatch;window.resumeMatch=resumeMatch;window.resetMatch=resetMatch;window.finishMatch=finishMatch;
+window.goalPrompt=goalPrompt;window.saveGoal=saveGoal;window.removeGoal=removeGoal;window.renderPlayersList=renderPlayersList;
+window.shareModal=shareModal;window.shareWA=shareWA;
+window.buildStandingsText=buildStandingsText;window.buildTopScorerText=buildTopScorerText;window.buildFullText=buildFullText;
+window.openMatch=(id)=>{go('Live Scoreboard');setTimeout(()=>{const s=document.getElementById('matchSel');if(s){s.value=id;renderBoard();}},60);};
+</script>
+</body>
+</html>
